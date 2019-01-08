@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.sut.se61.demo.entity;
 import lombok.*;
 
 import javax.persistence.Id;
