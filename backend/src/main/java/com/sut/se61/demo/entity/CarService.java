@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Getter @Setter
 @NoArgsConstructor
 @ToString @EqualsAndHashCode
-public class CarServiceEntity {
+public class CarService {
     @Id
     @SequenceGenerator(name="user_seq",sequenceName="user_seq")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="user_seq")
@@ -43,5 +43,5 @@ public class CarServiceEntity {
         this.nameCarService = nameCarService;
     }
 
-    public CarServiceEntity(String nameCarService){this.nameCarService = nameCarService;}
+    public CarService(String nameCarService){this.nameCarService = nameCarService;}
 }
