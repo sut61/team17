@@ -1,0 +1,62 @@
+.header {
+  text-align: center;
+  min-width: 400px;
+  margin: auto auto;
+  color: #383838;
+  font-family: 'Itim', cursive;
+}
+
+.header > h1 {
+  font-size: 60px;
+}
+
+.header > h2 {
+  color: #525252;
+  font-size: 40px;
+}
+
+mat-grid-list {
+  margin: auto 15% 100px;
+}
+
+mat-card {
+  color: #383838;
+  font-family: 'Itim', cursive;
+  font-size: 65px;
+
+  min-width: 400px;
+  height: 200px;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: 0.5s;
+}
+
+mat-card > p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+mat-card:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  cursor: pointer;
+}
+@media only screen and (max-width: 1600px) {
+  mat-grid-list {
+    margin: auto 10% 100px;  }
+  mat-card{
+    min-width: 400px;
+    height: 200px;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  mat-grid-list {
+    margin: auto auto 100px;
+  }
+  mat-card{
+    min-width: 400px;
+    height: 200px;
+  }
+}

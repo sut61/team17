@@ -50,13 +50,16 @@ import {
   MatTooltipModule,
   MatTreeModule,
 } from '@angular/material';
+import {HomeComponent} from './home/home.component';
 
 
 const routes: Routes = [
+  {path: '', component: HomeComponent}
 ];
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
