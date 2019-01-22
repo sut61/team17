@@ -1,0 +1,31 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body {
+  height: auto;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+  background-image: url("/assets/img/insurance bg.jpg");
+
+  /* Full height */
+  background-attachment: fixed;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-repeat: repeat-x;
+
+}
+
+.full-width {
+  width: 95%;
+}
+footer.logout{
+
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+}
