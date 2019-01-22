@@ -1,4 +1,4 @@
-package com.sut.se61.demo;
+package com.sut.se61.g17;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
