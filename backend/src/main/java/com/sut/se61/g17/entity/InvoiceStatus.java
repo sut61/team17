@@ -2,6 +2,7 @@ package com.sut.se61.g17.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.*;
 
@@ -15,6 +16,7 @@ public class InvoiceStatus {
     @Column(name = "ID")
     private Long id;
 
+    @NonNull
     private String status;
 
     public InvoiceStatus(String status) {
