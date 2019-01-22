@@ -52,17 +52,21 @@ import {
 } from '@angular/material';
 import {HomeComponent} from './home/home.component';
 import {LoginUIComponent} from './login-ui/login-ui.component';
+import {PaymentUIComponent} from './payment-ui/payment-ui.component';
 
 
 const routes: Routes = [
   {path: 'login', component: LoginUIComponent},
+  {path: 'payment', component: PaymentUIComponent},
+
   {path: '', component: HomeComponent}
 ];
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginUIComponent
+    LoginUIComponent,
+    PaymentUIComponent
   ],
   imports: [
     BrowserModule,

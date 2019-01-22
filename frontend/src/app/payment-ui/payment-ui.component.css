@@ -1,0 +1,103 @@
+
+mat-card {
+  border-radius: 1em;
+}
+
+.search-header {
+  width: 30%;
+}
+
+.main-text {
+  color: #383838;
+}
+table, mat-table{
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.5); /* Black background with 0.5 opacity */
+
+}
+.header-text {
+  color: #3E211E;
+  font-family: 'Itim', cursive;
+  font-size: 30px;
+  text-align: center;
+  width: 400px;
+  margin: 70px auto 70px;
+}
+
+
+
+.btn-search {
+  border-radius: 1em;
+}
+
+p {
+  width: 100%;
+  text-align: left;
+  color: white;
+}
+
+.policy-detail {
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(255, 255, 255, 0.5); /* Black background with 0.5 opacity */
+
+  width: 60%;
+  margin: 20px auto;
+}
+
+.payment-card {
+  color: #383838;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 20px auto;
+
+  width: 60%;
+}
+
+.show-invoice {
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(255, 255, 255, 0.5); /* Black background with 0.5 opacity */
+
+  width: 60%;
+  margin: 20px auto;
+}
+
+.mat-fab {
+  background-color: #47476b;
+}
+
+::ng-deep .mat-form-field-underline, ::ng-deep .mat-form-field-ripple {
+  background-color: #383838 !important;
+  color: #383838 !important
+}
+
+::ng-deep .mat-form-field-empty.mat-form-field-label {
+  color: #383838;
+}
+
+p {
+  color: #383838;
+
+}
+
+@media only screen and (max-width: 992px) {
+  .header-text {
+    text-align: center;
+    width: 700px;
+    margin: 30px auto 30px;
+  }
+
+  .payment-card {
+    margin: 20px auto;
+    width: 700px;
+  }
+  .show-invoice {
+    width: 700px;
+    margin: 20px auto;
+  }
+  .policy-detail {
+    width: 700px;
+    margin: 20px auto;
+  }
+}
