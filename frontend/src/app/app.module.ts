@@ -51,15 +51,18 @@ import {
   MatTreeModule,
 } from '@angular/material';
 import {HomeComponent} from './home/home.component';
+import {LoginUIComponent} from './login-ui/login-ui.component';
 
 
 const routes: Routes = [
+  {path: 'login', component: LoginUIComponent},
   {path: '', component: HomeComponent}
 ];
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LoginUIComponent
   ],
   imports: [
     BrowserModule,
