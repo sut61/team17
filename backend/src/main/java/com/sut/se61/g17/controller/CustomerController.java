@@ -19,7 +19,7 @@ public class CustomerController {
     @Autowired
     private CareerRepository careerRepository;
 
-     @Autowired
+    @Autowired
     private GenderRepository genderRepository;
     @Autowired
     private ProvinceRepository provinceRepository;
@@ -32,32 +32,31 @@ public class CustomerController {
     private AddressRepository addressRepository;
 
     @GetMapping(path = "/")
-    public Collection<Customer> getCustomer(){
-      return customerRepository.findAll().stream().collect(Collectors.toList());
+    public Collection<Customer> getCustomer() {
+        return customerRepository.findAll().stream().collect(Collectors.toList());
     }
 
 
     @GetMapping(path = "/{customerID}")
-    public Customer getOneCustomer(@PathVariable Long customerID){
+    public Customer getOneCustomer(@PathVariable Long customerID) {
         return customerRepository.findById(customerID).get();
     }
 
 
-   @PostMapping(path = "/{careerID}/{genderID}/{subdistrictID}/{districtID}/{proviceID}")
+    @PostMapping(path = "/{careerID}/{genderID}/{subdistrictID}/{districtID}/{proviceID}")
     public Customer postCustomer(@RequestBody Customer customer, Address address,
                                  @PathVariable Long careerID,
                                  @PathVariable Long genderID,
                                  @PathVariable Long subdistrictID,
                                  @PathVariable Long districtID,
                                  @PathVariable Long proviceID
-                                 ) throws Exception {
-        try{
+    ) throws Exception {
+        try {
             Career careerName1 = careerRepository.findById(careerID).get();
             Gender gender1 = genderRepository.findById(genderID).get();
             SubDistrict subDistrict = subDistrictRepository.findById(subdistrictID).get();
             District district = districtRepository.findById(districtID).get();
             Province province = provinceRepository.findById(proviceID).get();
-
 
 
             address.setAddress(customer.getAddress().getAddress());
@@ -69,31 +68,35 @@ public class CustomerController {
             customer.setAddress(address);
             customer.setCareer(careerName1);
             customer.setGender(gender1);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             throw new Exception("Error");
         }
 
 
-
-       return  customerRepository.save(customer);
-
-
-   }
+        return customerRepository.save(customer);
 
 
- @GetMapping(path = "/career")
- public Collection<Career> getCareer(){return careerRepository.findAll().stream().collect(Collectors.toList());}
+    }
+
+
+    @GetMapping(path = "/career")
+    public Collection<Career> getCareer() {
+        return careerRepository.findAll().stream().collect(Collectors.toList());
+    }
 
     @GetMapping(path = "/career/{careerID}")
-    public Career getOneCareer(@PathVariable Long careerID){
+    public Career getOneCareer(@PathVariable Long careerID) {
         return careerRepository.findById(careerID).get();
     }
+
     @GetMapping(path = "/gender")
-    public Collection<Gender> getGender(){return genderRepository.findAll().stream().collect(Collectors.toList());}
+    public Collection<Gender> getGender() {
+        return genderRepository.findAll().stream().collect(Collectors.toList());
+    }
 
     @GetMapping(path = "/gender/{gerderID}")
-    public Gender getOneGender(@PathVariable Long genderID){
+    public Gender getOneGender(@PathVariable Long genderID) {
         return genderRepository.findById(genderID).get();
     }
 
@@ -102,11 +105,13 @@ public class CustomerController {
     public Collection<Province> getAllProvince() {
         return provinceRepository.findAll().stream().collect(Collectors.toList());
     }
+
     @GetMapping(path = "/district/{provinceID}")
     public Collection<District> getAllDistrict(@PathVariable Long provinceID) {
         Province province1 = provinceRepository.findById(provinceID).get();
         return districtRepository.findAllByProvinces(province1);
     }
+
     @GetMapping(path = "/subdistrict/{districtID}")
     public Collection<SubDistrict> getAllSubDistrict(@PathVariable Long districtID) {
         District district1 = districtRepository.findById(districtID).get();
