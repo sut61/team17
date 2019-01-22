@@ -1,0 +1,29 @@
+
+mat-card{
+  border-radius: 1em;
+  background-color: rgba(255, 255, 255, 0.5);
+  min-width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.field-input{
+  width: 90%;
+  border-radius: 30px;
+
+}
+button{
+  border-radius: 1em;
+  width: 50px;
+}
+.header-text {
+  color: #383838;
+  font-family: 'Itim', cursive;
+  font-size: 30px;
+  text-align: center;
+  width: 400px;
+  margin: 100px auto;
+}
+
+

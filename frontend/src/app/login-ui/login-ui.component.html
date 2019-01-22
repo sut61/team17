@@ -1,0 +1,23 @@
+<body>
+<div class="header-text">
+  <h1>เข้าสู่ระบบ</h1>
+</div>
+  <mat-card class="login-card">
+
+    <mat-grid-list cols="1" rowHeight="65px">
+      <mat-grid-tile >
+          <mat-form-field class="field-input">
+            <input matInput type="text" placeholder="Username" [(ngModel)]="credentials.username" value="">
+          </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field class="field-input">
+          <input matInput type="password" placeholder="Password" [(ngModel)]="credentials.password" value="">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1">
+        <button  mat-stroked-button color="#383838"  (click)="postLogin()">Login</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+</body>
