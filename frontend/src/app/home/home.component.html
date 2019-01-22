@@ -1,0 +1,40 @@
+<body>
+<div class="header">
+  <h1>Insurance</h1>
+  <h2>Menu</h2>
+</div>
+
+<mat-grid-list [cols]="breakpoint" rowHeight="240px" (window:resize)="onResize($event)">
+  <mat-grid-tile>
+    <mat-card routerLink="/" routerLinkActive="active">
+      <p>Policy</p>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card routerLink="/payment" routerLinkActive="active">
+      <p>Payment</p>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card routerLink="/customer" routerLinkActive="active">
+      <p>Customer</p>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card routerLink="/cardata" routerLinkActive="active">
+      <p>Car</p>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card routerLink="/carservice" routerLinkActive="active">
+      <p>Car Service</p>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card routerLink="/hospital" routerLinkActive="active">
+      <p>Hospital</p>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+</body>
