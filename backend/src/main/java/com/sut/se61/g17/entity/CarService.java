@@ -1,4 +1,4 @@
-package com.example.demo.Entity;
+package com.sut.se61.g17.entity;
 import javax.persistence.*;
 import lombok.*;
 import javax.persistence.Id;

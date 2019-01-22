@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.sut.se61.g17.entity;
 import com.sun.istack.internal.NotNull;
 import lombok.*;
 import javax.annotation.Generated;
@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 @Getter @Setter
 @NoArgsConstructor
 @ToString @EqualsAndHashCode
-public class HospitalEntity {
+public class Hospital {
     @Id @GeneratedValue
     private Long id;
     private @NotNull String hospitalName;
