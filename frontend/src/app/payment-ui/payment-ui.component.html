@@ -1,0 +1,175 @@
+<body>
+<div class="header-text">
+  <h1>ชำระค่าประกันรถ</h1>
+</div>
+<mat-card class="payment-card">
+  <mat-grid-list cols="12" rowHeight="70px">
+    <mat-grid-tile [colspan]="9" [rowspan]="1">
+      <div class="full-width">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="ค้นหาเลขที่กรมธรรม์" type="number" [(ngModel)]="idPolicy" value="">
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+      <button class="full-width btn-search" mat-stroked-button color="warm" (click)="searchPayment()">Search</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
+
+
+<div [@showDetailPolicy]="isOpen ? 'open':'closed'">
+  <mat-card class="policy-detail">
+
+    <mat-grid-list cols="12" rowHeight="35px">
+      <mat-grid-tile [rowspan]="1" [colspan]="2">
+        <p>กรมธรรม์เลขที่</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>:</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="5">
+        <p>{{policyObject.policyID}}</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="4">
+
+      </mat-grid-tile>
+
+      <!-- ROW 2 -->
+      <mat-grid-tile [rowspan]="1" [colspan]="2">
+        <p>ชื่อผู้ครอบครอง</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>:</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="5">
+        <p>{{policyObject.customer.firstName}} {{policyObject.customer.lastName}}</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>อาชีพ</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>:</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="2">
+        <p>{{policyObject.customer.career.careerName}}</p>
+      </mat-grid-tile>
+      <!-- ROW 3-->
+
+      <mat-grid-tile [rowspan]="1" [colspan]="2">
+        <p>ประเภทกรมธรรม์</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>:</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="5">
+        <p>--- Sprint #2 ---</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>ชั้น</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>:</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="2">
+        <p>--- Sprint #2 ---</p>
+      </mat-grid-tile>
+      <!-- ROW 3-->
+
+      <mat-grid-tile [rowspan]="1" [colspan]="2">
+        <p>รถยนต์</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>:</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="5">
+        <p>--- Gram Task ---</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>รุ่น</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>:</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="2">
+        <p>--- Gram Task ---</p>
+      </mat-grid-tile>
+
+      <!-- ROW 4-->
+
+      <mat-grid-tile [rowspan]="1" [colspan]="2">
+        <p>ประกัน เริ่มต้น</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>:</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="5">
+        <p>{{policyObject.periodStartDate}}</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>วันสิ้นสุด</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="1">
+        <p>:</p>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="1" [colspan]="2">
+        <p>{{policyObject.periodExpiryDate}}</p>
+      </mat-grid-tile>
+
+      <mat-grid-tile [rowspan]="2" [colspan]="4">
+        <mat-form-field style="width: 100%;align-items:flex-end">
+          <mat-select [(ngModel)]="invoiceID" placeholder="เลือกรอบเดือนที่ค้างชำระ MM/yyyy">
+            <mat-option *ngFor="let invoice of invoices" [value]="invoice.invoiceID">
+              {{invoice.invoiceDate}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [rowspan]="2" [colspan]="4">
+        <mat-form-field style="width: 100%">
+          <input matInput [(ngModel)]="paymentObject.amount" placeholder="จำนวนเงินที่รับ" type="number">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [rowspan]="2" [colspan]="4">
+        <button class="btn-search" style="width: 90%;" mat-raised-button color="warn" (click)="pay()">ชำระค่างวด
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+
+  </mat-card>
+
+  <mat-card class="show-invoice">
+    <table mat-table [dataSource]="invoiceData" >
+
+      <ng-container matColumnDef="invoiceID">
+        <th mat-header-cell *matHeaderCellDef>Invoice ID</th>
+        <td mat-cell *matCellDef="let invoice">{{invoice.invoiceID}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="invoiceDate">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let invoice">{{invoice.invoiceDate}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="invoiceAmount">
+        <th mat-header-cell *matHeaderCellDef>Amount</th>
+        <td mat-cell *matCellDef="let invoice">{{invoice.invoiceAmount}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="invoiceStatus">
+        <th mat-header-cell *matHeaderCellDef>Invoice Status</th>
+        <td mat-cell *matCellDef="let invoice">{{invoice.invoiceStatus.status}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-card>
+
+</div>
+
+
+</body>
+
