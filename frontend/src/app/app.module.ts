@@ -53,10 +53,11 @@ import {
 import {HomeComponent} from './home/home.component';
 import {LoginUIComponent} from './login-ui/login-ui.component';
 import {PaymentUIComponent} from './payment-ui/payment-ui.component';
-
+import {CarDataUiComponent} from './car-data-ui/car-data-ui.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginUIComponent},
+  {path: 'cardata', component: CarDataUiComponent},
   {path: 'payment', component: PaymentUIComponent},
 
   {path: '', component: HomeComponent}
@@ -66,6 +67,7 @@ const routes: Routes = [
     AppComponent,
     HomeComponent,
     LoginUIComponent,
+    CarDataUiComponent,
     PaymentUIComponent
   ],
   imports: [

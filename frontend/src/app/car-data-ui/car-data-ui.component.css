@@ -1,0 +1,40 @@
+
+body {
+  margin-top: 0 px;
+  height: 100%;
+
+}
+mat-card{
+  border-radius: 30px;
+}
+.databox1{
+  font-family: 'Itim', cursive;
+  font-size: 30px;
+     text-align: center;
+     width: 60%;
+    background: #fff;
+    opacity: .8;
+    color: #FF3399;
+    margin :20px auto;
+}
+mat-select{
+  width:100%;
+}
+.databox{
+    margin: 20px auto;
+
+    width: 60%;
+    height: auto;
+   
+
+    background: #fff;
+    opacity: .8;
+    color: #FF3399;
+  }
+
+mat-form-field{
+  width: 70%;
+  margin:auto auto;
+}
+
+
