@@ -1,0 +1,66 @@
+<body>
+  <mat-card class="databox1">
+    <h1>CAR DATA</h1>
+  </mat-card>
+
+
+  <mat-card class="databox">
+   
+    <div class="row">
+      <mat-grid-list cols="1" rowHeight="70px">
+        <mat-grid-tile>
+          <mat-form-field>
+            <mat-select placeholder="Car Type" [(ngModel)]="carTypeID">
+              <mat-option *ngFor="let carTypez of carTypes" [value]="carTypez.carTypeID">{{carTypez.carType}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field>
+            <mat-select placeholder="Branch" [(ngModel)]="branchID">
+              <mat-option *ngFor="let branchz of branchs" [value]="branchz.branchID">{{branchz.branchName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field>
+            <mat-select placeholder="Car Color" [(ngModel)]="colorID">
+              <mat-option *ngFor="let colorz of colors" [value]="colorz.colorID">{{colorz.color}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field>
+            <mat-select placeholder="Gear Type" [(ngModel)]="gearTypeID">
+              <mat-option *ngFor="let gearTypez of gearTypes" [value]="gearTypez.gearTypeID">{{gearTypez.gearType}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="object.model" placeholder="รุ่นรถ" value="">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+
+          <mat-form-field class="example-full-width">
+            <input matInput [(ngModel)]="object.cC" placeholder="CC" value="">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button mat-raised-button color="warn" (click)="insertReview()">SAVE CAR</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+    </div>
+  </mat-card>
+
+
+
+  <!--<img src='/assets/img/promo-bg-1.jpg' style='px = 1000%'>-->
+</body>
