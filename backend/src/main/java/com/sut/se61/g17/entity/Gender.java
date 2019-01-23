@@ -1,37 +1,25 @@
 package com.sut.se61.g17.entity;
-import lombok.*;
 
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Entity;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+@Data
 @Entity
-@Getter @Setter
 @NoArgsConstructor
-@ToString @EqualsAndHashCode
 public class Gender {
-    @Id @GeneratedValue
-    private @NonNull Long genderID;
-    private  String genderName;
+    @Id
+    @SequenceGenerator(name = "gender_seq",sequenceName = "gender_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "gender_seq")
+    @Column(name = "GENDER_ID")
+    private Long genderID;
 
-    public Long getGenderID() {
-        return genderID;
+    private String genderType;
+
+
+
+    public Gender(String genderType) {
+        this.genderType = genderType;
     }
-
-    public void setGenderID(Long genderID) {
-        this.genderID = genderID;
-    }
-
-    public String getGenderName() {
-        return genderName;
-    }
-
-    public void setGenderName(String genderName) {
-        this.genderName = genderName;
-    }
-
-    public Gender(String genderName) {
-        this.genderName = genderName;
-    }
-
 }
