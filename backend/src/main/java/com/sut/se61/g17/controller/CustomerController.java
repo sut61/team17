@@ -72,8 +72,7 @@ public class CustomerController {
             System.out.println(e);
             throw new Exception("Error");
         }
-
-
+        
         return customerRepository.save(customer);
 
 
