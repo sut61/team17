@@ -54,12 +54,13 @@ import {HomeComponent} from './home/home.component';
 import {LoginUIComponent} from './login-ui/login-ui.component';
 import {PaymentUIComponent} from './payment-ui/payment-ui.component';
 import {CarDataUiComponent} from './car-data-ui/car-data-ui.component';
+import {CustomerInfoUIComponent} from './customer-info-ui/customer-info-ui.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginUIComponent},
   {path: 'cardata', component: CarDataUiComponent},
   {path: 'payment', component: PaymentUIComponent},
-
+  {path: 'customer', component: CustomerInfoUIComponent},
   {path: '', component: HomeComponent}
 ];
 @NgModule({
@@ -68,7 +69,8 @@ const routes: Routes = [
     HomeComponent,
     LoginUIComponent,
     CarDataUiComponent,
-    PaymentUIComponent
+    PaymentUIComponent,
+    CustomerInfoUIComponent
   ],
   imports: [
     BrowserModule,

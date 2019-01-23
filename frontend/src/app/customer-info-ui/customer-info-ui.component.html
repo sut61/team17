@@ -1,0 +1,159 @@
+<body>
+<div class="header-text">
+  <h1>
+    Customer Information
+  </h1>
+</div>
+
+<mat-card class="detail">
+  <mat-grid-list cols = "1" rowHeight= "70px">
+    <mat-grid-tile [colspan]= "1" [rowspan]= "1">
+      <mat-form-field class="full-width">
+        <input matInput [(ngModel)]="customerObject.idNumber" placeholder="ID Number (x-xxxx-xxxxx-xx-x)" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="full-width">
+        <mat-select  [(ngModel)] = "genderIDSelected" placeholder="Gender" [ngModelOptions]="{standalone: true}">
+          <mat-option *ngFor="let gender of genders" [value] = "gender.genderID">
+            {{gender.genderType}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="full-width" >
+        <input matInput [(ngModel)] ="customerObject.firstName" placeholder="First Name" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="full-width">
+        <input matInput [(ngModel)] = "customerObject.lastName" placeholder="Last Name" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="full-width">
+        <input matInput [(ngModel)]="customerObject.birthday"  placeholder="Birthday Ex:2019-01-01"  [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="full-width">
+        <input type="tel" matInput [(ngModel)]="customerObject.phone" placeholder="Telephone" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="full-width">
+        <input  matInput [(ngModel)]= "customerObject.email" placeholder="Email" [ngModelOptions]="{standalone: true}">
+
+      </mat-form-field>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class = "full-width">
+        <mat-select [(ngModel)]="careerIDselected"  placeholder ="Career" [ngModelOptions]="{standalone: true}">
+          <mat-option *ngFor = "let career of careers" [value]="career.careerID">
+            {{career.careerName}}
+          </mat-option>
+
+        </mat-select></mat-form-field>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="full-width">
+        <input matInput [(ngModel)]="customerObject.address" placeholder="Address" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+
+      <mat-form-field class="full-width">
+        <mat-select [(ngModel)]="provinceSelected" placeholder="Province" (selectionChange)="getAllDistrict()" [ngModelOptions]="{standalone: true}" >
+          <mat-option *ngFor="let province of provinces" [value]="province.provinceID">
+            {{province.provinceName}}
+          </mat-option>
+
+        </mat-select></mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="full-width">
+        <mat-select  placeholder="District" [(ngModel)]="districtSelected"  (selectionChange)="getAllSubDistrict()" [ngModelOptions]="{standalone: true}">
+          <mat-option *ngFor="let district of districts" [value]="district.districtID">
+            {{district.districtName}}
+          </mat-option>
+
+        </mat-select></mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-form-field class="full-width">
+        <mat-select [(ngModel)]= "subDistrictSelected"  placeholder="Sub District" [ngModelOptions]="{standalone: true}">
+          <mat-option *ngFor="let subDistrict of subDistricts" [value]="subDistrict.subDistrictID">
+            {{subDistrict.subDistrictName}}
+          </mat-option>
+
+        </mat-select></mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-flat-button color="primary"  style="background-color:#4CAF50; width: 15%" (click)="postCustomerData()">Save</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mat-card>
+
+
+
+</body>
