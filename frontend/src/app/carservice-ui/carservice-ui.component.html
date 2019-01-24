@@ -1,0 +1,94 @@
+<body>
+<div class="header-text">
+  <h1>เพิ่มศูนย์ซ้อมรถ</h1>
+</div>
+  <mat-card class="policy-card">
+    <mat-grid-list cols="1" rowHeight="70px">
+      <mat-grid-tile>
+        <mat-form-field class="full-width">
+          <mat-select [(ngModel)]="carServiceTypeSelected" name="serviceType" placeholder="--เลือกประเภทบริการ--">
+            <mat-option *ngFor="let serviceType of carServiceTypes" [value]="serviceType.serviceTypeID">
+              {{serviceType.carServiceType}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field  class="full-width">
+          <input matInput [(ngModel)]="carServiceObject.carServiceName" [ngModelOptions]="{standalone: true}"
+                 placeholder="ชื่อศูนย์บริการซ้อมรถ">
+        </mat-form-field>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile>
+        <mat-form-field  class="full-width">
+          <input matInput [(ngModel)]="carServiceObject.address" [ngModelOptions]="{standalone: true}"
+                 placeholder="ที่อยู่" value="">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field  class="full-width">
+          <mat-select [(ngModel)]="provinceSelected" placeholder="--เลือกจังหวัด--" (selectionChange)="getAllDistrict()">
+            <mat-option *ngFor="let province of provinces" [value]="province.provinceID">
+              {{province.provinceName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field  class="full-width">
+          <mat-select [(ngModel)]="districtSelected" placeholder="--เลือกอำเภอ--" (selectionChange)="getAllSubDistrict()">
+            <mat-option *ngFor="let district of districts" [value]="district.districtID">
+              {{district.districtName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field  class="full-width">
+          <mat-select [(ngModel)]="subDistrictSelected" placeholder="--เลือกตำบล--">
+            <mat-option *ngFor="let subDistrict of subDistricts" [value]="subDistrict.subDistrictID">
+              {{subDistrict.subDistrictName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile  class="full-width">
+        <button mat-raised-button style="width:100%;background-color: cadetblue;color: white;" (click)="postCarServiceData()">บันทึก</button>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+
+
+
+
+  </mat-card>
+
+<mat-card class="show-car-service">
+  <table mat-table [dataSource]="carServiceData" class="mat-elevation-z8">
+    <ng-container matColumnDef="carServiceName">
+      <th mat-header-cell *matHeaderCellDef>Car Service Name</th>
+      <td mat-cell *matCellDef="let carService">{{carService.carServiceName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef>Address</th>
+      <td mat-cell
+          *matCellDef="let carService">{{carService.address.address}} {{carService.address.district.districtName}} {{carService.address.subDistrict.subDistrictName}}  {{carService.address.province.provinceName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="carServiceType">
+      <th mat-header-cell *matHeaderCellDef>Car Service Type</th>
+      <td mat-cell *matCellDef="let carService">{{carService.carServiceType.carServiceType}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row class="row-table" *matRowDef="let row; columns: displayedColumns;" (click)="test(row)" ></tr>
+  </table>
+
+</mat-card>
+</body>
