@@ -55,12 +55,15 @@ import {LoginUIComponent} from './login-ui/login-ui.component';
 import {PaymentUIComponent} from './payment-ui/payment-ui.component';
 import {CarDataUiComponent} from './car-data-ui/car-data-ui.component';
 import {CustomerInfoUIComponent} from './customer-info-ui/customer-info-ui.component';
+import {CarserviceUiComponent} from './carservice-ui/carservice-ui.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginUIComponent},
   {path: 'cardata', component: CarDataUiComponent},
   {path: 'payment', component: PaymentUIComponent},
   {path: 'customer', component: CustomerInfoUIComponent},
+  {path: 'carservice', component: CarserviceUiComponent},
+
   {path: '', component: HomeComponent}
 ];
 @NgModule({
@@ -70,6 +73,7 @@ const routes: Routes = [
     LoginUIComponent,
     CarDataUiComponent,
     PaymentUIComponent,
+    CarserviceUiComponent,
     CustomerInfoUIComponent
   ],
   imports: [

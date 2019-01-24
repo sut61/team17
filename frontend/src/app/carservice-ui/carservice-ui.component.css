@@ -1,0 +1,56 @@
+.policy-card{
+  width: 50%;
+  margin: auto auto;
+
+
+}
+mat-card{
+  border-radius: 1em;
+  background-color: rgba(255,255,255,0.7);
+}
+table, mat-table{
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.5); /* Black background with 0.5 opacity */
+
+}
+.header-text{
+  width: 50%;
+  text-align: center;
+  color: #3E211E;
+  font-family: 'Itim', cursive;
+  margin: auto auto;
+  font-size: 30px;
+
+}
+.example-full-width{
+  margin-left: 20%;
+  width: 60%;
+}
+.row mat-form-field{
+  margin-left: 6.5%;
+  width: 60%;
+}
+.center_div {
+  text-align: center;
+}
+.full-width{
+  width: 100%;
+}
+.show-car-service{
+  margin: 20px auto;
+  width: 50%;
+}
+table{
+  width: 100%;
+}
+.row-table{
+  cursor: pointer;
+  transition: 0.5s;
+}
+.row-table:hover{
+  cursor: pointer;
+  background-color: rgba(0,0,0,0.5);
+}
