@@ -23,7 +23,7 @@ import java.util.Set;
 public class Data implements CommandLineRunner {
 
     private final String FILE_ENCODE = "UTF-8";
-    private final String filePath = "src/external data/Thailand-UTF8 Demo.txt";
+    private final String filePath = "src/externaldata/Thailand-UTF8 Demo.txt";
 
     @Autowired
     private ProvinceRepository provinceRepository;
@@ -87,7 +87,7 @@ public class Data implements CommandLineRunner {
 
         carServiceTypeData();
         hospitalTypeData();
-        paymentDemoData();
+//        paymentDemoData();
         gearType();
         propertyTypeData();
         carDataTest();
@@ -209,7 +209,7 @@ public class Data implements CommandLineRunner {
     }
 
 
-    private void paymentDemoData() throws ParseException {
+   /* private void paymentDemoData() throws ParseException {
 
         LocalDateTime dateTimeNow = LocalDateTime.now(ZoneId.of("Asia/Bangkok"));
 
@@ -235,14 +235,15 @@ public class Data implements CommandLineRunner {
                 genderRepository.findByGenderType("male"),
                 careerRepository.findByCareerName("Student")));
 
+        policy.setCarData(carDataRepository.)
         policy.setPeriodStartDate(dateNow);
         policy.setPeriodExpiryDate(dateExpiry);
         policy.setIssuedDate(dateTimeNow);
-        //policy.setEmployee(employeeRepository.findByUsername("admin"));
+        policy.setEmployee(employeeRepository.findByUsername("admin"));
         policy.setCustomer(customer);
         policyRepository.save(policy);
 
-    }
+    }*/
 
     public void propertyTypeData() {
         propertyRepository.save(new Property("ชั้นที่ 1"));
