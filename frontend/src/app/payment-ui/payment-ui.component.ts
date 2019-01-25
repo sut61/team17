@@ -104,7 +104,7 @@ export class PaymentUIComponent implements OnInit {
 
   pay() {
     console.log(this.invoiceID);
-    this.paymentService.postPay(this.invoiceID, 'admin', this.paymentObject).subscribe(res => {
+    this.paymentService.postPay(this.invoiceID, sessionStorage.getItem('username'), this.paymentObject).subscribe(res => {
       console.log(res, 'Success');
       this.getInvoices(this.policyObject.policyID);
       this.getInvoicesOverdueByPolicy(this.policyObject.policyID);
