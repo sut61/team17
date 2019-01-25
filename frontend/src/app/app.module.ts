@@ -58,15 +58,17 @@ import {CustomerInfoUIComponent} from './customer-info-ui/customer-info-ui.compo
 import {CarserviceUiComponent} from './carservice-ui/carservice-ui.component';
 import {AuthGuardService} from './service/auth-guard.service';
 import {HospitalUIComponent} from './hospital-ui/hospital-ui.component';
+import {PolicyUiComponent} from './policy-ui/policy-ui.component';
 
 const routes: Routes = [
+  {path: 'payment', component: PaymentUIComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginUIComponent},
-  {path: 'cardata', component: CarDataUiComponent},
-  {path: 'payment', component: PaymentUIComponent},
-  {path: 'customer', component: CustomerInfoUIComponent},
-  {path: 'carservice', component: CarserviceUiComponent},
-  {path: 'hospital', component: HospitalUIComponent , canActivate: [AuthGuardService]},
-  {path: '', component: HomeComponent}
+  {path: 'customer', component: CustomerInfoUIComponent, canActivate: [AuthGuardService]},
+  {path: 'carservice', component: CarserviceUiComponent, canActivate: [AuthGuardService]},
+  {path: 'cardata', component: CarDataUiComponent, canActivate: [AuthGuardService]},
+  {path: '', component: HomeComponent, canActivate: [AuthGuardService]},
+  {path: 'policy', component: PolicyUiComponent, canActivate: [AuthGuardService]},
+  {path: 'hospital', component: HospitalUIComponent , canActivate: [AuthGuardService]}
 ];
 @NgModule({
   declarations: [
@@ -77,6 +79,7 @@ const routes: Routes = [
     PaymentUIComponent,
     CarserviceUiComponent,
     HospitalUIComponent,
+    PolicyUiComponent,
     CustomerInfoUIComponent
   ],
   imports: [
