@@ -39,7 +39,15 @@ public class CarData {
 
     public CarData() {
     }
+    public CarData(@NonNull String model, @NonNull String cC, BranchCar branchCar, CarColor carColor, CarType carType, GearType gearType) {
 
+        this.model = model;
+        this.cC = cC;
+        this.branchCar = branchCar;
+        this.carColor = carColor;
+        this.carType = carType;
+        this.gearType = gearType;
+    }
     public Long getCarID() {
         return carID;
     }
