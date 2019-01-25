@@ -42,13 +42,17 @@ export class PaymentUIComponent implements OnInit {
     periodStartDate: null,
     periodExpiryDate: null,
     carData: {
-      branchCar: null,
+      branchCar: {
+        branchName: ''
+      },
       model: ''
     },
     customer: {
       firstName: '',
       lastName: '',
-      career: ''
+      career: {
+        careerName: ''
+      }
     }
   };
 
