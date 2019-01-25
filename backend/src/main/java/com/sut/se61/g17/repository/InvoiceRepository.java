@@ -10,7 +10,7 @@ import java.util.List;
 @RepositoryRestResource
 public interface InvoiceRepository extends JpaRepository<Invoice,Long> {
     List<Invoice> findByPolicy_PolicyID(Long id);
-    List<Invoice> findByPolicy_PolicyIDAndAndInvoiceStatus_Status(Long id, String status);
+    List<Invoice> findByPolicy_PolicyIDAndAndInvoiceStatus_Status(Long id,String status);
     Invoice findByPolicy(Policy policy);
     Boolean existsByPolicy(Policy policy);
 

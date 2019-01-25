@@ -7,5 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface GearTypeRepository extends JpaRepository<GearType, Long> {
+    GearType findByGearType(String s);
 }
 
