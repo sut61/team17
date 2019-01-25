@@ -33,7 +33,7 @@ export class LoginUIComponent implements OnInit {
       console.log(response);
       console.log(' ---- end response ----');
 
-      this.token.saveToken(response.headers.get('Authorization'));
+      this.token.saveToken(response.headers.get('Authorization'), this.credentials.username);
       console.log(' ---- begin token ----');
       console.log(this.token.getToken());
       console.log(' ---- end token ----');
