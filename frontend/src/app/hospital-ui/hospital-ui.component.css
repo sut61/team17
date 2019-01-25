@@ -1,0 +1,57 @@
+
+.topTitleBackgound{ /*กรอบด้านหลัง*/
+  background:rgb(189, 195, 199);
+  opacity: 0.9;
+  min-height: 90vh;
+  margin: 2% 5% ;
+  text-align: center;
+}
+.topTitle{     /*tapชื่อหัว*/
+  font-family: 'Itim', cursive;
+  font-size: 35px; 
+  background:rgb(75, 119, 190);
+  text-align: center;
+  height: 30px;
+}
+.header-text{
+  width: 50%;
+  text-align: center;
+  color: #3E211E;
+  font-family: 'Itim', cursive;
+  margin: auto auto;
+  font-size: 30px;
+
+}
+.full-width-input{
+  width: 95%;
+}
+.title-in-card{
+  font-family: 'Itim', cursive;
+  background:rgb(89, 171, 227);
+  font-size:25px;
+}
+.button{
+  font-family: 'Itim', cursive;
+  width: 20%;
+  font-size: 30px;
+  background:rgb(0, 181, 204);
+  margin: 0 65% 0 0;
+  
+}
+.show-hospital{
+  margin: 0 0 0 35%;
+  width: 60%;
+  background: rgb(89, 171, 227);
+
+}
+.example-container {
+  height: 690px;
+  overflow: auto;
+  background: lightgray ;
+}
+
+table {
+   width: 100%;
+}
+
+
