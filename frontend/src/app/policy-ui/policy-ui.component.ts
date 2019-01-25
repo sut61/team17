@@ -66,7 +66,7 @@ export class PolicyUiComponent implements OnInit {
       gearType: {}
     }
   };
-  
+
   policyObject = {
   };
 
@@ -104,13 +104,13 @@ export class PolicyUiComponent implements OnInit {
         this.customerObject = response;
         try {
           console.log(this.customerObject.customerID);
-      } catch (e){
+        } catch (e){
           if (e instanceof TypeError) {
             console.log(e.message);
             alert('Id number not correct!');
             this.isOpenCustomer = false;
           }
-        }        
+        }
       }, error => {
         alert('Id number not correct!');
         this.isOpenCustomer = false;
@@ -147,11 +147,11 @@ export class PolicyUiComponent implements OnInit {
     this.service.getAllgearType().subscribe(res => {
       this.gearTypes = res;
     });
-   }
+  }
   getAllcarColors() {
     this.service.getAllcarColor().subscribe(res => {
-          this.carColors = res;
-        });
+      this.carColors = res;
+    });
   }
   dateToString(){
     const yyyy = this.date.getFullYear();
@@ -168,14 +168,14 @@ export class PolicyUiComponent implements OnInit {
     if(this.propertyIDSelected == null){
       alert('Please select property before save!');
     }else if(this.customerObject.customerID == null){
-      alert('Please click search before save!');      
-    }else{     
+      alert('Please click search before save!');
+    }else{
       try {
         console.log(this.dateToString());
         this.service.postPolicy(this.policyObject, this.propertyIDSelected, this.customerObject.customerID, this.carDataSelected,
           sessionStorage.getItem('username'), this.periodStartDate, this.periodYear).subscribe(res => {
-            console.log(res);
-            alert('success');
+          console.log(res);
+          alert('success');
         } , error1 => {
           alert(error1.error.message);
         });
@@ -184,7 +184,7 @@ export class PolicyUiComponent implements OnInit {
           console.log(e.message);
           alert('Please enter date before save!');
         }
-      }  
+      }
     }
   }
 }
