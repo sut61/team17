@@ -5,13 +5,11 @@ import com.sut.se61.g17.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,8 +21,7 @@ public class PolicyController {
 
     @Autowired
     private CustomerRepository customerRepository;
-//    @Autowired
-//    private PolicyStatusRepository policyStatusRepository;
+
     @Autowired
     private PropertyRepository propertyRepository;
     @Autowired

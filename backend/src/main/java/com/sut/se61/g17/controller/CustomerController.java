@@ -1,12 +1,8 @@
 package com.sut.se61.g17.controller;
 
 
-import com.sut.se61.g17.entity.Career;
-import com.sut.se61.g17.entity.Customer;
-import com.sut.se61.g17.entity.Gender;
-import com.sut.se61.g17.repository.CareerRepository;
-import com.sut.se61.g17.repository.CustomerRepository;
-import com.sut.se61.g17.repository.GenderRepository;
+import com.sut.se61.g17.entity.*;
+import com.sut.se61.g17.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
