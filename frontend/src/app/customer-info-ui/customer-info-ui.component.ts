@@ -71,7 +71,7 @@ export class CustomerInfoUIComponent implements OnInit {
   postCustomerData() {
     this.service.postCustomer(this.customerObject, this.careerIDselected, this.genderIDSelected, this.subDistrictSelected, this.districtSelected, this.provinceSelected).subscribe(res => {
         console.log(res);
-        alert('success');
+        alert('บันทึกสำเร็จ');
       }
       , error1 => {
         alert(error1.error.message);
