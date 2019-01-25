@@ -1,0 +1,122 @@
+<body>
+
+<div class="header-text">
+        <h1>เพิ่มโรงพยาบาลที่รับบริการ</h1>
+</div>
+
+<mat-card class="topTitleBackgound">
+  <mat-card class="topTitle">
+    <h3>Hospital</h3>
+  </mat-card>
+ <br>
+ 
+  <mat-grid-list cols="12" rowHeight="700px">
+    <mat-grid-tile [colspan]="4">
+      <mat-card class="top-card">
+        <mat-toolbar class="title-in-card">Hospital Profile</mat-toolbar>
+  
+        <mat-form-field class="full-width-input">
+          <input matInput [(ngModel)]="object.hospital.hospitalName" placeholder="Hospital Name">
+        </mat-form-field>
+  
+        <mat-form-field class="full-width-input">
+          <input matInput [(ngModel)]="object.branchName" placeholder="Hospital Branch">
+        </mat-form-field>
+  
+        <mat-form-field class="full-width-input">
+          <mat-select [(ngModel)]="typeSelected" placeholder="ประเภทโรงพยาบาล">
+            <mat-option *ngFor="let type of types" [value]="type.typeID">
+              {{type.typeName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-toolbar class="title-in-card">Hospital Address</mat-toolbar>
+        <mat-form-field class="full-width-input">
+          <input [(ngModel)]="object.address" matInput placeholder="Address">
+        </mat-form-field>
+  
+        <mat-form-field class="full-width-input">
+          <mat-select [(ngModel)]="provinceSelected" placeholder="--เลือกจังหวัด--" (selectionChange)="getAllDistrict()">
+            <mat-option *ngFor="let province of provinces" [value]="province.provinceID">
+              {{province.provinceName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field class="full-width-input">
+          <mat-select [(ngModel)]="districtSelected" placeholder="--เลือกอำเภอ--" (selectionChange)="getAllSubDistrict()">
+            <mat-option *ngFor="let district of districts" [value]="district.districtID">
+              {{district.districtName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+  
+  
+        <mat-form-field class="full-width-input">
+          <mat-select [(ngModel)]="subDistrictSelected" placeholder="--เลือกตำบล--">
+            <mat-option *ngFor="let subDistrict of subDistricts" [value]="subDistrict.subDistrictID">
+              {{subDistrict.subDistrictName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field class="full-width-input">
+          <input matInput [(ngModel)]="object.phone" placeholder="Phone">
+        </mat-form-field>
+      </mat-card>
+  
+    </mat-grid-tile>
+    
+    
+      
+      <mat-card class="show-hospital">
+        <div class="example-container mat-elevation-z8">
+      <table mat-table [dataSource]="hospitalBranch">
+      
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.hospital.hospitalName}} </td>
+        </ng-container>
+
+       
+        <ng-container matColumnDef="branch">
+          <th mat-header-cell *matHeaderCellDef>Brannch</th>
+          <td mat-cell *matCellDef="let element"> {{element.branchName}} </td>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td mat-cell *matCellDef="let element"> {{element.hospital.hospitalType.typeName}} </td>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>Address</th>
+          <td mat-cell *matCellDef="let element"> {{element.address.address}} {{element.address.subDistrict.subDistrictName}}
+            {{element.address.district.districtName}} {{element.address.province.provinceName}}</td>
+        </ng-container>
+        
+        
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef> Phone </th>
+          <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        </div>
+      </mat-card>
+    
+        </mat-grid-list>
+        
+        <button mat-raised-button color="warn" (click)="postHospital()" class="button">Save Hospital</button>
+        
+        
+        
+        </mat-card>
+        </body>
+
+

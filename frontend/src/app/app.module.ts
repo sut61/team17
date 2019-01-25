@@ -56,6 +56,8 @@ import {PaymentUIComponent} from './payment-ui/payment-ui.component';
 import {CarDataUiComponent} from './car-data-ui/car-data-ui.component';
 import {CustomerInfoUIComponent} from './customer-info-ui/customer-info-ui.component';
 import {CarserviceUiComponent} from './carservice-ui/carservice-ui.component';
+import {AuthGuardService} from './service/auth-guard.service';
+import {HospitalUIComponent} from './hospital-ui/hospital-ui.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginUIComponent},
@@ -63,7 +65,7 @@ const routes: Routes = [
   {path: 'payment', component: PaymentUIComponent},
   {path: 'customer', component: CustomerInfoUIComponent},
   {path: 'carservice', component: CarserviceUiComponent},
-
+  {path: 'hospital', component: HospitalUIComponent , canActivate: [AuthGuardService]},
   {path: '', component: HomeComponent}
 ];
 @NgModule({
@@ -74,6 +76,7 @@ const routes: Routes = [
     CarDataUiComponent,
     PaymentUIComponent,
     CarserviceUiComponent,
+    HospitalUIComponent,
     CustomerInfoUIComponent
   ],
   imports: [
