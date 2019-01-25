@@ -1,6 +1,7 @@
 package com.sut.se61.g17.controller;
 
-import com.sut.se61.g17.entity.CarService;
+import com.sut.se61.g17.entity.*;
+import com.sut.se61.g17.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
