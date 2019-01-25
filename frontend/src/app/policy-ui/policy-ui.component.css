@@ -1,0 +1,29 @@
+
+  .header {
+    top: 1%;
+    left: 15%;
+    width: 70%;
+    margin-top: 20px; 
+  }
+  mat-card{
+    top: 15%;
+    left: 15%;
+    width: 70%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3ch;
+  }
+  .period-time-select{
+    width: 90%;
+    border-radius: 0ch;
+    left: 0%;
+  }
+  .customer-insert,.car-insert{
+    width: 70%;
+  }
+  .date-select,.period-select{
+    width: 50%;
+  }
+  .customer-btn-search,.car-btn-search{
+    width: 30%;
+    margin: 15px;
+  }
