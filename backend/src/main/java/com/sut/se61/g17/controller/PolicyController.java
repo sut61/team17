@@ -23,8 +23,8 @@ public class PolicyController {
 
     @Autowired
     private CustomerRepository customerRepository;
-    @Autowired
-    private PolicyStatusRepository policyStatusRepository;
+//    @Autowired
+//    private PolicyStatusRepository policyStatusRepository;
     @Autowired
     private PropertyRepository propertyRepository;
     @Autowired
