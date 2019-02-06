@@ -66,7 +66,8 @@ export class PolicyService {
 
   public postPolicy(object: any, propertyID: number, customerID: number, carID: number, username: string, periodStartDate: string, periodYear: number): Observable<any> {
     return this.http.post(policyApi + propertyID + '/' + customerID + '/' + carID + '/' + username + '/' + periodStartDate + '/' + periodYear, {
-      // 'issuedDate': object.issuedDate
+      'licensePlate': object.licensePlate,
+      'vin': object.vin
     }, {headers: this.authKey});
   }
 }

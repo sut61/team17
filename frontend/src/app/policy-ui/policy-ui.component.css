@@ -3,7 +3,10 @@
     top: 1%;
     left: 15%;
     width: 70%;
-    margin-top: 20px; 
+    margin-top: 20px;     
+    font-family: 'Itim', cursive;
+    font-size: 30px;
+    text-align: center;
   }
   mat-card{
     top: 15%;
@@ -12,18 +15,25 @@
     background: rgba(255, 255, 255, 0.3);
     border-radius: 3ch;
   }
-  .period-time-select{
-    width: 90%;
-    border-radius: 0ch;
-    left: 0%;
+  mat-panel-title{
+    width: 30%;
   }
-  .customer-insert,.car-insert{
-    width: 70%;
+  mat-panel-description{
+    width: 60%;
+  }
+  .customer-insert{
+    width: 65%;
   }
   .date-select,.period-select{
     width: 50%;
   }
-  .customer-btn-search,.car-btn-search{
+  .customer-btn-search{
     width: 30%;
     margin: 15px;
+    background-color: rgba(43, 64, 255, 0.849);
+  }
+  .headers-align {
+    flex-basis: 10;  
+    justify-content: space-between;
+    align-items: center;
   }
