@@ -21,7 +21,6 @@ public class PolicyController {
 
     @Autowired
     private CustomerRepository customerRepository;
-
     @Autowired
     private PropertyRepository propertyRepository;
     @Autowired
@@ -36,16 +35,6 @@ public class PolicyController {
     private CarTypeRepository carTypeRepository;
     @Autowired
     private GearTypeRepository gearTypeRepository;
-
-    @GetMapping(path = "/")
-    public Collection<Policy> getPolicy(){
-        return policyRepository.findAll().stream().collect(Collectors.toList());
-    }
-    @GetMapping(path = "/{policyID}")
-    public Policy getOnePolicy(@PathVariable Long policyID){
-        return policyRepository.findById(policyID).get();
-    }
-
 
     @GetMapping(path = "/property")
     public Collection<Property> getProperty(){
@@ -81,24 +70,15 @@ public class PolicyController {
     public CarData getOneCarData(@PathVariable Long carID){
         return carDataRepository.findById(carID).get();
     }
-
-    @GetMapping("/carTypes/{branchCarID}")
-    public Collection<CarType> getAllcarType(/*@PathVariable Long branchCarID*/) {
-//        CarData carDataByBranch = carDataRepository.findByBranchCar(branchCarRepository.findById(branchCarID).get());
-//        return carTypeRepository.findAllByCarData(carDataByBranch);
-        return carTypeRepository.findAll().stream().collect(Collectors.toList());
-    }
-
+    
     @GetMapping("/branchCars")
     public Collection<BranchCar> branchCar() {
         return branchCarRepository.findAll().stream().collect(Collectors.toList());
     }
-
     @GetMapping("/carColors")
     public Collection<CarColor> carColor() {
         return carColorRepository.findAll().stream().collect(Collectors.toList());
     }
-
     @GetMapping("/gearTypes")
     public Collection<GearType> gearType() {
         return gearTypeRepository.findAll().stream().collect(Collectors.toList());
@@ -127,27 +107,30 @@ public class PolicyController {
 
         if(periodYear<1 || periodYear > 10)
             throw new Exception("Period incorrect!");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate maxDate = LocalDate.now().plusMonths(1);
+        LocalDate dateStart = LocalDate.parse(periodStartDate, formatter);
+        if(dateStart.isAfter(maxDate))
+            throw new Exception("Please selected date not more than 1 month of current!");
+        if(dateStart.isBefore(LocalDate.now()))
+            throw new Exception("Please selected date equal or more than of current!");
+        if(!policy.getLicensePlate().matches("(\\d?[ก-ฮ])?[ก-ฮ]\\d{3}[1-9]"))
+            throw new Exception("LicensePlate Incorrect!");
+        if(policy.getVin().length()!=17)
+            throw new Exception("VIN Incorrect!");
         try{
             Property property = propertyRepository.findById(propertyID).get();
             Customer customer = customerRepository.findById(customerID).get();
             CarData carData = carDataRepository.findById(carID).get();
             Employee employee = employeeRepository.findByUsername(username);
-            //PolicyStatus policyStatus = policyStatusRepository.findById(policyStatusID).get();
-
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate dateStart = LocalDate.parse(periodStartDate, formatter);
             LocalDate dateExpiry = dateStart.plusYears(periodYear);
             LocalDateTime dateTimeNow = LocalDateTime.now(ZoneId.of("Asia/Bangkok"));
-            //DateTimeFormatter formatterIssued = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            //LocalDateTime dateIssued = LocalDateTime.parse(issuedDate, formatterIssued);
 
             policy.setIssuedDate(dateTimeNow);
             policy.setProperty(property);
             policy.setCustomer(customer);
             policy.setCarData(carData);
             policy.setEmployee(employee);
-//            policy.setPolicyStatus(policyStatus);
             policy.setPeriodStartDate(dateStart);
             policy.setPeriodExpiryDate(dateExpiry);
         }catch (Exception e){
