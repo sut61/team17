@@ -8,13 +8,20 @@ import {BeneficiaryService} from '../beneficiary.service';
   styleUrls: ['./beneficiary-popup.component.css']
 })
 export class BeneficiaryPopupComponent implements OnInit {
-  beneficiaryObject = {
+
+  static bId: number;
+  beneficiary = {
     firstname: '',
     lastname: '',
     phone: '',
     personalId: '',
     gender: {
       genderType: ''
+    },
+    policy: {
+      customer: {
+        firstname: ''
+      }
     },
     relationship: '',
     address: {
@@ -36,8 +43,8 @@ export class BeneficiaryPopupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getBeneficiaryById(BeneficiaryUIComponent.beneficiaryTemp).subscribe(res => {
-      this.beneficiaryObject = res;
+    this.service.getBeneficiaryById(BeneficiaryPopupComponent.bId).subscribe(res => {
+      this.beneficiary = res;
     });
 
   }

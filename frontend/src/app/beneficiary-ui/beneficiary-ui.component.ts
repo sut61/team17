@@ -131,8 +131,10 @@ export class BeneficiaryUIComponent implements OnInit {
   }
 
   openDialog(bId: number): void {
-    BeneficiaryUIComponent.beneficiaryTemp = bId;
-    const dialogRef = this.dialog.open(BeneficiaryPopupComponent, {});
+    BeneficiaryPopupComponent.bId = bId;
+    const dialogRef = this.dialog.open(BeneficiaryPopupComponent, {
+
+    });
     dialogRef.afterClosed().subscribe(result => {
       BeneficiaryUIComponent.beneficiaryTemp = null;
       console.log('The dialog was closed');
