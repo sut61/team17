@@ -22,7 +22,7 @@ public class PolicyController {
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
-    private PropertyRepository propertyRepository;
+    private PropertyPolicyRepository propertyPolicyRepository;
     @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
@@ -37,12 +37,12 @@ public class PolicyController {
     private GearTypeRepository gearTypeRepository;
 
     @GetMapping(path = "/property")
-    public Collection<Property> getProperty(){
-        return propertyRepository.findAll().stream().collect(Collectors.toList());
+    public Collection<PropertyPolicy> getProperty(){
+        return propertyPolicyRepository.findAll().stream().collect(Collectors.toList());
     }
     @GetMapping(path = "/property/{propertyID}")
-    public Property getOneProperty(@PathVariable Long propertyID){
-        return propertyRepository.findById(propertyID).get();
+    public PropertyPolicy getOneProperty(@PathVariable Long propertyID){
+        return propertyPolicyRepository.findById(propertyID).get();
     }
 
 
@@ -119,7 +119,7 @@ public class PolicyController {
         if(policy.getVin().length()!=17)
             throw new Exception("VIN Incorrect!");
         try{
-            Property property = propertyRepository.findById(propertyID).get();
+            PropertyPolicy property = propertyPolicyRepository.findById(propertyID).get();
             Customer customer = customerRepository.findById(customerID).get();
             CarData carData = carDataRepository.findById(carID).get();
             Employee employee = employeeRepository.findByUsername(username);
@@ -127,7 +127,7 @@ public class PolicyController {
             LocalDateTime dateTimeNow = LocalDateTime.now(ZoneId.of("Asia/Bangkok"));
 
             policy.setIssuedDate(dateTimeNow);
-            policy.setProperty(property);
+            policy.setPropertyPolicy(property);
             policy.setCustomer(customer);
             policy.setCarData(carData);
             policy.setEmployee(employee);

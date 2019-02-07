@@ -49,13 +49,13 @@ public class Policy {
 
     @ManyToOne
     @JoinColumn(name = "PROPERTY_ID")
-    private Property property;
+    private PropertyPolicy propertyPolicy;
 
     @ManyToOne
     @JoinColumn(name = "CARDATA_ID")
     private CarData carData;
 
-    public Policy(LocalDate periodStartDate, LocalDate periodExpiryDate, LocalDateTime issuedDate, @NotNull @Size(min = 17, max = 17) String vin, @NotNull @Size(min = 5, max = 7) @Pattern(regexp = "(\\d?[ก-ฮ])?[ก-ฮ]\\d{3}[1-9]") String licensePlate, Employee employee, Customer customer, Property property, CarData carData) {
+    public Policy(LocalDate periodStartDate, LocalDate periodExpiryDate, LocalDateTime issuedDate, @NotNull @Size(min = 17, max = 17) String vin, @NotNull @Size(min = 5, max = 7) @Pattern(regexp = "(\\d?[ก-ฮ])?[ก-ฮ]\\d{3}[1-9]") String licensePlate, Employee employee, Customer customer, PropertyPolicy propertyPolicy, CarData carData) {
         this.periodStartDate = periodStartDate;
         this.periodExpiryDate = periodExpiryDate;
         this.issuedDate = issuedDate;
@@ -63,7 +63,7 @@ public class Policy {
         this.licensePlate = licensePlate;
         this.employee = employee;
         this.customer = customer;
-        this.property = property;
+        this.propertyPolicy = propertyPolicy;
         this.carData = carData;
     }
 }
