@@ -1,0 +1,16 @@
+.header-text {
+  color: #3E211E;
+  font-family: 'Itim', cursive;
+  font-size: 20px;
+ /* text-align: center;*/
+ /* width: 600px;*/
+  margin: 30px auto ;
+}
+span.tab{
+  padding-right: 50px; /* Or desired space*/
+}
+p{
+  color: #3E211E;
+  font-family: 'Itim', cursive;
+  font-size: 20px;
+}
