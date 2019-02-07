@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {RouterModule, Routes} from '@angular/router';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -89,9 +89,11 @@ const routes: Routes = [
     PolicyUiComponent,
     PropertyPolycyUiComponent,
     CustomerInfoUIComponent,
-    BeneficiaryUIComponent
+    BeneficiaryUIComponent,
+    BeneficiaryPopupComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     CdkTableModule,
     CdkTreeModule,

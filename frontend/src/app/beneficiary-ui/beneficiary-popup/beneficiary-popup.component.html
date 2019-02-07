@@ -1,7 +1,7 @@
 
 <mat-card>
   <div class="header-text">
-    <h2>{{beneficiaryObject.firstname}} {{beneficiaryObject.lastname}}</h2>
+    <h2>{{beneficiary.firstname}} {{beneficiary.lastname}}</h2>
   </div>
   <div>
 
@@ -12,7 +12,7 @@
           <p>Gender</p>
         </td>
         <td>
-          <p>{{beneficiaryObject.gender.genderType}}</p>
+          <p>{{beneficiary.gender.genderType}}</p>
         </td>
       </tr>
       <tr>
@@ -20,7 +20,7 @@
           <p>Identification No</p>
         </td>
         <td>
-          <p>{{beneficiaryObject.personalId}}</p>
+          <p>{{beneficiary.personalId}}</p>
         </td>
       </tr>
 
@@ -29,7 +29,7 @@
           <p>Address </p>
         </td>
         <td>
-          <p>{{beneficiaryObject.address.address}} {{beneficiaryObject.address.subDistrict.subDistrictName}} {{beneficiaryObject.address.district.districtName}} {{beneficiaryObject.address.province.provinceName}}</p>
+          <p>{{beneficiary.address.address}} {{beneficiary.address.subDistrict.subDistrictName}} {{beneficiary.address.district.districtName}} {{beneficiary.address.province.provinceName}}</p>
         </td>
       </tr>
 
@@ -38,17 +38,17 @@
           <p>Phone</p>
         </td>
         <td>
-          <p>{{beneficiaryObject.phone}}</p>
+          <p>{{beneficiary.phone}}</p>
         </td>
       </tr>
 
       <tr>
         <td>
-          <p>Relationship with {{beneficiaryObject.policy.customer.firstName}}<span class="tab"></span></p>
+          <p>Relationship with {{beneficiary.policy.customer.firstName}}<span class="tab"></span></p>
         </td>
 
         <td>
-          <p>{{beneficiaryObject.relationship.relationship}}</p>
+          <p>{{beneficiary.relationship.relationship}}</p>
         </td>
       </tr>
 
