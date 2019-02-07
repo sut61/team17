@@ -1,0 +1,25 @@
+.full-width{
+  width: 95%;
+
+}
+mat-card{
+  margin: 30px auto;
+  width: 600px;
+  border-radius: 1em;
+
+  background: rgba(255, 255, 255, 0.8); /* Black background with 0.5 opacity */
+
+}
+
+.header-text {
+  color: #3E211E;
+  font-family: 'Itim', cursive;
+  font-size: 30px;
+  text-align: center;
+  width: 600px;
+  margin: 70px auto 70px;
+}
+
+table {
+  width: 100%;
+}
