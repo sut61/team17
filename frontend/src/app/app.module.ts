@@ -61,6 +61,7 @@ import {HospitalUIComponent} from './hospital-ui/hospital-ui.component';
 import {PolicyUiComponent} from './policy-ui/policy-ui.component';
 import {PropertyPolycyUiComponent} from './property-policy-ui/property-polycy-ui.component';
 import {BeneficiaryUIComponent} from './beneficiary-ui/beneficiary-ui.component';
+import {BeneficiaryPopupComponent} from './beneficiary-ui/beneficiary-popup/beneficiary-popup.component';
 
 const routes: Routes = [
   {path: 'payment', component: PaymentUIComponent, canActivate: [AuthGuardService]},
@@ -136,6 +137,9 @@ const routes: Routes = [
     FormsModule,
     MatFormFieldModule,
     RouterModule.forRoot(routes)
+  ],
+  entryComponents: [
+    BeneficiaryPopupComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

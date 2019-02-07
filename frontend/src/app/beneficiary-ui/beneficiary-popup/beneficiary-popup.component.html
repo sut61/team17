@@ -1,0 +1,61 @@
+
+<mat-card>
+  <div class="header-text">
+    <h2>{{beneficiaryObject.firstname}} {{beneficiaryObject.lastname}}</h2>
+  </div>
+  <div>
+
+
+    <table class="full-width" cellspacing="0">
+      <tr>
+        <td>
+          <p>Gender</p>
+        </td>
+        <td>
+          <p>{{beneficiaryObject.gender.genderType}}</p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>Identification No</p>
+        </td>
+        <td>
+          <p>{{beneficiaryObject.personalId}}</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <p>Address </p>
+        </td>
+        <td>
+          <p>{{beneficiaryObject.address.address}} {{beneficiaryObject.address.subDistrict.subDistrictName}} {{beneficiaryObject.address.district.districtName}} {{beneficiaryObject.address.province.provinceName}}</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <p>Phone</p>
+        </td>
+        <td>
+          <p>{{beneficiaryObject.phone}}</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <p>Relationship with {{beneficiaryObject.policy.customer.firstName}}<span class="tab"></span></p>
+        </td>
+
+        <td>
+          <p>{{beneficiaryObject.relationship.relationship}}</p>
+        </td>
+      </tr>
+
+    </table>
+
+
+  </div>
+
+
+</mat-card>
