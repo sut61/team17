@@ -62,7 +62,10 @@ public class Data implements CommandLineRunner {
     private GearTypeRepository gearTypeRepository;
 
     @Autowired
-    private PropertyRepository propertyRepository;
+    private PropertyPolicyRepository propertyPolicyRepository;
+    @Autowired
+    private ClassPropertyRepository classPropertyRepository;
+
 
     @Autowired
     private CarDataRepository carDataRepository;
@@ -163,6 +166,12 @@ public class Data implements CommandLineRunner {
         careerRepository.saveAndFlush(new Career("government officer"));
     }
 
+    public void ClassPropertyData() {
+        classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถประเภท 1"));
+        classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถประเภท 2+"));
+        classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถประเภท 3+"));
+        classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถประเภท 3"));
+    }
 
     private void invoiceStatusData() {
         invoiceStatusRepository.saveAndFlush(new InvoiceStatus("Not Paid"));
