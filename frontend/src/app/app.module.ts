@@ -82,6 +82,7 @@ const routes: Routes = [
     CarserviceUiComponent,
     HospitalUIComponent,
     PolicyUiComponent,
+    PropertyPolycyUiComponent,
     CustomerInfoUIComponent
   ],
   imports: [
