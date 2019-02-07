@@ -59,6 +59,7 @@ import {CarserviceUiComponent} from './carservice-ui/carservice-ui.component';
 import {AuthGuardService} from './service/auth-guard.service';
 import {HospitalUIComponent} from './hospital-ui/hospital-ui.component';
 import {PolicyUiComponent} from './policy-ui/policy-ui.component';
+import {PropertyPolycyUiComponent } from './property-policy-ui/property-polycy-ui.component';
 
 const routes: Routes = [
   {path: 'payment', component: PaymentUIComponent, canActivate: [AuthGuardService]},
@@ -68,7 +69,8 @@ const routes: Routes = [
   {path: 'cardata', component: CarDataUiComponent, canActivate: [AuthGuardService]},
   {path: '', component: HomeComponent, canActivate: [AuthGuardService]},
   {path: 'policy', component: PolicyUiComponent, canActivate: [AuthGuardService]},
-  {path: 'hospital', component: HospitalUIComponent , canActivate: [AuthGuardService]}
+  {path: 'hospital', component: HospitalUIComponent , canActivate: [AuthGuardService]},
+  {path: 'propertypolicy', component: PropertyPolycyUiComponent, canActivate:[AuthGuardService]}
 ];
 @NgModule({
   declarations: [
