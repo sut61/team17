@@ -87,10 +87,9 @@ public class Data implements CommandLineRunner {
         carColor();
         carType();
         branchCar();
-
+        ClassPropertyData();
         carServiceTypeData();
         hospitalTypeData();
-//        paymentDemoData();
         gearType();
         propertyTypeData();
         carDataTest();
@@ -218,44 +217,8 @@ public class Data implements CommandLineRunner {
     }
 
 
-   /* private void paymentDemoData() throws ParseException {
-
-        LocalDateTime dateTimeNow = LocalDateTime.now(ZoneId.of("Asia/Bangkok"));
-
-        LocalDate dateNow = LocalDate.now(ZoneId.of("Asia/Bangkok"));
-        LocalDate dateExpiry = dateNow.plusYears(2);
-
-        Policy policy = new Policy();
-
-
-        Address address = addressRepository.saveAndFlush(new Address("7/50 ม.6",
-                districtRepository.findByDistrictName("พระประแดง"),
-                provinceRepository.findByProvinceName("สมุทรปราการ"),
-                subDistrictRepository.findBySubDistrictName("บางหัวเสือ")));
-
-        Customer customer = customerRepository.saveAndFlush(new Customer(
-                "Cusfirstname",
-                "Cuslastname",
-                "1201478954123",
-                "email@gmail.com",
-                dateNow,
-                "0991230880",
-                address,
-                genderRepository.findByGenderType("male"),
-                careerRepository.findByCareerName("Student")));
-
-        policy.setCarData(carDataRepository.)
-        policy.setPeriodStartDate(dateNow);
-        policy.setPeriodExpiryDate(dateExpiry);
-        policy.setIssuedDate(dateTimeNow);
-        policy.setEmployee(employeeRepository.findByUsername("admin"));
-        policy.setCustomer(customer);
-        policyRepository.save(policy);
-
-    }*/
-
     public void propertyTypeData() {
-        propertyRepository.save(new Property("ชั้นที่ 1"));
+        propertyPolicyRepository.save(new PropertyPolicy("ชั้นที่ 1","test detailvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",700.00,classPropertyRepository.findByClassName("ประกันภัยรถประเภท 1")));
     }
     public void carDataTest() {
         carDataRepository.save(new CarData("gram","500",branchCarRepository.findByBranchName("HONDA"),
