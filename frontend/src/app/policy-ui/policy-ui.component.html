@@ -1,115 +1,125 @@
 <body>
-<mat-card class="header">
-  <h1 style="text-align: center;">
-    กรมธรรม์
-  </h1>
-</mat-card>
-</body>
-
-<mat-card>
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
+  <mat-card class="header">
+    <h1 style="text-align: center;">
+      Policy
+    </h1>
+  </mat-card>
+  
+  
+  <mat-card>
+      <mat-accordion class="headers-align">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+          <mat-panel-title><i class="material-icons">assignment</i>Property Policy</mat-panel-title>
+          <mat-panel-description>Select Property</mat-panel-description>      
+      </mat-expansion-panel-header>
       <mat-form-field style="width: 100%">
-        <mat-select [(ngModel)]="propertyIDSelected" placeholder="ประเภทกรมธรรม์" [ngModelOptions]="{standalone: true}">
-          <mat-option *ngFor="let property of properties" (click)="displayProperty()" [value]="property.propertyID">
-            {{property.propertyName}}
+          <mat-select [(ngModel)]="propertyIDSelected" placeholder="ประเภทกรมธรรม์" [ngModelOptions]="{standalone: true}">
+            <mat-option *ngFor="let property of properties" (click)="displayProperty()" [value]="property.propertyID">
+              {{property.propertyName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      <table cellspacing="0" style="width: 100%" *ngIf="isOpenProperty">
+        <tr><td style="width: 20%">รายละเอียดกรมธรรม์</td><td style="width: 5%">:</td><td style="width: 75%">{{propertyObject.propertyName}}</td></tr>
+      </table>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+          <mat-panel-title><i class="material-icons">person_pin</i>Customer Information</mat-panel-title>
+          <mat-panel-description>Search Customer</mat-panel-description>      
+      </mat-expansion-panel-header>
+      <mat-form-field class="customer-insert">
+          <input matInput #message maxlength="13" placeholder="ค้นหาผู้ทำสัญญา" type="search" [(ngModel)]="idCustomer" value=""
+                 [ngModelOptions]="{standalone: true}">
+                 <span matSuffix>{{message.value.length}} / 13</span>
+        </mat-form-field>
+        <button class="customer-btn-search" mat-flat-button color="primary" (click)="searchCustomer()">ค้นหา</button>
+      <table cellspacing="0" style="width: 100%" *ngIf="isOpenCustomer">
+          <tr><h3>รายละเอียดของผู้ทำสัญญา</h3></tr>
+          <tr><td style="width: 20%">หมายเลขผู้ทำสัญญา</td><td style="width: 5%">:</td><td style="width: 75%">{{customerObject.customerID}}</td></tr>
+          <tr><td style="width: 20%">หมายเลขประจำตัวประชาชน</td><td style="width: 5%">:</td><td style="width: 75%">{{customerObject.idNumber}}</td></tr>
+          <tr><td style="width: 20%">ชื่อผู้ทำสัญญา</td><td style="width: 5%">:</td><td style="width: 75%">{{customerObject.firstName}} {{customerObject.lastName}}</td></tr>
+          <tr><td style="width: 20%">เพศ</td><td style="width: 5%">:</td><td style="width: 75%">{{customerObject.gender.genderType}}</td></tr>
+          <tr><td style="width: 20%">วันเกิด</td><td style="width: 5%">:</td><td style="width: 75%">{{customerObject.birthday}}</td></tr>
+          <tr><td style="width: 20%">อาชีพ</td><td style="width: 5%">:</td><td style="width: 75%">{{customerObject.career.careerName}}</td></tr>
+          <tr><td style="width: 20%">Email</td><td style="width: 5%">:</td><td style="width: 75%">{{customerObject.email}}</td></tr>
+          <tr><td style="width: 20%">ที่อยู่</td><td style="width: 5%">:</td><td style="width: 75%">{{customerObject.address.address}} {{customerObject.address.subDistrict.subDistrictName}}
+              {{customerObject.address.district.districtName}} {{customerObject.address.province.provinceName}}</td></tr>    
+      </table>      
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+          <mat-panel-title><i class="material-icons">directions_car</i>Vehicle Information</mat-panel-title>
+          <mat-panel-description>Select Car Data ,Type License Plate and VIN</mat-panel-description>      
+      </mat-expansion-panel-header>
+      <mat-form-field style="width: 50%">
+          <input matInput placeholder="เลขทะเบียน (ตัวอย่าง กข1234, ก0001 และ 9กข9999)" type="text" [(ngModel)]="policyObject.licensePlate" value=""
+                   [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+          <mat-form-field style="width: 50%">
+          <input matInput placeholder="เลขตัวถัง" type="text" [(ngModel)]="policyObject.vin" value=""
+                   [ngModelOptions]="{standalone: true}">
+          </mat-form-field>
+      <mat-form-field style="width: 100%">
+        <mat-select [(ngModel)]="branchSelected" placeholder="ยี่ห้อรถ" (selectionChange)="getAllcarTypes()">
+          <mat-option *ngFor="let branch of branches"  [value]="branch.branchID">
+            {{branch.branchName}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </mat-expansion-panel-header>
-    <div *ngIf="isOpenProperty">
-      <p>รายละเอียดกรมธรรม์ : {{propertyObject.propertyName}}</p>
-    </div>
-  </mat-expansion-panel>
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
-      <mat-form-field class="customer-insert">
-        <input matInput placeholder="ค้นหาผู้ทำสัญญา" type="search" [(ngModel)]="idCustomer" value=""
-               [ngModelOptions]="{standalone: true}">
+      <mat-form-field style="width: 100%">
+        <mat-select [(ngModel)]="carTypeSelected" placeholder="ประเภทรถ" [ngModelOptions]="{standalone: true}" (selectionChange)="getAllgearTypes()"> 
+          <mat-option *ngFor="let carType of carTypes"  [value]="carType.carTypeID">
+            {{carType.carType}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-      <button class="customer-btn-search" mat-flat-button (click)="searchCustomer()">ค้นหา</button>
-    </mat-expansion-panel-header>
-    <div *ngIf="isOpenCustomer">
-      <p>รายละเอียดทั้งหมดของผู้ทำสัญญา</p>
-      <p>หมายเลขผู้ทำสัญญา :{{customerObject.customerID}}</p>
-      <p>หมายเลขประจำตัวประชาชน :{{customerObject.idNumber}}</p>
-      <p>ชื่อผู้ทำสัญญา :{{customerObject.firstName}} {{customerObject.lastName}}</p>
-      <p>เพศ :{{customerObject.gender.genderType}}</p>
-      <p>วันเกิด :{{customerObject.birthday}}</p>
-      <p>หมายเลขโทรศัพท์ :{{customerObject.phone}}</p>
-      <p>อาชีพ :{{customerObject.career.careerName}}</p>
-      <p>Email :{{customerObject.email}}</p>
-      <p>ที่อยู่ :{{customerObject.address.address}} {{customerObject.address.subDistrict.subDistrictName}}
-        {{customerObject.address.district.districtName}} {{customerObject.address.province.provinceName}}</p>
-    </div>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-form-field style="width: 50%">
-      <input matInput placeholder="เลขทะเบียน" type="text" [(ngModel)]="licensePlate" value=""
-               [ngModelOptions]="{standalone: true}">
+      <mat-form-field style="width: 100%">
+        <mat-select [(ngModel)]="gearTypeSelected" placeholder="ประเภทเกียร์" [ngModelOptions]="{standalone: true}"  (selectionChange)="getAllcarColors()">
+          <mat-option *ngFor="let gearType of gearTypes"  [value]="gearType.gearTypeID">
+            {{gearType.gearType}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-      <mat-form-field style="width: 50%">
-      <input matInput placeholder="เลขตัวถัง" type="text" [(ngModel)]="vIN" value=""
-               [ngModelOptions]="{standalone: true}">
+      <mat-form-field style="width: 100%">
+        <mat-select [(ngModel)]="carColorSelected" placeholder="สีรถ" [ngModelOptions]="{standalone: true}"  (selectionChange)="getCarData()">
+          <mat-option *ngFor="let carColor of carColors"  [value]="carColor.colorID">
+            {{carColor.color}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-    </mat-expansion-panel-header>
-    <mat-form-field style="width: 100%">
-      <mat-select [(ngModel)]="branchSelected" placeholder="ยี่ห้อรถ" (selectionChange)="getAllcarTypes()">
-        <mat-option *ngFor="let branch of branches"  [value]="branch.branchID">
-          {{branch.branchName}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field style="width: 100%">
-      <mat-select [(ngModel)]="carTypeSelected" placeholder="ประเภทรถ" [ngModelOptions]="{standalone: true}" (selectionChange)="getAllgearTypes()"> 
-        <mat-option *ngFor="let carType of carTypes"  [value]="carType.carTypeID">
-          {{carType.carType}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field style="width: 100%">
-      <mat-select [(ngModel)]="gearTypeSelected" placeholder="ประเภทเกียร์" [ngModelOptions]="{standalone: true}"  (selectionChange)="getAllcarColors()">
-        <mat-option *ngFor="let gearType of gearTypes"  [value]="gearType.gearTypeID">
-          {{gearType.gearType}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field style="width: 100%">
-      <mat-select [(ngModel)]="carColorSelected" placeholder="สีรถ" [ngModelOptions]="{standalone: true}"  (selectionChange)="getCarData()">
-        <mat-option *ngFor="let carColor of carColors"  [value]="carColor.colorID">
-          {{carColor.color}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field style="width: 100%">
-      <mat-select [(ngModel)]="carDataSelected" placeholder="model" [ngModelOptions]="{standalone: true}" >
-        <mat-option *ngFor="let carData of carDatas"  [value]="carData.carID">
-          {{carData.model}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-expansion-panel>
-  <mat-expansion-panel hideToggle style="margin-bottom: 10px;">
-    <mat-expansion-panel-header>
-      <mat-panel-title class="date-select">
-        <mat-form-field style="width: 60%">
-          <input matInput [matDatepickerFilter]="myFilter" placeholder="วันเริ่มต้นระยะประกัน" [matDatepicker]="picker"
-                 (focus)="picker.open()" [(ngModel)]="date" [ngModelOptions]="{standalone: true}">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </mat-panel-title>
-      <mat-panel-description class="period-select">
-        <mat-form-field style="width: 60%">
-          <input matInput [(ngModel)]="periodYear" placeholder="ระยะเวลาประกันภัย (1-10) ปี" type="number"
-                 [ngModelOptions]="{standalone: true}" min="1" max="10">
-        </mat-form-field>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-  </mat-expansion-panel>
-
-  <button mat-flat-button color="primary" style="margin-left: 25%; width: 50%; background-color:#4CAF50;"
-          (click)="postPolicyData()">บันทึก
-  </button>
-</mat-card>
+      <mat-form-field style="width: 100%">
+        <mat-select [(ngModel)]="carDataSelected" placeholder="model" [ngModelOptions]="{standalone: true}" >
+          <mat-option *ngFor="let carData of carDatas"  [value]="carData.carID">
+            {{carData.model}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel hideToggle style="margin-bottom: 10px;">
+      <mat-expansion-panel-header style="margin-top: 25px">
+        <mat-panel-title class="date-select">
+          <mat-form-field style="width: 100%">
+            <input matInput [min]="now" [max]="maxDate" placeholder="วันเริ่มต้นระยะประกัน" [matDatepicker]="picker"
+                   (focus)="picker.open()" [(ngModel)]="date" [ngModelOptions]="{standalone: true}">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-panel-title>
+        <mat-panel-description class="period-select">
+          <mat-form-field style="width: 100%">
+            <input matInput [(ngModel)]="periodYear" placeholder="ระยะเวลาประกันภัย (1-10) ปี" type="number"
+                   [ngModelOptions]="{standalone: true}" min="1" max="10">
+          </mat-form-field>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+  
+    <button mat-flat-button color="primary" style="margin-left: 25%; width: 50%; background-color:#4CAF50;"
+            (click)="postPolicyData()">Submit
+    </button>
+  </mat-accordion>
+  </mat-card>
+  </body>
+  

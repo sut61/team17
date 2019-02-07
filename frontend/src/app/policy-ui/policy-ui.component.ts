@@ -8,6 +8,7 @@ import {PolicyService} from './policy.service';
 })
 export class PolicyUiComponent implements OnInit {
   now = new Date();
+  maxDate = new Date();
   date = new Date();
   carDataSelected:number;
   carDatas:Array<any>;
@@ -21,8 +22,6 @@ export class PolicyUiComponent implements OnInit {
   carTypeSelected: number;
   gearTypeSelected: number;
   carColorSelected: number;
-  licensePlate: string;
-  vIn: string;
   branches: Array<any>;
   carTypes: Array<any>;
   gearTypes: Array<any>;
@@ -68,6 +67,8 @@ export class PolicyUiComponent implements OnInit {
   };
 
   policyObject = {
+    licensePlate: '',
+    vin: ''
   };
 
   constructor(private service: PolicyService) {
@@ -76,17 +77,8 @@ export class PolicyUiComponent implements OnInit {
   ngOnInit() {
     this.getProperties();
     this.getAllbranches();
+    this.maxDate.setMonth(this.now.getMonth()+1);
   }
-
-  myFilter = (d: Date): boolean => {
-    const day = d.getDate();
-    const month = d.getMonth();
-    const year = d.getFullYear();
-    // Prevent previous date from being selected.
-    return (day >= this.now.getDate() && month == this.now.getMonth() && year == this.now.getFullYear())
-      || (month > this.now.getMonth() && year == this.now.getFullYear()
-        || (year > this.now.getFullYear()));
-  };
 
   displayProperty() {
     this.isOpenProperty = true;
@@ -169,6 +161,10 @@ export class PolicyUiComponent implements OnInit {
       alert('Please select property before save!');
     }else if(this.customerObject.customerID == null){
       alert('Please click search before save!');
+    }else if(this.periodYear == null){
+      alert('Please select period before save!');    
+    }else if(this.carDataSelected == null){
+      alert('Please select car data before save!');
     }else{
       try {
         console.log(this.dateToString());
