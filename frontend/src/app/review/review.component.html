@@ -1,0 +1,86 @@
+
+<div class="main_background">
+
+<mat-card class="databox1">
+  <h1 style="color:white;" >Review</h1>
+</mat-card>
+
+
+<mat-card class="databox">
+
+  <div class="row">
+    <mat-grid-list cols="1" rowHeight="70px">
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-select placeholder="PropertyType <ประเภทประกัน> " [(ngModel)]="Review.classID">
+            <mat-option *ngFor="let insuTypez of insuTypes" [value]="insuTypez.classID">{{insuTypez.className}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-select placeholder="Car <ยี่ห้อรถ>" [(ngModel)]="Review.carID">
+            <mat-option *ngFor="let carz of carDatas" [value]="carz.carID">{{carz.model}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-select placeholder="Status <สถานะความพอใจ>" [(ngModel)]="Review.statusID">
+            <mat-option *ngFor="let statusz of statuss" [value]="statusz.statusID">{{statusz.status}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="Review.comment" placeholder="comment <ข้อดี> size (3-50)">
+        </mat-form-field>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile>
+        <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="Review.cons" placeholder="cons <ข้อเสีย> size (3-50)">
+        </mat-form-field>
+      </mat-grid-tile>
+
+
+        <mat-grid-tile>
+          <button mat-raised-button color="warn" (click)="save_func()">SAVE REVIEW</button>
+        </mat-grid-tile>
+
+
+
+    </mat-grid-list>
+  </div>
+</mat-card>
+<mat-card class="databox2">
+  <div class="row1" >
+
+    <div *ngFor="let review of reviewall">
+      <mat-card class="databox3">
+      <p> Property : {{review.classProperty.className}}</p>
+        <p> Car : {{review.carData.model}}</p>
+      <p> Status : {{review.status.status}}</p>
+      <p> Comment : {{review.comment}}</p>
+        <p> Cons: {{review.cons}}</p>
+
+      </mat-card>
+    </div>
+
+  </div>
+</mat-card>
+
+
+
+
+
+<!--<img src='/assets/img/promo-bg-1.jpg' style='px = 1000%'>-->
+</div>

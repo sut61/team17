@@ -59,9 +59,14 @@ import {CarserviceUiComponent} from './carservice-ui/carservice-ui.component';
 import {AuthGuardService} from './service/auth-guard.service';
 import {HospitalUIComponent} from './hospital-ui/hospital-ui.component';
 import {PolicyUiComponent} from './policy-ui/policy-ui.component';
+<<<<<<< Updated upstream
 import {PropertyPolycyUiComponent} from './property-policy-ui/property-polycy-ui.component';
 import {BeneficiaryUIComponent} from './beneficiary-ui/beneficiary-ui.component';
 import {BeneficiaryPopupComponent} from './beneficiary-ui/beneficiary-popup/beneficiary-popup.component';
+=======
+import {PropertyPolycyUiComponent } from './property-policy-ui/property-polycy-ui.component';
+import { ReviewComponent } from './review/review.component';
+>>>>>>> Stashed changes
 
 const routes: Routes = [
   {path: 'payment', component: PaymentUIComponent, canActivate: [AuthGuardService]},
@@ -69,6 +74,7 @@ const routes: Routes = [
   {path: 'customer', component: CustomerInfoUIComponent, canActivate: [AuthGuardService]},
   {path: 'carservice', component: CarserviceUiComponent, canActivate: [AuthGuardService]},
   {path: 'cardata', component: CarDataUiComponent, canActivate: [AuthGuardService]},
+  {path: 'review', component: ReviewComponent, canActivate: [AuthGuardService]},
   {path: '', component: HomeComponent, canActivate: [AuthGuardService]},
   {path: 'policy', component: PolicyUiComponent, canActivate: [AuthGuardService]},
   {path: 'hospital', component: HospitalUIComponent, canActivate: [AuthGuardService]},
@@ -81,6 +87,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
+    ReviewComponent,
     LoginUIComponent,
     CarDataUiComponent,
     PaymentUIComponent,
@@ -88,9 +95,13 @@ const routes: Routes = [
     HospitalUIComponent,
     PolicyUiComponent,
     PropertyPolycyUiComponent,
+<<<<<<< Updated upstream
     CustomerInfoUIComponent,
     BeneficiaryUIComponent,
     BeneficiaryPopupComponent
+=======
+    CustomerInfoUIComponent
+>>>>>>> Stashed changes
   ],
   imports: [
     ReactiveFormsModule,
