@@ -37,19 +37,19 @@
         </mat-form-field>
       </mat-grid-tile>
 
-
       <mat-grid-tile>
         <mat-form-field class="example-full-width">
-          <input matInput [(ngModel)]="Review.comment" placeholder="comment <ข้อดี> size (3-50)">
+          <input matInput [(ngModel)]="Review.cons" maxlength="1" placeholder="ระดับความพอใจ <1 - 5>">
         </mat-form-field>
       </mat-grid-tile>
 
 
       <mat-grid-tile>
         <mat-form-field class="example-full-width">
-          <input matInput [(ngModel)]="Review.cons" placeholder="cons <ข้อเสีย> size (3-50)">
+          <input matInput [(ngModel)]="Review.comment" maxlength="100" placeholder="comment <ข้อดี> size (3 - 100)">
         </mat-form-field>
       </mat-grid-tile>
+
 
 
         <mat-grid-tile>
@@ -69,8 +69,9 @@
       <p> Property : {{review.classProperty.className}}</p>
         <p> Car : {{review.carData.model}}</p>
       <p> Status : {{review.status.status}}</p>
+        <p> ระดับความพอใจ: {{review.cons}}</p>
       <p> Comment : {{review.comment}}</p>
-        <p> Cons: {{review.cons}}</p>
+
 
       </mat-card>
     </div>
