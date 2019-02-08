@@ -35,8 +35,8 @@ export class ClaimService {
     return this.http.get(claimTypePath, {headers: this.authKey});
   }
 
-  public postClaim(object: any, customerID: number, provinceID: number, claimTypeID: number): Observable<any> {
-    return this.http.post(claimAPI + customerID + '/' + provinceID + '/' + claimTypeID, {
+  public postClaim(object: any, customerID: number, provinceID: number, claimTypeID: number, carServiceID: number): Observable<any> {
+    return this.http.post(claimAPI + customerID + '/' + provinceID + '/' + claimTypeID + '/' + carServiceID, {
       'dataAccident': object.dataAccident
     }, {headers: this.authKey});
   }
