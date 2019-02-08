@@ -27,13 +27,13 @@ public class CustomerHealth {
     private int weight;
 
     @NotNull
-    @Size(min = 3 ,max = 30)
-    @Pattern(regexp = "[A-Z]+")
+    @Size(min = 2 ,max = 30)
+    @Pattern(regexp = "^([ก-๙]|[0-9]|[ ./*\\-])+")
     private String vivisection;
 
     @NotNull
-    @Size(min = 3, max = 30)
-    @Pattern(regexp = "[A-Z]+")
+    @Size(min = 2, max = 30)
+    @Pattern(regexp = "^([ก-๙]|[0-9]|[ ./*\\-])+")
     private String medicine;
 
     @ManyToOne
