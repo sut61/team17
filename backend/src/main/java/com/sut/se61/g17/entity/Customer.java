@@ -2,6 +2,7 @@ package com.sut.se61.g17.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,7 +31,8 @@ public class Customer {
      private  String email ;
 
 
-     private LocalDate birthday;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate birthday;
 
     @NotNull
     @Size(min = 5, max = 20)
