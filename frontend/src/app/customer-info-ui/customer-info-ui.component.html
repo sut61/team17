@@ -38,7 +38,9 @@
 
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <mat-form-field class="full-width">
-        <input matInput [(ngModel)]="customerObject.birthday"  placeholder="Birthday Ex:2019-01-01"  [ngModelOptions]="{standalone: true}">
+        <input matInput  [max]="maxDate" [(ngModel)]="bd" [matDatepicker]="picker" placeholder="Birthday" (click)="test()">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
       </mat-form-field>
     </mat-grid-tile>
 
