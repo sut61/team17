@@ -69,7 +69,7 @@ public class ReviewSystemTests {
     public void testCommentCannotBeNull() {
         Review review = new Review();
         review.setComment(null);
-        review.setCons("ทดสอบ");
+        review.setCons(1);
         review.setClassProperty(classProperty);
         review.setStatus(status);
         review.setCarData(carData);
@@ -86,33 +86,12 @@ public class ReviewSystemTests {
             System.out.println(e.getConstraintViolations());
         }
     }
-    @Test
-    public void testCostCannotBeNull() {
-        Review review = new Review();
-        review.setComment("ทดสอบ");
-        review.setCons(null);
-        review.setClassProperty(classProperty);
-        review.setStatus(status);
-        review.setCarData(carData);
-        try {
-            entityManager.persist(review);
-            entityManager.flush();
-
-            fail("Should not pass to this line");
-        } catch(javax.validation.ConstraintViolationException e) {
-            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-            assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 1);
-            System.out.println("*********************testCostCannotBeNull**********************");
-            System.out.println(e.getConstraintViolations());
-        }
-    }
 
     @Test
     public void testCommentSizeCannotLowerThanMin() {
         Review review = new Review();
         review.setComment("ก");
-        review.setCons("ทดสอบ");
+        review.setCons(1);
         review.setClassProperty(classProperty);
         review.setStatus(status);
         review.setCarData(carData);
@@ -131,10 +110,10 @@ public class ReviewSystemTests {
     }
 
     @Test
-    public void testConsSizeCannotLowerThanMin() {
+    public void testConsCannotLowerThanMin() {
         Review review = new Review();
         review.setComment("ทดสอบ");
-        review.setCons("บ");
+        review.setCons(0);
         review.setClassProperty(classProperty);
         review.setStatus(status);
         review.setCarData(carData);
@@ -147,7 +126,7 @@ public class ReviewSystemTests {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             assertEquals(violations.isEmpty(), false);
             assertEquals(violations.size(), 1);
-            System.out.println("*********************testConsSizeCannotLowerThanMin**********************");
+            System.out.println("*********************testConsCannotLowerThanMin**********************");
             System.out.println(e);
         }
     }
@@ -156,8 +135,8 @@ public class ReviewSystemTests {
     @Test
     public void testCommentSizeCannotHigherThanMax() {
         Review review = new Review();
-        review.setComment("กกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกก");
-        review.setCons("กกกกกกกกกกกกกกก");
+        review.setComment("กกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกก");
+        review.setCons(2);
         review.setClassProperty(classProperty);
         review.setStatus(status);
         review.setCarData(carData);
@@ -175,10 +154,10 @@ public class ReviewSystemTests {
     }
 
     @Test
-    public void testConsSizeCannotHigherThanMax() {
+    public void testConsCannotHigherThanMax() {
         Review review = new Review();
         review.setComment("กกกกกกกกก");
-        review.setCons("กกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกกก");
+        review.setCons(6);
         review.setClassProperty(classProperty);
         review.setStatus(status);
         review.setCarData(carData);
@@ -190,7 +169,7 @@ public class ReviewSystemTests {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             assertEquals(violations.isEmpty(), false);
             assertEquals(violations.size(), 1);
-            System.out.println("*********************testConsSizeCannotHigherThanMax**********************");
+            System.out.println("*********************testConsCannotHigherThanMax**********************");
             System.out.println(e);
         }
     }
@@ -199,7 +178,7 @@ public class ReviewSystemTests {
     public void testCommentCannotMatchPattern() {
         Review review = new Review();
         review.setComment("Aกกกกกกกกกกกกกกกกกกก");
-        review.setCons("ทดสอบ");
+        review.setCons(1);
         review.setClassProperty(classProperty);
         review.setStatus(status);
         review.setCarData(carData);
@@ -217,33 +196,13 @@ public class ReviewSystemTests {
         }
     }
 
-    @Test
-    public void testConsCannotMatchPattern() {
-        Review review = new Review();
-        review.setComment("ทดสอบ");
-        review.setCons("Aทดสอบ");
-        review.setClassProperty(classProperty);
-        review.setStatus(status);
-        review.setCarData(carData);
 
-        try {
-            entityManager.persist(review);
-            entityManager.flush();
-            fail("Should not pass to this line");
-        } catch(javax.validation.ConstraintViolationException e) {
-            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-            assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 1);
-            System.out.println("*********************testConsCannotMatchPattern**********************");
-            System.out.println(e);
-        }
-    }
 
     @Test
     public void testClassPropertyCannotBeNull() {
         Review review = new Review();
         review.setComment("ทดสอบ");
-        review.setCons("ทดสอบ");
+        review.setCons(1);
         review.setClassProperty(null);
         review.setStatus(status);
         review.setCarData(carData);
@@ -265,7 +224,7 @@ public class ReviewSystemTests {
     public void testStatusCannotBeNull() {
         Review review = new Review();
         review.setComment("ทดสอบ");
-        review.setCons("ทดสอบ");
+        review.setCons(1);
         review.setClassProperty(classProperty);
         review.setStatus(null);
         review.setCarData(carData);
@@ -287,7 +246,7 @@ public class ReviewSystemTests {
     public void testCardataCannotBeNull() {
         Review review = new Review();
         review.setComment("ทดสอบ");
-        review.setCons("ทดสอบ");
+        review.setCons(1);
         review.setClassProperty(classProperty);
         review.setStatus(status);
         review.setCarData(null);

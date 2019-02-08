@@ -4,9 +4,7 @@ import lombok.Data;
 import lombok.NonNull;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Entity  //บอกว่าเป็น class entity class ที่เก็บขอมูล
 @Data  // lombox จะสร้าง method getter setter ให้เอง
@@ -20,16 +18,16 @@ public class Review {
     private @NonNull Long reviewID;
 
     @NotNull
-    @Size(min = 3,max = 50)
+    @Size(min = 3,max = 100)
     @Pattern(regexp = "^[ก-๙]*") // ขึ้นต้นด้วยตัวใหญ่เสมอแล้วตามด้วยอักษรตัวเล็กจะมีก็ได้ไม่มีก็ได้
     private  String comment;
 
 
 //    @Column(unique = true)
-    @NotNull
-    @Size(min = 3,max = 50)
-    @Pattern(regexp = "^[ก-๙]*")
-    private  String cons;
+
+    @Min(1)
+    @Max(5)
+    private  int cons;
 
     @NotNull
     @ManyToOne
@@ -49,7 +47,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(String comment, String cons, ClassProperty classProperty, Status status, CarData carData) {
+    public Review(String comment, int cons, ClassProperty classProperty, Status status, CarData carData) {
         this.comment = comment;
         this.cons = cons;
         this.classProperty = classProperty;
@@ -89,11 +87,11 @@ public class Review {
         this.reviewID = reviewID;
     }
 
-    public String getCons() {
+    public int getCons() {
         return cons;
     }
 
-    public void setCons(String cons) {
+    public void setCons(int cons) {
         this.cons = cons;
     }
 
