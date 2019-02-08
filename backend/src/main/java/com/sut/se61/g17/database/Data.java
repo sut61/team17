@@ -66,6 +66,8 @@ public class Data implements CommandLineRunner {
     @Autowired
     private ClassPropertyRepository classPropertyRepository;
 
+    @Autowired
+    private StatusRepository statusRepository;
 
     @Autowired
     private CarDataRepository carDataRepository;
@@ -91,6 +93,7 @@ public class Data implements CommandLineRunner {
         carServiceTypeData();
         hospitalTypeData();
         gearType();
+        Status();
         propertyTypeData();
         carDataTest();
 
@@ -181,6 +184,17 @@ public class Data implements CommandLineRunner {
         genderRepository.saveAndFlush(new Gender("male"));
         genderRepository.saveAndFlush(new Gender("female"));
     }
+
+    private void Status() {
+        Status status1 = new Status();
+        status1.setStatus("Good");
+        statusRepository.save(status1);
+
+        Status status2 = new Status();
+        status2.setStatus("Bad");
+        statusRepository.save(status2);
+    }
+
 
     private void carColor() {
         carColorRepository.saveAndFlush(new CarColor("Red"));
