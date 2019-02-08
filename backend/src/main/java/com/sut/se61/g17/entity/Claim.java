@@ -21,7 +21,6 @@ public class Claim {
 
     @NotNull
     @Size(min = 30, max = 100)
-    @Column(unique = true)
     @Pattern(regexp = "^([ก-๙]|[0-9]|[ ./*\\-])+")
     private String dataAccident;
 
@@ -37,7 +36,7 @@ public class Claim {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "CUSTOMER_ID")
+    @JoinColumn(name = "CUSTOMER_ID",unique = true)
     private Customer customer;
 
     @NotNull
