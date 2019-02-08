@@ -5,6 +5,8 @@ import com.sut.se61.g17.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -52,13 +54,22 @@ public class CaptiveAgentController {
         return subDistrictRepository.findAllByDistricts(district1);
     }
 
-    @PostMapping(path = "/{genderID}/{subdistrictID}/{districtID}/{provinceID}")
+    @PostMapping(path = "/{genderID}/{subdistrictID}/{districtID}/{provinceID}/{birthday}/{passwordCheck}")
     public Employee postEmployee(@RequestBody Employee employee, Address address,
                                  @PathVariable Long genderID,
                                  @PathVariable Long subdistrictID,
                                  @PathVariable Long districtID,
-                                 @PathVariable Long provinceID
+                                 @PathVariable Long provinceID,
+                                 @PathVariable String birthday,
+                                 @PathVariable String passwordCheck
     ) throws Exception {
+        if(!passwordCheck.equals(employee.getPassword()))
+            throw new Exception("Password and Confirm incorrect!");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate maxDate = LocalDate.now().minusYears(18);
+        LocalDate dateOfBirth = LocalDate.parse(birthday, formatter);
+        if(dateOfBirth.isAfter(maxDate))
+            throw new Exception("Please selected birthday before 18 years of current!");
         try{
             Gender gender = genderRepository.findById(genderID).get();
             SubDistrict subDistrict = subDistrictRepository.findById(subdistrictID).get();
@@ -75,6 +86,7 @@ public class CaptiveAgentController {
             addressRepository.save(address);
             employee.setAddress(address);
             employee.setGender(gender);
+            employee.setBirthday(dateOfBirth);
         }catch (Exception e){
             System.out.println(e);
             throw new Exception("Error");

@@ -21,4 +21,20 @@ public class CarServiceType {
     public CarServiceType(String carServiceType) {
         this.carServiceType = carServiceType;
     }
+
+    public Long getServiceTypeID() {
+        return serviceTypeID;
+    }
+
+    public void setServiceTypeID(Long serviceTypeID) {
+        this.serviceTypeID = serviceTypeID;
+    }
+
+    public String getCarServiceType() {
+        return carServiceType;
+    }
+
+    public void setCarServiceType(String carServiceType) {
+        this.carServiceType = carServiceType;
+    }
 }

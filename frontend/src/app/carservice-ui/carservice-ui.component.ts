@@ -71,6 +71,9 @@ export class CarserviceUiComponent implements OnInit {
     this.carservice.postCarService(this.carServiceObject, this.subDistrictSelected, this.districtSelected, this.provinceSelected, this.carServiceTypeSelected).subscribe(res => {
       console.log(res);
       this.getAllCarService();
+      alert('Success');
+    }, error1 => {
+      alert('Error');
     });
   }
 

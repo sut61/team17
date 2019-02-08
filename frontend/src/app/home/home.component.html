@@ -5,36 +5,83 @@
 </div>
 
 <mat-grid-list [cols]="breakpoint" rowHeight="240px" (window:resize)="onResize($event)">
-  <mat-grid-tile>
-    <mat-card routerLink="/policy" routerLinkActive="active">
-      <p>Policy</p>
-    </mat-card>
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-card routerLink="/payment" routerLinkActive="active">
-      <p>Payment</p>
-    </mat-card>
-  </mat-grid-tile>
+
+
   <mat-grid-tile>
     <mat-card routerLink="/customer" routerLinkActive="active">
       <p>Customer</p>
     </mat-card>
   </mat-grid-tile>
+
   <mat-grid-tile>
     <mat-card routerLink="/cardata" routerLinkActive="active">
       <p>Car</p>
     </mat-card>
   </mat-grid-tile>
+
   <mat-grid-tile>
     <mat-card routerLink="/carservice" routerLinkActive="active">
       <p>Car Service</p>
     </mat-card>
   </mat-grid-tile>
+
   <mat-grid-tile>
     <mat-card routerLink="/hospital" routerLinkActive="active">
       <p>Hospital</p>
     </mat-card>
   </mat-grid-tile>
+
+<mat-grid-tile>
+  <mat-card routerLink="/review" routerLinkActive="active">
+    <p>Review</p>
+  </mat-card>
+</mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card routerLink="/policy" routerLinkActive="active">
+      <p>Policy</p>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card routerLink="/propertyPolicy" routerLinkActive="active">
+      <p>Property</p>
+      <p>Policy</p>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card routerLink="/beneficiary" routerLinkActive="active">
+      <p>Beneficiary</p>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card routerLink="/captiveagent" routerLinkActive="active">
+      <p>CaptiveAgent</p>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card routerLink="" routerLinkActive="active">
+      <p>Custromer</p>
+      <p> Health</p>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card routerLink="" routerLinkActive="active">
+      <p>Claim</p>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card routerLink="/payment" routerLinkActive="active">
+      <p>Payment</p>
+    </mat-card>
+  </mat-grid-tile>
+
 </mat-grid-list>
+
 
 </body>

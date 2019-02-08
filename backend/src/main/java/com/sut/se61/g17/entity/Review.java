@@ -31,14 +31,17 @@ public class Review {
     @Pattern(regexp = "^[ก-๙]*")
     private  String cons;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "classID", nullable = false)
     private ClassProperty classProperty;
 
+    @NotNull
     @ManyToOne                  //joinความสัมพันธ์ *-1
     @JoinColumn(name = "statusID", nullable = false)
     private Status status;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "CARDATA_ID")
     private CarData carData;

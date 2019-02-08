@@ -1,0 +1,54 @@
+/* .header-text{
+    width: 50%;
+    text-align: center;
+    color: #3E211E;
+    font-family: 'Itim', cursive;
+    margin: auto auto;
+    font-size: 30px;
+  }
+    .topTitle{
+    font-family: 'Itim', cursive;
+    font-size: 35px;
+    background:rgb(75, 119, 190);
+    text-align: center;
+    height: 30px;
+  }
+  .topTitleBackgound{
+    background:rgb(199, 237, 248);
+    opacity: 0.9;
+    min-height: 70vh;
+    width: 60%;
+    margin: 2% 18%;
+    text-align: center;
+  } */
+.header-text{
+  width: 50%;
+  text-align: center;
+  color: #3E211E;
+  font-family: 'Itim', cursive;
+  margin: auto auto;
+  font-size: 30px;
+
+}
+.title-in-card{
+  font-family: 'Itim', cursive;
+  background:rgb(89, 171, 227);
+  font-size:40px;
+  text-align: center;
+}
+mat-card{
+  margin: 10px auto;
+  width: 900px;
+  border-radius: 1em;
+  background-color: rgba(255,255,255,0.7);
+}
+mat-form-field{
+
+  width: 90%;
+}
+
+button{
+  background:rgb(25, 181, 254);
+  width: 30%;
+  font-size: 20px;
+}

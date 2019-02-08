@@ -68,7 +68,8 @@ public class Data implements CommandLineRunner {
 
     @Autowired
     private StatusRepository statusRepository;
-
+    @Autowired
+    private ClaimTypeRepository claimTypeRepository;
     @Autowired
     private CarDataRepository carDataRepository;
 
@@ -96,6 +97,7 @@ public class Data implements CommandLineRunner {
         Status();
         propertyTypeData();
         carDataTest();
+        getClaimData();
 
     }
 
@@ -173,6 +175,11 @@ public class Data implements CommandLineRunner {
         classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถประเภท 2+"));
         classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถประเภท 3+"));
         classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถประเภท 3"));
+    }
+    private void getClaimData(){
+        claimTypeRepository.save(new ClaimType("เล็กน้อย"));
+        claimTypeRepository.save(new ClaimType("ปานกลาง"));
+        claimTypeRepository.save(new ClaimType("ร้ายแรง"));
     }
 
     private void invoiceStatusData() {

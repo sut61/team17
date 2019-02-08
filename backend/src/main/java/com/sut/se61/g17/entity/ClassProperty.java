@@ -22,4 +22,20 @@ public class ClassProperty {
     public ClassProperty(@NotNull String className) {
         this.className = className;
     }
+
+    public Long getClassID() {
+        return classID;
+    }
+
+    public void setClassID(Long classID) {
+        this.classID = classID;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
 }

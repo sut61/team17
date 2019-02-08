@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -14,9 +15,9 @@ public class Status {
     @SequenceGenerator(name="status_seq",sequenceName="status_seq")   // ทำให้ id gen ของตัวเองเองไม่แย่งกันใช้
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="status_seq")
     @Column(name="statusID")
-    private @NonNull
+    private @NotNull
     Long statusID;
-    private @NonNull
+    private @NotNull
     String status;
 
     public Long getStatusID() {
