@@ -238,8 +238,8 @@ public class Data implements CommandLineRunner {
     }
 
 
-    public void propertyTypeData() {
-        propertyPolicyRepository.save(new PropertyPolicy("ชั้นที่ 1","test detailvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",700.00,classPropertyRepository.findByClassName("ประกันภัยรถประเภท 1")));
+   public void propertyTypeData() {
+        propertyPolicyRepository.save(new PropertyPolicy("ThaiCareYou","คุ้มครองในวงเงิน 100,000 บาท" ,"จ่ายผ่านบัตรเครดิตได้ทุกประเภท" , 1990.00 , classPropertyRepository.findByClassName("ประกันภัยรถประเภท 1")));
     }
     public void carDataTest() {
         carDataRepository.save(new CarData("gram","500",branchCarRepository.findByBranchName("HONDA"),

@@ -134,7 +134,8 @@ public class BeneficiarySystemTests {
 
 		propertyPolicy.setClassProperty(entityManager.persistFlushFind(classProperty));
 		propertyPolicy.setCostPolicy(700.00);
-		propertyPolicy.setDetail("KKKKKKKKKKKKKKK");
+		propertyPolicy.setDetailProtection("KKKKKKKKKKKKKKK");
+		propertyPolicy.setDetailPayment("DDDDDDDDDDDDDDDDD");
 		propertyPolicy.setPropertyName("TestPropertyName");
 		entityManager.persistFlushFind(propertyPolicy);
 
