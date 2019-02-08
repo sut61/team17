@@ -28,7 +28,8 @@ export class PropertyPolicyUiService {
   public postPropertyPolicy(object: any, classID: number ): Observable<any> {
     return this.http.post(propertyApi + classID , {
       'propertyName': object.propertyName,
-      'detail': object.detail,
+      'detailProtection': object.detailProtection,
+      'detailPayment': object.detailPayment,
       'costPolicy' : object.costPolicy,
     }, {headers: this.authKey});
   }

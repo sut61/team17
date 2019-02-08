@@ -6,9 +6,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-@NoArgsConstructor
+/*@NoArgsConstructor*/
 @Data
 @Entity
 public class PropertyPolicy {
@@ -19,25 +20,37 @@ public class PropertyPolicy {
     private @NotNull Long propertyID;
 
     @Column(unique = true )
+    @Pattern(regexp = "^[A-Za-z ก-๙]\\w+")
+    @Size(min = 5,max = 30)
     @NotNull
     private String propertyName;
 
-    @Size(min = 15 , max = 512)
-   @NotNull
-    private String detail ;
+    @Size(min = 10 , max = 512)
+    @NotNull
+    private String detailProtection ;
+
+    @Size(min = 10 , max = 512)
+    @NotNull
+    private String detailPayment ;
 
 
-   @Min(value = 100)
-   @NotNull
+
+    @Min(value = 100)
+    @NotNull
     private double costPolicy ;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "classID", nullable = false)
     private ClassProperty classProperty;
 
-    public PropertyPolicy(@NotNull String propertyName, @NotNull String detail, @NotNull double costPolicy, ClassProperty classProperty) {
+    public PropertyPolicy() {
+    }
+
+    public PropertyPolicy(@Pattern(regexp = "^[A-Za-z]\\w+") @Size(min = 5, max = 30) @NotNull String propertyName, @Size(min = 10, max = 512) @NotNull String detailProtection, @Size(min = 10, max = 512) @NotNull String detailPayment, @Min(value = 100) @NotNull double costPolicy, ClassProperty classProperty) {
         this.propertyName = propertyName;
-        this.detail = detail;
+        this.detailProtection = detailProtection;
+        this.detailPayment = detailPayment;
         this.costPolicy = costPolicy;
         this.classProperty = classProperty;
     }
@@ -58,12 +71,20 @@ public class PropertyPolicy {
         this.propertyName = propertyName;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getDetailProtection() {
+        return detailProtection;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setDetailProtection(String detailProtection) {
+        this.detailProtection = detailProtection;
+    }
+
+    public String getDetailPayment() {
+        return detailPayment;
+    }
+
+    public void setDetailPayment(String detailPayment) {
+        this.detailPayment = detailPayment;
     }
 
     public double getCostPolicy() {
