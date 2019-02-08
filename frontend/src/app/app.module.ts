@@ -64,6 +64,7 @@ import {BeneficiaryUIComponent} from './beneficiary-ui/beneficiary-ui.component'
 import {BeneficiaryPopupComponent} from './beneficiary-ui/beneficiary-popup/beneficiary-popup.component';
 import { ReviewComponent } from './review/review.component';
 import {ClaimUiComponent} from './claim-ui/claim-ui.component';
+import {CustomerHealthUIComponent} from './customer-health-ui/customer-health-ui.component';
 
 const routes: Routes = [
   {path: 'payment', component: PaymentUIComponent, canActivate: [AuthGuardService]},
@@ -78,6 +79,8 @@ const routes: Routes = [
   {path: 'propertypolicy', component: PropertyPolycyUiComponent, canActivate: [AuthGuardService]},
   {path: 'beneficiary', component: BeneficiaryUIComponent, canActivate: [AuthGuardService]},
   {path: 'claim', component: ClaimUiComponent, canActivate: [AuthGuardService]},
+  {path: 'health', component: CustomerHealthUIComponent, canActivate: [AuthGuardService]},
+
 
 ];
 
@@ -96,7 +99,8 @@ const routes: Routes = [
     CustomerInfoUIComponent,
     BeneficiaryUIComponent,
     BeneficiaryPopupComponent,
-    ClaimUiComponent
+    ClaimUiComponent,
+    CustomerHealthUIComponent
 
   ],
   imports: [

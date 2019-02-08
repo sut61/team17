@@ -1,0 +1,111 @@
+<!-- <body>
+  <div class="header-text">
+    <h1>บันทึกสุขภาพลูกค้า</h1>
+  </div>
+  <mat-card class="topTitleBackgound">
+    <mat-card class="topTitle">
+      <h3>Customer Health</h3>
+    </mat-card>
+  </mat-card>
+  <mat-grid-list cols="12" rowHeight="700px">
+    <mat-grid-tile [colspan]="4">
+        <mat-card class="top-card">
+
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+</body> -->
+<body>
+<div class="header-text">
+  <h1>บันทึกสุขภาพลูกค้า</h1>
+</div>
+<mat-card class="top-card">
+  <mat-grid-list cols="1" rowHeight="70px">
+    <mat-grid-tile>
+      <mat-toolbar class="title-in-card">Customer Health</mat-toolbar>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field class="customer-insert">
+        <input matInput placeholder="ค้นหาผู้ทำสัญญา" type="search" [(ngModel)]="idNumber"
+               [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <button class="customer-btn-search" mat-flat-button (click)="getCustomer()">ค้นหา</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
+<mat-card>
+  <table cellspacing="0" style="width: 100%" *ngIf="isOpenCustomer">
+
+
+    <tr>
+      <td style="width: 20%">หมายเลขประจำตัวประชาชน</td>
+      <td style="width: 5%">:</td>
+      <td style="width: 75%">{{customerObject.idNumber}}</td>
+    </tr>
+    <tr>
+      <td style="width: 20%">ชื่อผู้ทำสัญญา</td>
+      <td style="width: 5%">:</td>
+      <td style="width: 75%">{{customerObject.firstName}} {{customerObject.lastName}}</td>
+    </tr>
+  </table>
+
+
+  <mat-grid-list cols="3" rowHeight="70px">
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="healthobject.age" [ngModelOptions]="{standalone: true}"
+               placeholder="อายุ" >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="healthobject.height" [ngModelOptions]="{standalone: true}"
+               placeholder="ส่วนสูง ซม." >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="healthobject.weight" [ngModelOptions]="{standalone: true}"
+               placeholder="น้ำหนัก กก." >
+      </mat-form-field>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+  <mat-grid-list cols="2" rowHeight="70px">
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="healthobject.vivisection" [ngModelOptions]="{standalone: true}"
+               placeholder="การผ่าตัด" >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="healthobject.medicine" [ngModelOptions]="{standalone: true}"
+               placeholder="การแพ้ยา" >
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile>
+      <mat-form-field class="full-width">
+        <mat-select [(ngModel)]="diseaseId" placeholder="โรคประจำตัว">
+          <mat-option *ngFor="let disease of diseases" [value]="disease.diseaseID">
+            {{disease.diseaseName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list cols="1" rowHeight="70px">
+    <mat-grid-tile  class="full-width">
+      <button mat-raised-button style="width:100%;background-color: rgb(25, 181, 254);color:black; font-size: 25px" (click)="postHealth()">บันทึก</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</mat-card>
+</body>
