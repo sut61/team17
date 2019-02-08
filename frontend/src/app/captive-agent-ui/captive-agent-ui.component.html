@@ -1,0 +1,91 @@
+<body>
+  <mat-card class="header">
+    <h1 style="text-align: center;">
+      Captive Agent
+    </h1>     
+  </mat-card>
+
+  <mat-card >
+      <mat-accordion class="example-headers-align">
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title><i class="material-icons">account_box</i>Account</mat-panel-title>
+              <mat-panel-description>Type Username and password</mat-panel-description>      
+          </mat-expansion-panel-header>
+    <table cellspacing="0" style="width: 100%"> 
+        <tr><mat-form-field style="width: 100%">
+            <input matInput [(ngModel)]="captiveAgentObject.username" placeholder="Username" [ngModelOptions]="{standalone: true}">
+        </mat-form-field></tr>
+        <tr><mat-form-field style="width: 100%">
+            <input matInput [(ngModel)]="captiveAgentObject.password" maxlength="10" type="password" placeholder="Password" [ngModelOptions]="{standalone: true}">        
+          </mat-form-field></tr>   
+        <tr><mat-form-field style="width: 100%">
+            <input matInput [(ngModel)]="passwordCheck" maxlength="10" type="password" placeholder="Confirm" [ngModelOptions]="{standalone: true}">        
+          </mat-form-field></tr>     
+    </table>   
+      </mat-expansion-panel>
+    <mat-expansion-panel style="margin-bottom: 10px;">
+      <mat-expansion-panel-header>
+        <mat-panel-title><i class="material-icons">description</i>Description</mat-panel-title>
+        <mat-panel-description>Type Description</mat-panel-description>      
+      </mat-expansion-panel-header>      
+    <table cellspacing="0" style="width: 100%">
+    <tr><mat-form-field style="width: 100%">
+      <input matInput #message maxlength="13" [(ngModel)]="captiveAgentObject.idNumber" placeholder="ID Number" [ngModelOptions]="{standalone: true}">
+      <span matSuffix>{{message.value.length}} / 13</span>
+    </mat-form-field></tr>
+    <tr><mat-form-field style="width: 100%">
+            <mat-select  [(ngModel)]="genderIDSelected" placeholder="Gender" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let gender of genders" [value]="gender.genderID">
+                {{gender.genderType}}
+              </mat-option>
+            </mat-select>
+    </mat-form-field></tr>
+    <tr><mat-form-field style="width: 50%" >
+        <input matInput [(ngModel)] ="captiveAgentObject.firstName" placeholder="First Name" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field style="width: 50%" >
+        <input matInput [(ngModel)] ="captiveAgentObject.lastName" placeholder="Last Name" [ngModelOptions]="{standalone: true}">
+      </mat-form-field></tr>
+    <tr><mat-form-field style="width: 50%">
+      <input matInput [max]="maxDate" placeholder="วันเริ่มต้นระยะประกัน" [matDatepicker]="picker"
+      (focus)="picker.open()" [(ngModel)]="date" [ngModelOptions]="{standalone: true}">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field style="width: 50%">
+        <input type="tel" matInput [(ngModel)]="captiveAgentObject.phone" placeholder="Telephone" [ngModelOptions]="{standalone: true}">
+    </mat-form-field></tr>
+    <tr><mat-form-field style="width: 100%">
+        <input  matInput [(ngModel)]= "captiveAgentObject.email" placeholder="Email" [ngModelOptions]="{standalone: true}">
+    </mat-form-field></tr>
+    <tr><mat-form-field style="width: 100%">
+        <input matInput [(ngModel)]="captiveAgentObject.address" placeholder="Address" [ngModelOptions]="{standalone: true}">
+    </mat-form-field></tr>
+    <tr><mat-form-field style="width: 100%">
+        <mat-select [(ngModel)]="provinceSelected" placeholder="Province" (selectionChange)="getAllDistrict()" [ngModelOptions]="{standalone: true}" >
+          <mat-option *ngFor="let province of provinces" [value]="province.provinceID">
+            {{province.provinceName}}
+          </mat-option>
+    </mat-select></mat-form-field></tr>
+    <tr><mat-form-field style="width: 50%">
+        <mat-select  placeholder="District" [(ngModel)]="districtSelected"  (selectionChange)="getAllSubDistrict()" [ngModelOptions]="{standalone: true}">
+          <mat-option *ngFor="let district of districts" [value]="district.districtID">
+            {{district.districtName}}
+          </mat-option>
+    </mat-select></mat-form-field>
+    <mat-form-field style="width: 50%">
+        <mat-select [(ngModel)]= "subDistrictSelected"  placeholder="Sub District" [ngModelOptions]="{standalone: true}">
+          <mat-option *ngFor="let subDistrict of subDistricts" [value]="subDistrict.subDistrictID">
+            {{subDistrict.subDistrictName}}
+          </mat-option>
+        </mat-select></mat-form-field></tr>
+    </table>
+  </mat-expansion-panel>
+  <button mat-flat-button color="primary" style="margin-left: 25%; width: 50%; background-color:#4CAF50;"
+          (click)="postCaptiveAgentData()">Submit
+  </button>
+  </mat-accordion>
+  </mat-card>
+  </body>
+  
