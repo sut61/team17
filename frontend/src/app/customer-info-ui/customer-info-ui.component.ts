@@ -17,13 +17,14 @@ export class CustomerInfoUIComponent implements OnInit {
   subDistrictSelected: number;
   districts: Array<any>;
   districtSelected: number;
+  birthday: string;
 
   customerObject = {
     firstName: null,
     lastName: null,
     idNumber: null,
     email: null,
-    birthday: null,
+
     phone: null,
     address: null
   };
@@ -74,8 +75,8 @@ export class CustomerInfoUIComponent implements OnInit {
   }
 
   postCustomerData() {
-    this.customerObject.birthday = this.bd.getFullYear() + '-' + this.bd.getMonth() + '-' + this.bd.getDate() ;
-    this.service.postCustomer(this.customerObject, this.careerIDselected, this.genderIDSelected, this.subDistrictSelected, this.districtSelected, this.provinceSelected).subscribe(res => {
+    console.log(this.dateToString());
+    this.service.postCustomer(this.customerObject, this.careerIDselected, this.genderIDSelected, this.subDistrictSelected, this.districtSelected, this.provinceSelected, this.birthday).subscribe(res => {
         console.log(res);
         alert('บันทึกสำเร็จ');
       }
@@ -83,9 +84,17 @@ export class CustomerInfoUIComponent implements OnInit {
         alert('กรุณากรองข้อมูลให้ถูกต้องและครบถ้วน');
       });
   }
-test() {
-    console.log(this.bd.getFullYear() + '-' + (this.bd.getMonth() + 1) + '-' + this.bd.getDate() );
 
-}
 
+
+  dateToString() {
+    const yyyy = this.bd.getFullYear();
+    /*//prevent month from being 1 digit (yyyy-m-dd)*/
+    const mm = (this.bd.getMonth() < 10 ? '0' : '') + (this.bd.getMonth() + 1);
+    /*//prevent date from being 1 digit (yyyy-mm-d)*/
+    const dd = (this.bd.getDate() < 10 ? '0' : '') + this.bd.getDate();
+  /*  //format date (yyyy-mm-dd) to string for path backend
+    //And backend format string to LocalDate*/
+    return this.birthday = yyyy + '-' + mm + '-' + dd;
+  }
 }

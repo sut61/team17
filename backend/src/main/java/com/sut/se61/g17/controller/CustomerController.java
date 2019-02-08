@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -44,15 +46,20 @@ public class CustomerController {
     }
 
 
-   @PostMapping(path = "/{careerID}/{genderID}/{subdistrictID}/{districtID}/{proviceID}")
+   @PostMapping(path = "/{careerID}/{genderID}/{subdistrictID}/{districtID}/{proviceID}/{birthday}")
    @Transactional
     public Customer postCustomer(@RequestBody Customer customer, Address address,
                                  @PathVariable Long careerID,
                                  @PathVariable Long genderID,
                                  @PathVariable Long subdistrictID,
                                  @PathVariable Long districtID,
-                                 @PathVariable Long proviceID
+                                 @PathVariable Long proviceID,
+                                 @PathVariable String birthday
                                  ) throws Exception {
+
+
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+       LocalDate birthday1 =  LocalDate.parse(birthday, formatter);
         try{
             Career careerName1 = careerRepository.findById(careerID).get();
             Gender gender1 = genderRepository.findById(genderID).get();
@@ -71,6 +78,7 @@ public class CustomerController {
             customer.setAddress(address);
             customer.setCareer(careerName1);
             customer.setGender(gender1);
+            customer.setBirthday(birthday1);
         }catch (Exception e){
             System.out.println(e);
             throw new Exception("Error");

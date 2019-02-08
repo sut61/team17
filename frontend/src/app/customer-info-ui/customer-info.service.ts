@@ -42,13 +42,13 @@ export class CustomerInfoService {
   public getSubdtrictByDistrict(id: number): Observable<any> {
     return this.http.get(customerApi + 'subdistrict/' + id, {headers: this.authKey});
   }
-  public postCustomer(object: any, careerID: number, genderID: number, subdistrictID: number, districtID: number, proviceID: number): Observable<any> {
-    return this.http.post(customerApi + careerID + '/' + genderID + '/' + subdistrictID + '/' + districtID + '/' + proviceID , {
+  public postCustomer(object: any, careerID: number, genderID: number, subdistrictID: number, districtID: number, proviceID: number , birthday: string): Observable<any> {
+    return this.http.post(customerApi + careerID + '/' + genderID + '/' + subdistrictID + '/' + districtID + '/' + proviceID + '/' + birthday, {
       'firstName': object.firstName,
       'lastName': object.lastName,
       'idNumber' : object.idNumber,
       'email' : object.email,
-      'birthday' : object.birthday,
+
       'phone' : object.phone,
       'address': {
         'address': object.address
