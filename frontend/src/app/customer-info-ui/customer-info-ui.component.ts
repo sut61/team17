@@ -28,6 +28,11 @@ export class CustomerInfoUIComponent implements OnInit {
     address: null
   };
 
+  maxDate = new Date(new Date().getFullYear() - 18, new Date().getMonth() , new Date().getDate());
+  bd = new Date();
+
+
+
   constructor(private service: CustomerInfoService) {
   }
 
@@ -69,14 +74,18 @@ export class CustomerInfoUIComponent implements OnInit {
   }
 
   postCustomerData() {
+    this.customerObject.birthday = this.bd.getFullYear() + '-' + this.bd.getMonth() + '-' + this.bd.getDate() ;
     this.service.postCustomer(this.customerObject, this.careerIDselected, this.genderIDSelected, this.subDistrictSelected, this.districtSelected, this.provinceSelected).subscribe(res => {
         console.log(res);
         alert('บันทึกสำเร็จ');
       }
       , error1 => {
-        alert(error1.error.message);
+        alert('กรุณากรองข้อมูลให้ถูกต้องและครบถ้วน');
       });
   }
+test() {
+    console.log(this.bd.getFullYear() + '-' + (this.bd.getMonth() + 1) + '-' + this.bd.getDate() );
 
+}
 
 }
