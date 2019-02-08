@@ -74,6 +74,7 @@ export class ClaimUiComponent implements OnInit {
       this.provinces = res;
     });
   }
+
   getAllCarservice() {
     this.claimservice.getCarserviceByProvinceID(this.provinceSelected).subscribe(res => {
       console.log(res);
@@ -97,7 +98,7 @@ export class ClaimUiComponent implements OnInit {
   }
 
   postClaimServiceData() {
-    this.claimservice.postClaim(this.claimObject, this.customerObject.customerID, this.provinceSelected, this.claimTypeSelect).subscribe(res => {
+    this.claimservice.postClaim(this.claimObject, this.customerObject.customerID, this.provinceSelected, this.claimTypeSelect, this.carServiceSelected).subscribe(res => {
       console.log(res);
       this.getAllClaim();
       alert('Success');
