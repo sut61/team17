@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BeneficiaryService} from './beneficiary.service';
-import {MatDialog, MatStepper} from '@angular/material';
+import {MatDialog, MatSnackBar, MatStepper} from '@angular/material';
 import {BeneficiaryPopupComponent} from './beneficiary-popup/beneficiary-popup.component';
 
 @Component({
@@ -82,7 +82,8 @@ export class BeneficiaryUIComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
               private service: BeneficiaryService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private snackBar: MatSnackBar) {
     this.isOpen = false;
 
   }
@@ -121,7 +122,9 @@ export class BeneficiaryUIComponent implements OnInit {
       }, error => {
         this.policyObject = null;
         this.isOpen = false;
-        alert('ไม่พบกรมธรรม์');
+        this.snackBar.open('การค้นหากรมธรรม์', 'ไม่สำเร็จ', {
+          duration: 2000,
+        });
       });
 
     } else {
@@ -132,9 +135,7 @@ export class BeneficiaryUIComponent implements OnInit {
 
   openDialog(bId: number): void {
     BeneficiaryPopupComponent.bId = bId;
-    const dialogRef = this.dialog.open(BeneficiaryPopupComponent, {
-
-    });
+    const dialogRef = this.dialog.open(BeneficiaryPopupComponent, {});
     dialogRef.afterClosed().subscribe(result => {
       BeneficiaryUIComponent.beneficiaryTemp = null;
       console.log('The dialog was closed');
@@ -143,10 +144,14 @@ export class BeneficiaryUIComponent implements OnInit {
 
   deleteBenefic(bId: number) {
     this.service.deleteBeneficiaryById(bId).subscribe(res => {
-      alert('ลบผู้ได้รับผลประโยชน์สำเร็จ');
+      this.snackBar.open('ลบผู้ได้รับผลประโยชน์สำเร็จ', null, {
+        duration: 5000,
+      });
       this.getBeneficiariesByPolicy(this.policyObject.policyID);
     }, error1 => {
-      alert('ลบผู้ได้รับผลประโยชน์ไม่สำเร็จ');
+      this.snackBar.open('ลบผู้ได้รับผลประโยชน์ไม่สำเร็จ', null, {
+        duration: 5000,
+      });
     });
   }
 
@@ -154,10 +159,15 @@ export class BeneficiaryUIComponent implements OnInit {
     this.service.postBeneficiary(this.beneficiaryObject).subscribe(res => {
       console.log(res);
       this.getBeneficiariesByPolicy(this.policyObject.policyID);
-      alert('เพิ่มผู้ได้รับผลประโยชน์สำเร็จ');
+      this.snackBar.open('เพิ่มผู้ได้รับผลประโยชน์สำเร็จ', null, {
+        duration: 5000,
+      });
+
     }, error1 => {
       console.log(error1);
-      alert('เพิ่มผู้ได้รับผลประโยชน์ไม่สำเร็จ');
+      this.snackBar.open('เพิ่มผู้ได้รับผลประโยชน์ไม่สำเร็จ', null, {
+        duration: 2000,
+      });
     });
 
   }
