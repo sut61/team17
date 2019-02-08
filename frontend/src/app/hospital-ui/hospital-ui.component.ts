@@ -46,6 +46,9 @@ export class HospitalUIComponent implements OnInit {
     this.service.postHospital(this.object, this.typeSelected, this.provinceSelected, this.districtSelected, this.subDistrictSelected).subscribe(res => {
       console.log(res);
       this.getTable();
+      alert('บันทึกข้อมูลสำเร็จ');
+    }, error1 => {
+      alert('บันทึกข้อมูลไม่สำเร็จ');
     });
   }
 
