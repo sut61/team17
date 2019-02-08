@@ -63,6 +63,7 @@ import {PropertyPolycyUiComponent} from './property-policy-ui/property-polycy-ui
 import {BeneficiaryUIComponent} from './beneficiary-ui/beneficiary-ui.component';
 import {BeneficiaryPopupComponent} from './beneficiary-ui/beneficiary-popup/beneficiary-popup.component';
 import { ReviewComponent } from './review/review.component';
+
 import {ClaimUiComponent} from './claim-ui/claim-ui.component';
 import {CustomerHealthUIComponent} from './customer-health-ui/customer-health-ui.component';
 
@@ -96,6 +97,7 @@ const routes: Routes = [
     HospitalUIComponent,
     PolicyUiComponent,
     PropertyPolycyUiComponent,
+
     CustomerInfoUIComponent,
     BeneficiaryUIComponent,
     BeneficiaryPopupComponent,
