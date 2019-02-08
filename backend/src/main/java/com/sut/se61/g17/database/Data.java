@@ -72,7 +72,8 @@ public class Data implements CommandLineRunner {
     private ClaimTypeRepository claimTypeRepository;
     @Autowired
     private CarDataRepository carDataRepository;
-
+    @Autowired
+    private RelationshipRepository relationshipRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Data(BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -98,6 +99,8 @@ public class Data implements CommandLineRunner {
         propertyTypeData();
         carDataTest();
         getClaimData();
+        relationshipData();
+        PolicyTest();
 
     }
 
@@ -157,9 +160,17 @@ public class Data implements CommandLineRunner {
         Employee employee = new Employee();
         employee.setUsername("admin");
         employee.setPassword(bCryptPasswordEncoder.encode("admin"));
-        employee.setFirstName("First Name Test");
-        employee.setLastName("Last Name Test");
+        employee.setFirstName("Sivaroot");
+        employee.setLastName("Chuncharoen");
         employee.setGender(male);
+        employee.setAddress(addressRepository.saveAndFlush(new Address("7/50 ม.7",
+                districtRepository.findByDistrictName("พระประแดง"),
+                provinceRepository.findByProvinceName("สมุทรปราการ"),
+                subDistrictRepository.findBySubDistrictName("บางหัวเสือ"))));
+        employee.setIdNumber("1111111111111");
+        employee.setBirthday(LocalDate.now());
+        employee.setPhone("0991230880");
+        employee.setEmail("sivaroot@gmail.com");
         employeeRepository.saveAndFlush(employee);
     }
 
@@ -207,6 +218,7 @@ public class Data implements CommandLineRunner {
         carColorRepository.saveAndFlush(new CarColor("Red"));
         carColorRepository.saveAndFlush(new CarColor("Black"));
         carColorRepository.saveAndFlush(new CarColor("White"));
+        carColorRepository.saveAndFlush(new CarColor("Titanium Flash"));
     }
 
     private void carType() {
@@ -216,6 +228,7 @@ public class Data implements CommandLineRunner {
     }
 
     private void branchCar() {
+        branchCarRepository.save(new BranchCar("MAZDA"));
         branchCarRepository.save(new BranchCar("BMW"));
         branchCarRepository.save(new BranchCar("HONDA"));
         branchCarRepository.save(new BranchCar("BENZ"));
@@ -245,6 +258,55 @@ public class Data implements CommandLineRunner {
         carDataRepository.save(new CarData("gram","500",branchCarRepository.findByBranchName("HONDA"),
                 carColorRepository.findByColor("Black"),carTypeRepository.findByCarType("4-door"),
                 gearTypeRepository.findByGearType("Auto")));
+    }
+    public void relationshipData(){
+        relationshipRepository.save(new Relationship("adoptive parents"));
+        relationshipRepository.save(new Relationship("adopted child"));
+        relationshipRepository.save(new Relationship("aunt"));
+        relationshipRepository.save(new Relationship("brother"));
+        relationshipRepository.save(new Relationship("sister"));
+        relationshipRepository.save(new Relationship("father"));
+        relationshipRepository.save(new Relationship("mother"));
+
+
+    }
+    public void PolicyTest(){
+        Employee employee = employeeRepository.findByUsername("admin");
+
+        Address address = addressRepository.saveAndFlush(new Address("7/50 ม.6",
+                districtRepository.findByDistrictName("พระประแดง"),
+                provinceRepository.findByProvinceName("สมุทรปราการ"),
+                subDistrictRepository.findBySubDistrictName("บางหัวเสือ")));
+
+        CarData carData = carDataRepository.save(
+                new CarData(
+                        "CX-3 2016",
+                        "2000",
+                        branchCarRepository.findByBranchName("MAZDA"),
+                        carColorRepository.findByColor("Titanium Flash"),carTypeRepository.findByCarType("4-door"),
+                        gearTypeRepository.findByGearType("Auto")));
+        Customer customer = customerRepository.saveAndFlush(new Customer(
+                "Sivaroot",
+                "Chuncharoen",
+                "1231231231231",
+                "sivaroot.sut@gmail.com",
+                LocalDate.now(ZoneId.of("Asia/Bangkok")),
+                "0991230880",
+                address,
+                genderRepository.findByGenderType("male"),
+                careerRepository.findByCareerName("Student")));
+        Policy policy = new Policy();
+        policy.setLicensePlate("กด2018");
+        policy.setVin("VIUNHUYTGBVFDS14L");
+        policy.setPolicyID(1L);
+        policy.setPeriodStartDate(LocalDate.now(ZoneId.of("Asia/Bangkok")));
+        policy.setPeriodExpiryDate((LocalDate.now(ZoneId.of("Asia/Bangkok")).plusYears(1)));
+        policy.setEmployee(employee);
+        policy.setCustomer(customer);
+        policy.setIssuedDate(LocalDateTime.now(ZoneId.of("Asia/Bangkok")));
+        policy.setCarData(carData);
+
+        policyRepository.save(policy);
     }
 }
 
