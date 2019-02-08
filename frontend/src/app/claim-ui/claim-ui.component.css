@@ -1,0 +1,23 @@
+
+.header-text{
+  width: 50%;
+  text-align: center;
+  color: #3E211E;
+  font-family: 'Itim', cursive;
+  margin: auto auto;
+  font-size: 30px;
+
+}
+mat-card{
+  margin: 10px auto;
+  width: 600px;
+  border-radius: 1em;
+  background-color: rgba(255,255,255,0.7);
+}
+mat-form-field{
+
+  width: 100%;
+}
+button{
+  width: 30%;
+}

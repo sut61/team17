@@ -1,0 +1,105 @@
+<body>
+<div class="header-text">
+  <h1>แจ้งเคลมรถ</h1>
+</div>
+<mat-card class="policy-card">
+  <mat-grid-list cols="1" rowHeight="70px">
+    <mat-grid-tile>
+
+      <mat-form-field class="customer-insert">
+        <input matInput placeholder="ค้นหาผู้ทำสัญญา" type="search" [(ngModel)]="idCustomer" value=""
+               [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <button class="customer-btn-search" mat-flat-button (click)="searchCustomer()">ค้นหา</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
+
+<mat-card>
+  <table cellspacing="0" style="width: 100%" *ngIf="isOpenCustomer">
+
+    <tr>
+      <td style="width: 20%">หมายเลขผู้ทำสัญญา</td>
+      <td style="width: 5%">:</td>
+      <td style="width: 75%">{{customerObject.customerID}}</td>
+    </tr>
+    <tr>
+      <td style="width: 20%">หมายเลขประจำตัวประชาชน</td>
+      <td style="width: 5%">:</td>
+      <td style="width: 75%">{{customerObject.idNumber}}</td>
+    </tr>
+    <tr>
+      <td style="width: 20%">ชื่อผู้ทำสัญญา</td>
+      <td style="width: 5%">:</td>
+      <td style="width: 75%">{{customerObject.firstName}} {{customerObject.lastName}}</td>
+    </tr>
+    <tr>
+      <td style="width: 20%">เพศ</td>
+      <td style="width: 5%">:</td>
+      <td style="width: 75%">{{customerObject.gender.genderType}}</td>
+    </tr>
+    <tr>
+      <td style="width: 20%">วันเกิด</td>
+      <td style="width: 5%">:</td>
+      <td style="width: 75%">{{customerObject.birthday}}</td>
+    </tr>
+    <tr>
+      <td style="width: 20%">อาชีพ</td>
+      <td style="width: 5%">:</td>
+      <td style="width: 75%">{{customerObject.career.careerName}}</td>
+    </tr>
+    <tr>
+      <td style="width: 20%">Email</td>
+      <td style="width: 5%">:</td>
+      <td style="width: 75%">{{customerObject.email}}</td>
+    </tr>
+    <tr>
+      <td style="width: 20%">ที่อยู่</td>
+      <td style="width: 5%">:</td>
+      <td style="width: 75%">{{customerObject.address.address}} {{customerObject.address.subDistrict.subDistrictName}}
+        {{customerObject.address.district.districtName}} {{customerObject.address.province.provinceName}}</td>
+    </tr>
+  </table>
+
+  <mat-grid-list cols="1" rowHeight="70px">
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+        <input matInput [(ngModel)]="claimObject.dataAccident" [ngModelOptions]="{standalone: true}"
+               placeholder="ข้อมูลอุบัติเหตุ" >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field class="full-width">
+        <mat-select [(ngModel)]="claimTypeSelect" placeholder="ระดับความร้ายแรงของอุบัติเหตุ">
+          <mat-option *ngFor="let claimType of claimTypes" [value]="claimType.claimTypeID">
+            {{claimType.claimTypeName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field  class="full-width">
+        <mat-select [(ngModel)]="provinceSelected" placeholder="&#45;&#45;เลือกจังหวัด&#45;&#45;" (selectionChange)="getAllCarservice()">
+          <mat-option *ngFor="let province of provinces" [value]="province.provinceID">
+            {{province.provinceName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field  class="full-width">
+        <mat-select [(ngModel)]="carServiceSelected" placeholder="&#45;&#45;เลือกอู่/ศูยน์ซ่อมรถ&#45;&#45;" >
+          <mat-option *ngFor="let carService of carServices" [value]="carService.carServiceID">
+            {{carService.carServiceName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile  class="full-width">
+      <button mat-raised-button style="width:100%;background-color: cadetblue;color: white;" (click)="postClaimServiceData()">บันทึก</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</mat-card>
+</body>
