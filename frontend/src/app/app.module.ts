@@ -66,6 +66,7 @@ import { ReviewComponent } from './review/review.component';
 
 import {ClaimUiComponent} from './claim-ui/claim-ui.component';
 import {CustomerHealthUIComponent} from './customer-health-ui/customer-health-ui.component';
+import { CaptiveAgentUiComponent } from './captive-agent-ui/captive-agent-ui.component';
 
 const routes: Routes = [
   {path: 'payment', component: PaymentUIComponent, canActivate: [AuthGuardService]},
@@ -81,7 +82,7 @@ const routes: Routes = [
   {path: 'beneficiary', component: BeneficiaryUIComponent, canActivate: [AuthGuardService]},
   {path: 'claim', component: ClaimUiComponent, canActivate: [AuthGuardService]},
   {path: 'health', component: CustomerHealthUIComponent, canActivate: [AuthGuardService]},
-
+  {path: 'captiveagent', component: CaptiveAgentUiComponent, canActivate: [AuthGuardService]}
 
 ];
 
@@ -102,7 +103,8 @@ const routes: Routes = [
     BeneficiaryUIComponent,
     BeneficiaryPopupComponent,
     ClaimUiComponent,
-    CustomerHealthUIComponent
+    CustomerHealthUIComponent,
+    CaptiveAgentUiComponent
 
   ],
   imports: [
