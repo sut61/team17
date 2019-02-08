@@ -1,11 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {RouterModule, Routes} from '@angular/router';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -59,7 +59,9 @@ import {CarserviceUiComponent} from './carservice-ui/carservice-ui.component';
 import {AuthGuardService} from './service/auth-guard.service';
 import {HospitalUIComponent} from './hospital-ui/hospital-ui.component';
 import {PolicyUiComponent} from './policy-ui/policy-ui.component';
-import {PropertyPolycyUiComponent } from './property-policy-ui/property-polycy-ui.component';
+import {PropertyPolycyUiComponent} from './property-policy-ui/property-polycy-ui.component';
+import {BeneficiaryUIComponent} from './beneficiary-ui/beneficiary-ui.component';
+import {BeneficiaryPopupComponent} from './beneficiary-ui/beneficiary-popup/beneficiary-popup.component';
 
 const routes: Routes = [
   {path: 'payment', component: PaymentUIComponent, canActivate: [AuthGuardService]},
@@ -69,9 +71,12 @@ const routes: Routes = [
   {path: 'cardata', component: CarDataUiComponent, canActivate: [AuthGuardService]},
   {path: '', component: HomeComponent, canActivate: [AuthGuardService]},
   {path: 'policy', component: PolicyUiComponent, canActivate: [AuthGuardService]},
-  {path: 'hospital', component: HospitalUIComponent , canActivate: [AuthGuardService]},
-  {path: 'propertypolicy', component: PropertyPolycyUiComponent, canActivate:[AuthGuardService]}
+  {path: 'hospital', component: HospitalUIComponent, canActivate: [AuthGuardService]},
+  {path: 'propertypolicy', component: PropertyPolycyUiComponent, canActivate: [AuthGuardService]},
+  {path: 'beneficiary', component: BeneficiaryUIComponent, canActivate: [AuthGuardService]}
+
 ];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,9 +87,13 @@ const routes: Routes = [
     CarserviceUiComponent,
     HospitalUIComponent,
     PolicyUiComponent,
-    CustomerInfoUIComponent
+    PropertyPolycyUiComponent,
+    CustomerInfoUIComponent,
+    BeneficiaryUIComponent,
+    BeneficiaryPopupComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     CdkTableModule,
     CdkTreeModule,
@@ -131,7 +140,11 @@ const routes: Routes = [
     MatFormFieldModule,
     RouterModule.forRoot(routes)
   ],
+  entryComponents: [
+    BeneficiaryPopupComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

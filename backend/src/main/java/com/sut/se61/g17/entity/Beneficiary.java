@@ -28,13 +28,13 @@ public class Beneficiary {
     @Column(name = "firstname")
     private String firstname;
 
- //   @NotNull
+    @NotNull
     @Size(min = 1,max = 25)
     @Pattern(regexp = "^[A-Z][a-z]*")
     @Column(name = "lastname")
     private String lastname;
 
- //   @NotNull
+    @NotNull
     @Size(min = 8,max = 10)
     @Pattern(regexp = "^[0]\\d*")
     private String phone;
@@ -45,20 +45,22 @@ public class Beneficiary {
     @Column(/*name = "personalId",*/unique = true)
     private String personalId;
 
-   // @NotNull
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "GENDER_ID")
     private Gender gender;
 
-   // @NotNull
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "POLICY_ID")
     private Policy policy;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "relationship_id")
     private Relationship relationship;
 
+    @NotNull
     @OneToOne
     @JoinColumn(name = "addressID")
     private Address address;
