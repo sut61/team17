@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CustomerInfoService} from '../customer-info-ui/customer-info.service';
+
 import {PropertyPolicyUiService} from './property-policy-ui.service';
 
 @Component({
@@ -10,7 +10,7 @@ import {PropertyPolicyUiService} from './property-policy-ui.service';
 export class PropertyPolycyUiComponent implements OnInit {
 
   propertyData: any;
-  displayedColumns: string[] = ['name', 'detail', 'class', 'cost'];
+  displayedColumns: string[] = ['name', 'class', 'detailProtection', 'detailPayment',  'cost'];
 
 
   classPropertys: Array<any>;
@@ -18,7 +18,8 @@ export class PropertyPolycyUiComponent implements OnInit {
 
   propertyObject = {
     propertyName: null,
-    detail: null,
+    detailProtection : null,
+    detailPayment: null,
     costPolicy: null
   };
 
