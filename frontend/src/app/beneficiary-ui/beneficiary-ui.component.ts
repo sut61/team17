@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {BeneficiaryService} from './beneficiary.service';
-import {MatDialog, MatSnackBar, MatStepper} from '@angular/material';
-import {BeneficiaryPopupComponent} from './beneficiary-popup/beneficiary-popup.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BeneficiaryService } from './beneficiary.service';
+import { MatDialog, MatSnackBar, MatStepper } from '@angular/material';
+import { BeneficiaryPopupComponent } from './beneficiary-popup/beneficiary-popup.component';
 
 @Component({
   selector: 'app-beneficiary-ui',
@@ -31,16 +31,16 @@ export class BeneficiaryUIComponent implements OnInit {
   static beneficiaryTemp: number;
   isOpen = true;
   beneficiaryObject = {
-    firstname: '',
-    lastname: '',
-    phone: '',
+    firstname: null,
+    lastname: null,
+    phone: null,
     personalID: '',
-    address: '',
-    genderID: -1,
-    provinceID: -1,
-    districtID: -1,
-    subDistrictID: -1,
-    relationshipID: -1,
+    address: null,
+    genderID: null,
+    provinceID: null,
+    districtID: null,
+    subDistrictID: null,
+    relationshipID: null,
     policyID: null
   };
 
@@ -70,6 +70,7 @@ export class BeneficiaryUIComponent implements OnInit {
       }
     }
   };
+
   beneficiaries: Array<any>;
   relationships: Array<any>;
   genders: Array<any>;
@@ -78,43 +79,44 @@ export class BeneficiaryUIComponent implements OnInit {
   subDistricts: Array<any>;
 
 
-  addressFormGroup: FormGroup;
-  provinceFormGroup: FormGroup;
-  districtFormGroup: FormGroup;
-  subDistrictFormGroup: FormGroup;
+  beneficiaryFormGroup: FormGroup;
+
 
   @ViewChild('stepper') stepper: MatStepper;
 
 
   constructor(private _formBuilder: FormBuilder,
-              private service: BeneficiaryService,
-              public dialog: MatDialog,
-              private snackBar: MatSnackBar) {
+    private service: BeneficiaryService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar) {
     this.isOpen = false;
-
   }
 
   ngOnInit() {
 
+    this.beneficiaryFormGroup = this._formBuilder.group({
+      firstname: ['', [Validators.required,Validators.pattern('^[A-Z][a-z ]*$')]],
+      lastname: ['', [Validators.required,Validators.pattern('^[A-Z][a-z ]*$')]],
+      personalId: ['', [Validators.required,Validators.min(13),Validators.max(13)]],
+      phone: ['', [Validators.required,Validators.pattern('^[0]\\d*$'),Validators.min(9)]],
+      relationship: ['', Validators.required],
+      gender: ['', Validators.required],
+      address: ['', Validators.required],
+      province: ['', Validators.required],
+      district: ['', Validators.required],
+      subdistrict: ['', Validators.required]
+    });
+
     scrollTo(0, 0);
-    this.addressFormGroup = this._formBuilder.group({
-      addressCtrl: ['', Validators.required]
-    });
-    this.provinceFormGroup = this._formBuilder.group({
-      provinceCtrl: ['', Validators.required]
-    });
-    this.districtFormGroup = this._formBuilder.group({
-      districtCtrl: ['', Validators.required]
-    });
-    this.subDistrictFormGroup = this._formBuilder.group({
-      subdistrictCtrl: ['', Validators.required]
-    });
+
+
 
     this.getAllProvince();
     this.getGender();
     this.getRelationship();
   }
 
+ 
 
   searchPolicy() {
 
@@ -162,6 +164,7 @@ export class BeneficiaryUIComponent implements OnInit {
   }
 
   post() {
+
     this.service.postBeneficiary(this.beneficiaryObject).subscribe(res => {
       console.log(res);
       this.getBeneficiariesByPolicy(this.policyObject.policyID);

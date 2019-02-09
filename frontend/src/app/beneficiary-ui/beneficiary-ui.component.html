@@ -7,7 +7,7 @@
       <div class="full-width">
         <mat-form-field class="full-width">
           <input matInput placeholder="ค้นหาเลขที่กรมธรรม์" type="number" [(ngModel)]="beneficiaryObject.policyID"
-                 [ngModelOptions]="{standalone: true}" value="">
+            [ngModelOptions]="{standalone: true}" value="">
         </mat-form-field>
       </div>
     </mat-grid-tile>
@@ -141,62 +141,85 @@
 
 
   <div>
-    <mat-card class="policy-detail">
+    <form [formGroup]="beneficiaryFormGroup">
+      <mat-card class="policy-detail">
 
 
-      <div class="example-headers-align">
+        <div class="example-headers-align">
 
-        <mat-expansion-panel *ngFor="let benefic of beneficiaries"  >
-          <mat-expansion-panel-header (click)="openDialog(benefic.beneficiaryId)">
-            <mat-panel-title>
-              {{benefic.relationship.relationship}}
-            </mat-panel-title>
-            <mat-panel-description>
-              {{benefic.firstname}} {{benefic.lastname}}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
+          <mat-expansion-panel *ngFor="let benefic of beneficiaries">
+            <mat-expansion-panel-header (click)="openDialog(benefic.beneficiaryId)">
+              <mat-panel-title>
+                {{benefic.relationship.relationship}}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{benefic.firstname}} {{benefic.lastname}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
 
-          <mat-action-row>
-            <button class="btn-search sec-font" style="width: 25%;background-color: tomato" mat-raised-button
-                    (click)="deleteBenefic(benefic.beneficiaryId)">ลบผู้ได้รับผลประโยชน์
-            </button>
-          </mat-action-row>
-        </mat-expansion-panel>
+            <mat-action-row>
+              <button class="btn-search sec-font" style="width: 25%;background-color: tomato" mat-raised-button
+                (click)="deleteBenefic(benefic.beneficiaryId)">ลบผู้ได้รับผลประโยชน์
+              </button>
+            </mat-action-row>
+          </mat-expansion-panel>
 
+          <!--                         ************************************************-->
 
-        <mat-expansion-panel [expanded]="true" hideToggle>
-          <mat-expansion-panel-header class="main-font" style="background-color: #72f9da">
-            <mat-panel-title>
-              เพิ่มผู้รับผลประโยชน์
-            </mat-panel-title>
+          <mat-expansion-panel [expanded]="true" hideToggle>
+            <mat-expansion-panel-header class="main-font" style="background-color: #72f9da">
+              <mat-panel-title>
+                เพิ่มผู้รับผลประโยชน์
+              </mat-panel-title>
 
-          </mat-expansion-panel-header>
-          <br>
-          <form class="example-form">
+            </mat-expansion-panel-header>
+            <br>
 
             <table class="full-width" cellspacing="0">
               <tr>
                 <td>
                   <mat-form-field class="field-width">
-                    <input matInput [(ngModel)]="beneficiaryObject.firstname" [ngModelOptions]="{standalone: true}"
-                           required placeholder="First name">
+                    <input matInput [(ngModel)]="beneficiaryObject.firstname" formControlName="firstname" required
+                      placeholder="Firstname">
+                    <mat-error *ngIf="beneficiaryFormGroup.invalid">
+                      <div *ngIf="beneficiaryFormGroup.hasError('required','firstname')">
+                        Please enter your firstname
+                      </div>
+                      <div *ngIf="beneficiaryFormGroup.hasError('pattern','firstname')">
+                        Pattern your firstname incorrect
+                      </div>
+                    </mat-error>
                   </mat-form-field>
+
+
+
                 </td>
                 <td>
                   <mat-form-field class="field-width">
-                    <input matInput [(ngModel)]="beneficiaryObject.lastname" [ngModelOptions]="{standalone: true}"
-                           required
-                           placeholder="Last name">
+                    <input matInput [(ngModel)]="beneficiaryObject.lastname" formControlName="lastname" required
+                      placeholder="Lastname">
+                    <mat-error *ngIf="beneficiaryFormGroup.invalid">
+                      <div *ngIf="beneficiaryFormGroup.hasError('required','lastname')">
+                        Please enter your lastname
+                      </div>
+                      <div *ngIf="beneficiaryFormGroup.hasError('pattern','lastname')">
+                        Pattern your lastname incorrect
+                      </div>
+                    </mat-error>
                   </mat-form-field>
                 </td>
                 <td>
                   <mat-form-field class="full-width">
-                    <mat-select [(ngModel)]="beneficiaryObject.genderID" placeholder="Gender"
-                                [ngModelOptions]="{standalone: true}" required>
+                    <mat-select [(ngModel)]="beneficiaryObject.genderID" placeholder="Select your gender"
+                      formControlName="gender" required>
                       <mat-option *ngFor="let gender of genders" [value]="gender.genderID">
                         {{gender.genderType}}
                       </mat-option>
                     </mat-select>
+                    <mat-error
+                      *ngIf="beneficiaryFormGroup.invalid && beneficiaryFormGroup.hasError('required','personalId')">
+                      Please Select your gender
+                    </mat-error>
                   </mat-form-field>
                 </td>
               </tr>
@@ -207,15 +230,35 @@
               <tr>
                 <td>
                   <mat-form-field class="full-width">
-                    <input matInput required [(ngModel)]="beneficiaryObject.personalID" minlength="13"
-                           [ngModelOptions]="{standalone: true}" maxlength="13" placeholder="Personal No." #perId>
+                    <input matInput [(ngModel)]="beneficiaryObject.personalID" minlength="13" maxlength="13"
+                      formControlName="personalId" required placeholder="Personal No." #perId>
+                    <mat-error *ngIf="beneficiaryFormGroup.invalid">
+                      <div *ngIf="beneficiaryFormGroup.hasError('required','personalId')">
+                        Please enter your personal ID
+                      </div>
+                      <div
+                        *ngIf="beneficiaryFormGroup.hasError('min','personalId') || beneficiaryFormGroup.hasError('max','personalId')">
+                        Personal ID incorrect
+                      </div>
+                    </mat-error>
                     <mat-hint align="end">{{perId.value.length}} / 13</mat-hint>
+
+
                   </mat-form-field>
                 </td>
                 <td>
                   <mat-form-field class="full-width">
-                    <input matInput required [(ngModel)]="beneficiaryObject.phone" [ngModelOptions]="{standalone: true}"
-                           maxlength="10" placeholder="Phone No." #phoneNo>
+                    <input matInput required [(ngModel)]="beneficiaryObject.phone" formControlName="phone"
+                      maxlength="10" placeholder="Phone No." #phoneNo>
+                    <mat-error *ngIf="beneficiaryFormGroup.invalid">
+                      <div *ngIf="beneficiaryFormGroup.hasError('required','phone')">
+                        Please enter your phone
+                      </div>
+                      <div
+                        *ngIf="beneficiaryFormGroup.hasError('pattern','phone') || beneficiaryFormGroup.hasError('min','phone')">
+                        Phone number incorrect e.g. "0999999999"
+                      </div>
+                    </mat-error>
                     <mat-hint align="end">{{phoneNo.value.length}}</mat-hint>
                   </mat-form-field>
                 </td>
@@ -224,79 +267,89 @@
 
 
             <mat-form-field class="full-width">
-              <mat-select required [(ngModel)]="beneficiaryObject.relationshipID" [ngModelOptions]="{standalone: true}"
-                          placeholder="Relationship status with ">
+              <mat-select required [(ngModel)]="beneficiaryObject.relationshipID" formControlName="relationship"
+                placeholder="Relationship status with ">
                 <mat-option *ngFor="let relationship of relationships" [value]="relationship.relationshipId">
                   {{relationship.relationship}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="beneficiaryFormGroup.invalid && beneficiaryFormGroup.hasError('required','relationship')">
+                Please Select your relationship
+              </mat-error>
             </mat-form-field>
 
 
-          </form>
+
+            <!--------------------------------------------------------------------------------------------------->
 
 
-          <mat-vertical-stepper [linear]="true" #stepper>
-            <mat-step [stepControl]="addressFormGroup">
-              <form [formGroup]="addressFormGroup">
+            <mat-vertical-stepper [linear]="true" #stepper>
+              <mat-step [stepControl]="beneficiaryFormGroup">
                 <ng-template matStepLabel>Enter your address</ng-template>
                 <mat-form-field class="full-width">
-                  <input matInput [(ngModel)]="beneficiaryObject.address" formControlName="addressCtrl" required
-                         placeholder="Address">
+                  <input matInput [(ngModel)]="beneficiaryObject.address" formControlName="address" required
+                    placeholder="Address">
+                  <mat-error *ngIf="beneficiaryFormGroup.hasError('required', 'address')">
+                    Please enter your new address
+                  </mat-error>
                 </mat-form-field>
-              </form>
-            </mat-step>
-            <mat-step [stepControl]="provinceFormGroup">
-              <form [formGroup]="provinceFormGroup">
+
+              </mat-step>
+              <mat-step [stepControl]="beneficiaryFormGroup">
                 <ng-template matStepLabel>Select your province</ng-template>
                 <mat-form-field class="full-width">
                   <mat-select [(ngModel)]="beneficiaryObject.provinceID" placeholder="Select your province" required
-                              formControlName="provinceCtrl" (selectionChange)="getAllDistrict()">
+                    formControlName="province" (selectionChange)="getAllDistrict()">
                     <mat-option *ngFor="let province of provinces" [value]="province.provinceID">
                       {{province.provinceName}}
                     </mat-option>
                   </mat-select>
+                  <mat-error *ngIf="beneficiaryFormGroup.hasError('required', 'province')">
+                      Please enter your new province
+                    </mat-error>
                 </mat-form-field>
-              </form>
-            </mat-step>
-            <mat-step [stepControl]="districtFormGroup">
-              <form [formGroup]="districtFormGroup">
+              </mat-step>
+              <mat-step [stepControl]="beneficiaryFormGroup">
                 <ng-template matStepLabel>Select your district</ng-template>
                 <mat-form-field class="full-width">
                   <mat-select [(ngModel)]="beneficiaryObject.districtID" placeholder="Select your district" required
-                              formControlName="districtCtrl" (selectionChange)="getAllSubDistrict()">
+                    formControlName="district" (selectionChange)="getAllSubDistrict()">
                     <mat-option *ngFor="let district of districts" [value]="district.districtID">
                       {{district.districtName}}
                     </mat-option>
                   </mat-select>
+                  <mat-error *ngIf="beneficiaryFormGroup.hasError('required', 'district')">
+                      Please enter your new province
+                    </mat-error>
                 </mat-form-field>
-              </form>
-            </mat-step>
-            <mat-step [stepControl]="subDistrictFormGroup">
-              <form [formGroup]="subDistrictFormGroup">
+              </mat-step>
+              <mat-step [stepControl]="beneficiaryFormGroup">
                 <ng-template matStepLabel>Select your subdistrict</ng-template>
                 <mat-form-field class="full-width">
-                  <mat-select [(ngModel)]="beneficiaryObject.subDistrictID" formControlName="subdistrictCtrl" required
-                              placeholder="Select your subdistrict">
+                  <mat-select [(ngModel)]="beneficiaryObject.subDistrictID" formControlName="subdistrict" required
+                    placeholder="Select your subdistrict">
                     <mat-option *ngFor="let subDistrict of subDistricts" [value]="subDistrict.subDistrictID">
                       {{subDistrict.subDistrictName}}
                     </mat-option>
                   </mat-select>
+                  <mat-error *ngIf="beneficiaryFormGroup.hasError('required', 'subdistrict')">
+                      Please enter your new subdistrict
+                    </mat-error>
                 </mat-form-field>
-              </form>
-            </mat-step>
-          </mat-vertical-stepper>
+              </mat-step>
+            </mat-vertical-stepper>
 
 
-          <mat-action-row>
-            <button class="btn-search sec-font" style="width: 25%;background-color: tomato;" mat-raised-button
-                    (click)="post()">ยืนยัน
-            </button>
-          </mat-action-row>
-        </mat-expansion-panel>
-      </div>
+            <mat-action-row>
+              <button class="btn-search sec-font" style="width: 25%;background-color: tomato;" mat-raised-button
+                (click)="post()">ยืนยัน
+              </button>
+            </mat-action-row>
+          </mat-expansion-panel>
+        </div>
 
-    </mat-card>
+      </mat-card>
+    </form>
   </div>
 
 </div>
