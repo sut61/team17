@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import { MatSnackBar} from '@angular/material';
 import {PropertyPolicyUiService} from './property-policy-ui.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {max} from 'rxjs/operators';
+import {__values} from 'tslib';
 
 @Component({
   selector: 'app-property-polycy-ui',
@@ -16,6 +19,8 @@ export class PropertyPolycyUiComponent implements OnInit {
   classPropertys: Array<any>;
   classIDselect: number;
 
+  propertyFormGroup: FormGroup;
+
   propertyObject = {
     propertyName: null,
     detailProtection : null,
@@ -23,13 +28,25 @@ export class PropertyPolycyUiComponent implements OnInit {
     costPolicy: null
   };
 
-  constructor(private propertyService: PropertyPolicyUiService , private snackBar: MatSnackBar) {
+  constructor(private _formBuilder: FormBuilder , private propertyService: PropertyPolicyUiService , private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
     this.getClassData();
 
     this.getTable();
+
+    this.propertyFormGroup = this._formBuilder.group({
+      propertyName: ['', [Validators.required,Validators.pattern('^([ก-๙]|[A-Z | a-z]|[ ./*\\-])+'), Validators.min(5)]],
+      detailProtection: ['', [Validators.required,Validators.min(10 )]],
+      detailPayment: ['', [Validators.required,Validators.min(10)]],
+      costPolicy: ['', [Validators.required,Validators.min(100)]],
+
+      classProperty: ['', Validators.required]
+    });
+
+    scrollTo(0, 0);
+
   }
 
   getClassData() {

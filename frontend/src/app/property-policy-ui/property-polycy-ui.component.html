@@ -2,39 +2,79 @@
   <h1>เพิ่มประเภทประกันรถ</h1>
 </div>
 
-
+<form [formGroup]="propertyFormGroup">
 <mat-card>
   <mat-grid-list cols="1" rowHeight="70px">
     <mat-grid-tile>
 
       <mat-form-field class="full-width">
-        <mat-select [(ngModel)]="classIDselect" placeholder="Class Property Policy">
-          <mat-option *ngFor="let classProperty of classPropertys" [value]="classProperty.classID">
+        <mat-select [(ngModel)]="classIDselect" placeholder="Class Property Policy" formControlName="classProperty" required>
+          <mat-option *ngFor="let classProperty of classPropertys" [value]="classProperty.classID" >
             {{classProperty.className}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="propertyFormGroup.invalid && propertyFormGroup.hasError('required','classProperty')">
+          Please Select your Class Property
+        </mat-error>
       </mat-form-field>
     </mat-grid-tile>
     <mat-grid-tile>
       <mat-form-field class="full-width">
-        <input matInput [(ngModel)]="propertyObject.propertyName" placeholder="Property Name">
+        <input matInput [(ngModel)]="propertyObject.propertyName" placeholder="Property Name"
+               formControlName="propertyName" required>
+        <mat-error *ngIf="propertyFormGroup.invalid">
+          <div *ngIf="propertyFormGroup.hasError('required','propertyName')">
+            Please enter your Property Name
+          </div>
+          <div *ngIf="propertyFormGroup.hasError('pattern','propertyName') || propertyFormGroup.hasError('min','propertyName')">
+            Pattern your Property Name incorrect e.g. "We Care you"
+          </div>
+        </mat-error>
+
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile>
       <mat-form-field class="full-width">
-        <textarea matInput [(ngModel)]="propertyObject.detailProtection" placeholder="Detail Protection"></textarea>
+        <textarea matInput [(ngModel)]="propertyObject.detailProtection" placeholder="Detail Protection"
+                  formControlName="detailProtection" required></textarea>
+        <mat-error *ngIf="propertyFormGroup.invalid">
+          <div *ngIf="propertyFormGroup.hasError('required','detailProtection')">
+            Please enter your detail Protection
+          </div>
+          <div *ngIf="propertyFormGroup.hasError('min','detailProtection')">
+            Pattern your detail Protection incorrect
+          </div>
+        </mat-error>
       </mat-form-field>
     </mat-grid-tile>
 
     <mat-grid-tile>
     <mat-form-field class="full-width">
-      <textarea matInput [(ngModel)]="propertyObject.detailPayment" placeholder="Detail Payment"></textarea>
+      <textarea matInput [(ngModel)]="propertyObject.detailPayment" placeholder="Detail Payment"
+                formControlName="detailPayment" required></textarea>
+      <mat-error *ngIf="propertyFormGroup.invalid">
+        <div *ngIf="propertyFormGroup.hasError('required','detailPayment')">
+          Please enter detail Paymentl Protection
+        </div>
+        <div *ngIf="propertyFormGroup.hasError('min','detailPayment')">
+          Pattern your detail Payment incorrect
+        </div>
+      </mat-error>
     </mat-form-field>
   </mat-grid-tile>
     <mat-grid-tile>
       <mat-form-field class="full-width">
-        <input [(ngModel)]="propertyObject.costPolicy" matInput type="number" placeholder="Cost Policy (per month)">
+        <input [(ngModel)]="propertyObject.costPolicy" matInput type="number" placeholder="Cost Policy (per month)"
+               formControlName="costPolicy" required>
+        <mat-error *ngIf="propertyFormGroup.invalid">
+          <div *ngIf="propertyFormGroup.hasError('required','costPolicy')">
+            Please enter cost Policy Protection
+          </div>
+          <div *ngIf="propertyFormGroup.hasError('min','costPolicy')">
+            Pattern your Cost Policy incorrect ( Not less than 100 )
+          </div>
+        </mat-error>
       </mat-form-field>
     </mat-grid-tile>
 
@@ -46,7 +86,7 @@
 
 </mat-card>
 
-
+</form>
 <mat-card>
   <table mat-table [dataSource]="propertyData" class="mat-elevation-z8">
 
