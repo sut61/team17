@@ -317,6 +317,27 @@ public class Data implements CommandLineRunner {
                 address,
                 genderRepository.findByGenderType("male"),
                 careerRepository.findByCareerName("Student")));
+        Customer customer1 = customerRepository.saveAndFlush(new Customer(
+                "Somporn",
+                "Imchuam",
+                "7418529630123",
+                "sivaroot.sut@gmail.com",
+                LocalDate.now(ZoneId.of("Asia/Bangkok")),
+                "0994686767",
+                address,
+                genderRepository.findByGenderType("male"),
+                careerRepository.findByCareerName("Student")));
+        Customer customer2 = customerRepository.saveAndFlush(new Customer(
+                "Chantardsak",
+                "Usaha",
+                "1472583690123",
+                "sivaroot.sut@gmail.com",
+                LocalDate.now(ZoneId.of("Asia/Bangkok")),
+                "0882103942",
+                address,
+                genderRepository.findByGenderType("male"),
+                careerRepository.findByCareerName("Student")));
+
 
        PropertyPolicy propertyPolicy = propertyPolicyRepository.save(new PropertyPolicy("MasterInsurance","คุ้มครองในวงเงิน 100,000 บาท" ,"จ่ายผ่านบัตรเครดิตได้ทุกประเภท" , 1990.00 , classPropertyRepository.findByClassName("ประกันภัยรถชั้น 1")));
 
