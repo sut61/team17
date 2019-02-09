@@ -70,6 +70,7 @@ getAllReview(){
          this.snackBar.open('เพิ่มรีวิวสำเร็จ', null, {
         duration: 6000,
       });
+    this.getAllReview();
 
     }, error1 => {
       console.log(error1);
