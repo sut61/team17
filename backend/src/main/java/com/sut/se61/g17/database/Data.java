@@ -60,7 +60,8 @@ public class Data implements CommandLineRunner {
 
     @Autowired
     private GearTypeRepository gearTypeRepository;
-
+    @Autowired
+    private CarServiceRepository carServiceRepository;
     @Autowired
     private PropertyPolicyRepository propertyPolicyRepository;
     @Autowired
@@ -101,7 +102,7 @@ public class Data implements CommandLineRunner {
         getClaimData();
         relationshipData();
         PolicyTest();
-
+        CaeService();
     }
 
     private void addressData() {
@@ -269,6 +270,12 @@ public class Data implements CommandLineRunner {
         relationshipRepository.save(new Relationship("mother"));
 
 
+    }
+    public void CaeService(){
+        carServiceRepository.save(new CarService("CPE",addressRepository.saveAndFlush(new Address("55/50 ม.6",
+                districtRepository.findByDistrictName("พระประแดง"),
+                provinceRepository.findByProvinceName("สมุทรปราการ"),
+                subDistrictRepository.findBySubDistrictName("บางหัวเสือ"))),carServiceTypeRepository.save(new CarServiceType("Test"))));
     }
     public void PolicyTest(){
         Employee employee = employeeRepository.findByUsername("admin");
