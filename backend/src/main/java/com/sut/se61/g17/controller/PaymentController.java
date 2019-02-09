@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Collection;
 import java.util.Date;
@@ -78,16 +79,22 @@ public class PaymentController {
 
     @Scheduled(fixedRate = 15000)
     public void InvoiceManagement() {
-        System.out.println(" @Scheduled : " + new Date());
         LocalDate localDate = LocalDate.now(ZoneId.of("Asia/Bangkok"));
         InvoiceStatus invoiceS = invoiceStatusRepository.findByStatus("Not Paid");
         for (Policy policy : policyRepository.findAll()) {
             if(!invoiceRepository.existsByPolicy(policy)) {
-                if (localDate.isBefore(policy.getPeriodExpiryDate()) && localDate.getDayOfMonth() == policy.getPeriodStartDate().getDayOfMonth()) {
-                    Invoice invoice = new Invoice(localDate, 645.5, invoiceS, policy);
-                    System.out.println(invoiceRepository.save(invoice).getInvoiceID());
+                if(policy.getPeriodStartDate().isAfter(localDate) || policy.getPeriodStartDate().isEqual(localDate)) {
+                    if (localDate.isBefore(policy.getPeriodExpiryDate()) && localDate.getDayOfMonth() == policy.getPeriodStartDate().getDayOfMonth()) {
+                        Invoice invoice = new Invoice(localDate, policy.getPropertyPolicy().getCostPolicy(), invoiceS, policy);
+                        System.out.println("\n\n");
+                        invoiceRepository.saveAndFlush(invoice);
+                        System.out.println(" ------------- Gen Invoice Auto ------------- ");
+                        System.out.println(" ------------- Policy owner name  ----> " + "Policy ID : " +invoice.getInvoiceID()+ " "+ policy.getCustomer().getFirstName() + " " + policy.getCustomer().getLastName());
+                        System.out.println(" ------------- Invoice ID CheckGen----> " + invoiceRepository.findByPolicy(policy).getInvoiceID());
+                        System.out.println(" ------------- Invoice date       ----> " + localDate.toString());
+                        System.out.println(" ------------- Invoice amount     ----> " + invoice.getInvoiceAmount() + " Bath");
+                    }
                 }
-
             }
         }
     }

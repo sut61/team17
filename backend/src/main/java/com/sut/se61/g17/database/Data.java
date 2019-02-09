@@ -295,13 +295,18 @@ public class Data implements CommandLineRunner {
                 address,
                 genderRepository.findByGenderType("male"),
                 careerRepository.findByCareerName("Student")));
+
+       PropertyPolicy propertyPolicy = propertyPolicyRepository.save(new PropertyPolicy("MasterInsurance","คุ้มครองในวงเงิน 100,000 บาท" ,"จ่ายผ่านบัตรเครดิตได้ทุกประเภท" , 1990.00 , classPropertyRepository.findByClassName("ประกันภัยรถประเภท 1")));
+
         Policy policy = new Policy();
         policy.setLicensePlate("กด2018");
         policy.setVin("VIUNHUYTGBVFDS14L");
         policy.setPolicyID(1L);
+        policy.setIssuedDate(LocalDateTime.now(ZoneId.of("Asia/Bangkok")));
         policy.setPeriodStartDate(LocalDate.now(ZoneId.of("Asia/Bangkok")));
         policy.setPeriodExpiryDate((LocalDate.now(ZoneId.of("Asia/Bangkok")).plusYears(1)));
         policy.setEmployee(employee);
+        policy.setPropertyPolicy(propertyPolicy);
         policy.setCustomer(customer);
         policy.setIssuedDate(LocalDateTime.now(ZoneId.of("Asia/Bangkok")));
         policy.setCarData(carData);
