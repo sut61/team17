@@ -29,3 +29,9 @@ footer.logout{
   right: 30px;
   bottom: 30px;
 }
+.error-msg {
+  display: block;
+  position: absolute;
+  font-size: 75%;
+  bottom: -2em;
+}
