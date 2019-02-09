@@ -112,6 +112,75 @@ public class CustomerHealthSystemTests {
 
     /***----------------------- Test Null ----------------------- ***/
     @Test
+    public void testAgeCanNotNull() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(0);
+        customerHealth.setHeight(180);
+        customerHealth.setWeight(60);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine("ไม่มี");
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
+
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testAgeCanNotNull ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
+    @Test
+    public void testHeightCanNotNull() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(20);
+        customerHealth.setHeight(0);
+        customerHealth.setWeight(60);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine("ไม่มี");
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
+
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testHeightCanNotNull ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
+    @Test
+    public void testWeightCanNotNull() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(20);
+        customerHealth.setHeight(180);
+        customerHealth.setWeight(0);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine("ไม่มี");
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
+
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testWeightCanNotNull ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
+    @Test
     public void testVivisectionCanNotNull() {
         CustomerHealth customerHealth = new CustomerHealth();
         customerHealth.setAge(20);
@@ -134,9 +203,101 @@ public class CustomerHealthSystemTests {
             System.out.print(e.getConstraintViolations());
         }
     }
+    @Test
+    public void testMedicineCanNotNull() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(20);
+        customerHealth.setHeight(180);
+        customerHealth.setWeight(60);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine(null);
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
 
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testMedicineCanNotNull ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
 
-    /***----------------------- Test Size ----------------------- ***/
+    /***------------------------------------ Test Size ------------------------------------ ***/
+    /***----------------------- Test Size ThenMax ----------------------- ***/
+    @Test
+    public void testAgeSizeThenMax() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(101);
+        customerHealth.setHeight(180);
+        customerHealth.setWeight(60);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine("ไม่มี");
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
+
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testAgeSizeThenMax ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
+    @Test
+    public void testHeightSizeThenMax() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(20);
+        customerHealth.setHeight(300);
+        customerHealth.setWeight(60);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine("ไม่มี");
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
+
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testHeightSizeThenMax ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
+    @Test
+    public void testWeightSizeThenMax() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(20);
+        customerHealth.setHeight(180);
+        customerHealth.setWeight(201);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine("ไม่มี");
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
+
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testWeightSizeThenMax ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
     @Test
     public void testVivisectionSizeThenMax() {
         CustomerHealth customerHealth = new CustomerHealth();
@@ -160,6 +321,99 @@ public class CustomerHealthSystemTests {
         }
     }
     @Test
+    public void testMedicineSizeThenMax() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(20);
+        customerHealth.setHeight(180);
+        customerHealth.setWeight(60);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine("ไม่มี11111111111111111111111111111111111111111111111111111111111111");
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
+
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testMedicineSizeThenMax ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
+    /***----------------------- Test Size LowerMin ----------------------- ***/
+    @Test
+    public void testAgeSizelowerMin() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(101);
+        customerHealth.setHeight(180);
+        customerHealth.setWeight(60);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine("ไม่มี");
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
+
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testAgeSizelowerMin ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
+    @Test
+    public void testHeightSizelowerMin() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(20);
+        customerHealth.setHeight(300);
+        customerHealth.setWeight(60);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine("ไม่มี");
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
+
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testHeightSizelowerMin ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
+    @Test
+    public void testWeightSizelowerMin() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(20);
+        customerHealth.setHeight(180);
+        customerHealth.setWeight(201);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine("ไม่มี");
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
+
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testWeightSizelowerMin ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
+    @Test
     public void testVivisectionSizelowerMin() {
         CustomerHealth customerHealth = new CustomerHealth();
         customerHealth.setAge(20);
@@ -178,6 +432,29 @@ public class CustomerHealthSystemTests {
             assertEquals(violations.isEmpty(), false);
             assertEquals(violations.size(), 1);
             System.out.print("\n\n================================ Print Error testVivisectionSizelowerMin ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
+    @Test
+    public void testMedicineSizelowerMin() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(20);
+        customerHealth.setHeight(180);
+        customerHealth.setWeight(60);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine("ม");
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
+
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testMedicineSizelowerMin ================================\n\n");
             System.out.print(e.getConstraintViolations());
         }
     }
@@ -205,6 +482,32 @@ public class CustomerHealthSystemTests {
             System.out.print(e.getConstraintViolations());
         }
     }
+    @Test
+    public void testMedicineNotPattern() {
+        CustomerHealth customerHealth = new CustomerHealth();
+        customerHealth.setAge(20);
+        customerHealth.setHeight(180);
+        customerHealth.setWeight(60);
+        customerHealth.setVivisection("ไม่เคย");
+        customerHealth.setMedicine("ABCD");
+        customerHealth.setDisease(disease);
+        customerHealth.setCustomer(customer);
+        try {
+            entityManager.persist(customerHealth);
+            entityManager.flush();
+            fail("fail");
+
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.print("\n\n================================ Print Error testMedicineNotPattern ================================\n\n");
+            System.out.print(e.getConstraintViolations());
+        }
+    }
+
+
+    /***----------------------- Test Unique ----------------------- ***/
     @Test
     public void testUniqueCustomerID() {
         CustomerHealth customerHealth = new CustomerHealth();
