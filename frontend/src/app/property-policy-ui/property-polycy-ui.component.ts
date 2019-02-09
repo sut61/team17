@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-
+import { MatSnackBar} from '@angular/material';
 import {PropertyPolicyUiService} from './property-policy-ui.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class PropertyPolycyUiComponent implements OnInit {
     costPolicy: null
   };
 
-  constructor(private propertyService: PropertyPolicyUiService) {
+  constructor(private propertyService: PropertyPolicyUiService , private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -41,11 +41,16 @@ export class PropertyPolycyUiComponent implements OnInit {
   postPropertyData() {
     this.propertyService.postPropertyPolicy(this.propertyObject, this.classIDselect).subscribe(res => {
         console.log(res);
-        alert('เพิ่มสำเร็จ');
-      }
-      , error1 => {
-        alert('กรุณากรองข้อมูลให้ถูกต้องและครบถ้วน');
+      this.snackBar.open('เพิ่มประเภทประกันรถสำเร็จ', null, {
+        duration: 5000,
       });
+
+    }, error1 => {
+      console.log(error1);
+      this.snackBar.open('เพิ่มประเภทประกันรถไม่สำเร็จ กรุณากรอกข้อมมูลให้ถูกต้องและครบถ้วน', null, {
+        duration: 2000,
+      });
+    });
   }
 
   getTable() {
