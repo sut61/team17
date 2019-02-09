@@ -1,6 +1,7 @@
 import{Component, OnInit}from '@angular/core';
 import {ReviewService}from './review.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatSnackBar} from '@angular/material';
 import {TokenStorage} from '../service/token-storage';
 @Component({
   selector: 'app-review',
@@ -24,7 +25,7 @@ authKey = new HttpHeaders({
 
   };
 
-constructor(private service: ReviewService ,private token: TokenStorage, private httpClient: HttpClient) { }
+constructor(private service: ReviewService ,private token: TokenStorage, private httpClient: HttpClient,private snackBar: MatSnackBar) { }
 
  ngOnInit() {
     this.getAllStatus();
@@ -66,14 +67,16 @@ getAllReview(){
       .subscribe(
         data => {
           console.log('PUT Request is successful', data);
-          alert('เพิ่ม Review สำเร็จ');
-          location.reload();
-        },
-        error => {
-          console.log('Rrror', error);
-          alert('เกิดข้อผิดพลาด');
-        }
-      );
+         this.snackBar.open('เพิ่มรีวิวสำเร็จ', null, {
+        duration: 6000,
+      });
+
+    }, error1 => {
+      console.log(error1);
+      this.snackBar.open('เพิ่มรีวิวไม่สำเร็จ', null, {
+        duration: 3000,
+      });
+    });
   }
 
 
