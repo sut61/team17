@@ -28,10 +28,10 @@ public class BeneficiarySystemTests {
 
 	/***
 	 * Run command : mvnw test -Dtest=BeneficiarySystemTests
-	 * Line 161 : Test Null
-	 * Line 346 : Test Pattern
-	 * Line 440 : Test Size
-	 * Line 487 : Test Unique
+	 * Line 189 : Test Null
+	 * Line 374 : Test Pattern
+	 * Line 468 : Test Size
+	 * Line 515 : Test Unique
 	 * ***/
 
 	@Autowired
@@ -66,94 +66,120 @@ public class BeneficiarySystemTests {
 
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
+        /***--------------------------------------------------------------------------------------------------***/
+        /***--------------------------------------------------------------------------------------------------***/
+        /***--------------------------------------------------------------------------------------------------***/
+		/***------------------------------------- Set related table data -------------------------------------***/
+        /***--------------------------------------------------------------------------------------------------***/
+        /***--------------------------------------------------------------------------------------------------***/
+        /***--------------------------------------------------------------------------------------------------***/
 
-		/*** Set related table data ***/
-
-		gender.setGenderType("male");
-		entityManager.persist(gender);
-		entityManager.flush();
-
-		province.setProvinceName("สมุทรปราการ");
-		entityManager.persistAndFlush(province);
-		district.setDistrictName("พระประแดง");
-		entityManager.persistAndFlush(district);
-		subDistrict.setSubDistrictName("บางหัวเสือ");
-		entityManager.persistAndFlush(subDistrict);
-
-		address.setAddress("7/50 m.6");
-		address.setProvince(entityManager.persistFlushFind(province));
-		address.setDistrict(district);
-		address.setSubDistrict(subDistrict);
-		entityManager.persistAndFlush(address);
-
-		employee.setUsername("admin");
-		employee.setPassword("admin");
-		employee.setFirstName("Sivaroot");
-		employee.setLastName("Chuncharoen");
-		employee.setGender(gender);
-		employee.setAddress(address);
-		employee.setIdNumber("1111111111111");
-		employee.setBirthday(LocalDate.now());
-		employee.setPhone("0991230880");
-		employee.setEmail("sivaroot@gmail.com");
-		entityManager.persistAndFlush(employee);
-
-		carType.setCarType("4-door");
-		entityManager.persistAndFlush(carType);
-		gearType.setGearType("AUTO");
-		entityManager.persistAndFlush(gearType);
-		branchCar.setBranchName("HONDA");
-		entityManager.persistAndFlush(branchCar);
-		carColor.setColor("Titanium");
-		entityManager.persistAndFlush(carColor);
-		carData.setcC("500cc");
-		carData.setModel("CITY 2020");
-		carData.setBranchCar(entityManager.persistFlushFind(branchCar));
-		carData.setCarColor(entityManager.persistFlushFind(carColor));
-		carData.setCarType(entityManager.persistFlushFind(carType));
-		carData.setGearType(entityManager.persistFlushFind(gearType));
-		entityManager.persistAndFlush(carData);
+        try {
 
 
-		career.setCareerName("Student");
-		entityManager.persistAndFlush(career);
-		customer.setFirstName("Sivaroot");
-		customer.setLastName("Chuncharoen");
-		customer.setIdNumber("2222222222222");
-		customer.setEmail("sivaroot.sut@gmail.com");
-		customer.setBirthday(LocalDate.now());
-		customer.setPhone("0991230880");
-		customer.setAddress(entityManager.persistFlushFind(address));
-		customer.setGender(entityManager.persistFlushFind(gender));
-		customer.setCareer(entityManager.persistFlushFind(career));
-		entityManager.persistAndFlush(customer);
+            gender.setGenderType("male");
+            entityManager.persist(gender);
+            entityManager.flush();
 
 
-		classProperty.setClassName("Class 1");
-		entityManager.persistAndFlush(classProperty);
+            province.setProvinceName("สมุทรปราการ");
+            entityManager.persistAndFlush(province);
+            district.setDistrictName("พระประแดง");
+            entityManager.persistAndFlush(district);
+            subDistrict.setSubDistrictName("บางหัวเสือ");
+            entityManager.persistAndFlush(subDistrict);
 
-		propertyPolicy.setClassProperty(entityManager.persistFlushFind(classProperty));
-		propertyPolicy.setCostPolicy(700.00);
-		propertyPolicy.setDetailProtection("KKKKKKKKKKKKKKK");
-		propertyPolicy.setDetailPayment("DDDDDDDDDDDDDDDDD");
-		propertyPolicy.setPropertyName("TestPropertyName");
-		entityManager.persistFlushFind(propertyPolicy);
+            address.setAddress("7/50 m.6");
+            address.setProvince(entityManager.persistFlushFind(province));
+            address.setDistrict(district);
+            address.setSubDistrict(subDistrict);
+            entityManager.persistAndFlush(address);
 
-		policy.setLicensePlate("กค2018");
-		policy.setVin("KIJHYGFVBLOIJHGTF");
-		policy.setPeriodStartDate(LocalDate.now());
-		policy.setPeriodExpiryDate((LocalDate.now().plusYears(1)));
-		policy.setEmployee(employee);
-		policy.setCustomer(customer);
-		policy.setIssuedDate(LocalDateTime.now());
-		policy.setPropertyPolicy(propertyPolicy);
-		policy.setCarData(carData);
+            employee.setUsername("admin");
+            employee.setPassword("admin");
+            employee.setFirstName("Sivaroot");
+            employee.setLastName("Chuncharoen");
+            employee.setGender(gender);
+            employee.setAddress(address);
+            employee.setIdNumber("1111111111115");
+            employee.setBirthday(LocalDate.now());
+            employee.setPhone("0991230880");
+            employee.setEmail("sivaroot@gmail.com");
+            entityManager.persistAndFlush(employee);
 
-		entityManager.persistAndFlush(policy);
+            carType.setCarType("4-door");
+            entityManager.persistAndFlush(carType);
+            gearType.setGearType("AUTO");
+            entityManager.persistAndFlush(gearType);
+            branchCar.setBranchName("HONDA");
+            entityManager.persistAndFlush(branchCar);
+            carColor.setColor("Titanium");
+            entityManager.persistAndFlush(carColor);
+            carData.setcC("500cc");
+            carData.setModel("CITY 2020");
+            carData.setBranchCar(entityManager.persistFlushFind(branchCar));
+            carData.setCarColor(entityManager.persistFlushFind(carColor));
+            carData.setCarType(entityManager.persistFlushFind(carType));
+            carData.setGearType(entityManager.persistFlushFind(gearType));
+            entityManager.persistAndFlush(carData);
 
-		relationship.setRelationship("Father");
-		entityManager.persistAndFlush(relationship);
 
+            career.setCareerName("Student");
+            entityManager.persistAndFlush(career);
+            customer.setFirstName("Sivaroot");
+            customer.setLastName("Chuncharoen");
+            customer.setIdNumber("2222222222222");
+            customer.setEmail("sivaroot.sut@gmail.com");
+            customer.setBirthday(LocalDate.now());
+            customer.setPhone("0991230880");
+            customer.setAddress(entityManager.persistFlushFind(address));
+            customer.setGender(entityManager.persistFlushFind(gender));
+            customer.setCareer(entityManager.persistFlushFind(career));
+            entityManager.persistAndFlush(customer);
+
+
+            classProperty.setClassName("Class 1");
+            entityManager.persistAndFlush(classProperty);
+
+            propertyPolicy.setClassProperty(entityManager.persistFlushFind(classProperty));
+            propertyPolicy.setCostPolicy(700.00);
+            propertyPolicy.setDetailProtection("KKKKKKKKKKKKKKK");
+            propertyPolicy.setDetailPayment("DDDDDDDDDDDDDDDDD");
+            propertyPolicy.setPropertyName("TestPropertyName");
+            entityManager.persistFlushFind(propertyPolicy);
+
+            policy.setLicensePlate("กค2018");
+            policy.setVin("KIJHYGFVBLOIJHGTF");
+            policy.setPeriodStartDate(LocalDate.now());
+            policy.setPeriodExpiryDate((LocalDate.now().plusYears(1)));
+            policy.setEmployee(employee);
+            policy.setCustomer(customer);
+            policy.setIssuedDate(LocalDateTime.now());
+            policy.setPropertyPolicy(propertyPolicy);
+            policy.setCarData(carData);
+
+            entityManager.persistAndFlush(policy);
+
+            relationship.setRelationship("Father");
+            entityManager.persistAndFlush(relationship);
+        }catch (javax.validation.ConstraintViolationException ve){
+            System.out.println("/***--------------------------------------------------------------------------------------------------***/");
+            System.out.println("/***--------------------------------------------------------------------------------------------------***/");
+            System.out.println("@Before setup data fail -> ConstraintViolationException");
+            System.out.println(ve.getConstraintViolations());
+            fail("@Before setup data fail -> ConstraintViolationException");
+            System.out.println("/***--------------------------------------------------------------------------------------------------***/");
+            System.out.println("/***--------------------------------------------------------------------------------------------------***/");
+
+        }catch (javax.persistence.PersistenceException pe){
+            System.out.println("/***--------------------------------------------------------------------------------------------------***/");
+            System.out.println("/***--------------------------------------------------------------------------------------------------***/");
+            System.out.println("@Before setup data fail -> PersistenceException");
+            System.out.println(pe.getLocalizedMessage());
+            fail("@Before setup data fail -> PersistenceException");
+            System.out.println("/***--------------------------------------------------------------------------------------------------***/");
+            System.out.println("/***--------------------------------------------------------------------------------------------------***/");
+        }
 
 
 	}
