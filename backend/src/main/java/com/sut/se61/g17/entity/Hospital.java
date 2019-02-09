@@ -4,6 +4,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -14,6 +16,10 @@ public class Hospital {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hospital_seq")
     @Column(name = "hospitalID", unique = true, nullable = false)
     private @NotNull Long hospitalID;
+
+    @NotNull
+    @Size(min = 3 ,max = 50)
+    @Pattern(regexp = "^([ก-๙]|[0-9])+")
     private String hospitalName;
 
     @ManyToOne
