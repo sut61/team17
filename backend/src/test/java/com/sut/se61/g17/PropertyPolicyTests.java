@@ -187,12 +187,13 @@ public class PropertyPolicyTests {
     }
 
     @Test
-    public void testproprtyNameFistNotChar() {
+    public void testPropertyNameFistNotChar() {
         PropertyPolicy propertyPolicy = new PropertyPolicy();
-        propertyPolicy.setPropertyName("8abcd");
+        propertyPolicy.setPropertyName("8abcde");
         propertyPolicy.setDetailProtection("Abcdefghijklmnopqrstuvwxyz");
         propertyPolicy.setDetailPayment("Abcdefghijklmnopqrstuvwxyz");
         propertyPolicy.setCostPolicy(1500);
+        propertyPolicy.setClassProperty(classProperty);
 
         try {
             entityManager.persist(propertyPolicy);
@@ -202,7 +203,7 @@ public class PropertyPolicyTests {
         } catch (javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 2);
+            assertEquals(violations.size(), 1);
             System.out.println("********************************test Property name first not char********************");
             System.out.println(e);
         }
@@ -215,6 +216,7 @@ public class PropertyPolicyTests {
         propertyPolicy.setDetailProtection("Abcdefghijklmnopqrstuvwxyz");
         propertyPolicy.setDetailPayment("Abcd");
         propertyPolicy.setCostPolicy(1500);
+        propertyPolicy.setClassProperty(classProperty);
 
         try {
             entityManager.persist(propertyPolicy);
@@ -224,7 +226,7 @@ public class PropertyPolicyTests {
         } catch (javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 2);
+            assertEquals(violations.size(), 1);
             System.out.println("********************************test detailPayment min********************");
             System.out.println(e.getConstraintViolations());
         }
@@ -237,6 +239,7 @@ public class PropertyPolicyTests {
         propertyPolicy.setDetailProtection("Abcd");
         propertyPolicy.setDetailPayment("Abcdefghijklmnopqrstuvwxyz");
         propertyPolicy.setCostPolicy(1500);
+        propertyPolicy.setClassProperty(classProperty);
 
         try {
             entityManager.persist(propertyPolicy);
@@ -246,7 +249,7 @@ public class PropertyPolicyTests {
         } catch (javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 2);
+            assertEquals(violations.size(), 1);
             System.out.println("********************************test detailProtection min********************");
             System.out.println(e.getConstraintViolations());
         }
@@ -260,6 +263,7 @@ public class PropertyPolicyTests {
         propertyPolicy.setDetailProtection("Abcdefghijklmnopqrstuvwxyz");
         propertyPolicy.setDetailPayment("Abcdefghijklmnopqrstuvwxyz");
         propertyPolicy.setCostPolicy(50);
+        propertyPolicy.setClassProperty(classProperty);
 
         try {
             entityManager.persist(propertyPolicy);
@@ -269,11 +273,33 @@ public class PropertyPolicyTests {
         } catch (javax.validation.ConstraintViolationException e) {
             Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
             assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 2);
+            assertEquals(violations.size(), 1);
             System.out.println("********************************test cost************************");
             System.out.println(e);
         }
     }
 
+    @Test
+    public void testClassPropertyCannotBeNull() {
+        PropertyPolicy propertyPolicy = new PropertyPolicy();
+        propertyPolicy.setPropertyName("abcdef");
+        propertyPolicy.setDetailProtection("Abcdefghijklmnopqrstuvwxyz");
+        propertyPolicy.setDetailPayment("Abcdefghijklmnopqrstuvwxyz");
+        propertyPolicy.setCostPolicy(1500);
+        propertyPolicy.setClassProperty(null);
 
+
+        try {
+            entityManager.persist(propertyPolicy);
+            entityManager.flush();
+
+            fail("Should not pass to this line");
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.println("********************************test Property Cannot null***********************");
+            System.out.println(e);
+        }
+    }
 }
