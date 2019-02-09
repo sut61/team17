@@ -40,7 +40,7 @@ public class CustomerHealth {
     @JoinColumn(name = "diseaseID")
     private Disease disease;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "CUSTOMER_ID",unique = true)
     private Customer customer;
 
