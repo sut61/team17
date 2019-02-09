@@ -7,5 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Employee findByUsername(String s);
-
+    Boolean existsByUsername(String s);
+    Boolean existsByIdNumber(String s);
 }

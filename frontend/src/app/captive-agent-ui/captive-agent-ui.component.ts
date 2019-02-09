@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {CaptiveAgentService} from './captive-agent.service';
+import { MatDialog, MatSnackBar, MatStepper } from '@angular/material';
 @Component({
   selector: 'app-captive-agent-ui',
   templateUrl: './captive-agent-ui.component.html',
   styleUrls: ['./captive-agent-ui.component.css']
 })
 export class CaptiveAgentUiComponent implements OnInit {
+  isOpen = true;
   genders: Array<any>;
   genderIDSelected: number;
   provinces: Array<any>;
@@ -29,12 +31,16 @@ export class CaptiveAgentUiComponent implements OnInit {
     email: null,
     address: null
   }
-  constructor(private service: CaptiveAgentService) { }
+  constructor(private service: CaptiveAgentService,
+    private snackBar: MatSnackBar) {
+    this.isOpen = false;
+  }
 
   ngOnInit() {
     this.getGender();
     this.getAllProvince();    
     this.maxDate.setFullYear(this.now.getFullYear() - 18);
+    this.date = null;
   }
   getGender() {
     this.service.getAllgender().subscribe(res => {
@@ -72,30 +78,60 @@ export class CaptiveAgentUiComponent implements OnInit {
   }
 
   postCaptiveAgentData() {
-    // if(this.propertyIDSelected == null){
-    //   alert('Please select property before save!');
-    // }else if(this.customerObject.customerID == null){
-    //   alert('Please click search before save!');
-    // }else if(this.periodYear == null){
-    //   alert('Please select period before save!');    
-    // }else if(this.carDataSelected == null){
-    //   alert('Please select car data before save!');
-    // }else{
-      // try {
+    if(this.captiveAgentObject.username == null){
+      this.snackBar.open('Please type username before save!', null, {
+        duration: 5000,
+      });
+    }else if(this.captiveAgentObject.idNumber == null){
+      this.snackBar.open('Please type idNumber before save!', null, {
+        duration: 5000,
+      });
+    }else if(this.genderIDSelected == null){
+      this.snackBar.open('Please select gender before save!', null, {
+        duration: 5000,
+      });
+    }else if(this.captiveAgentObject.firstName == null){
+      this.snackBar.open('Please type firstName before save!', null, {
+        duration: 5000,
+      });
+    }else if(this.captiveAgentObject.lastName == null){
+      this.snackBar.open('Please type lastName before save!', null, {
+        duration: 5000,
+      });
+    }else if(this.captiveAgentObject.phone == null){
+      this.snackBar.open('Please type phone before save!', null, {
+        duration: 5000,
+      });
+    }else if(this.captiveAgentObject.email == null){
+      this.snackBar.open('Please type email before save!', null, {
+        duration: 5000,
+      });
+    }else if(this.captiveAgentObject.address == null || this.provinceSelected == null || this.districtSelected == null || this.subDistrictSelected == null){
+      this.snackBar.open('Please enter address before save!', null, {
+        duration: 5000,
+      });
+    }else{
+      try {
         console.log(this.dateToString());
         this.service.postCaptiveAgent(this.captiveAgentObject, this.genderIDSelected, this.subDistrictSelected, this.districtSelected,
           this.provinceSelected,this.birthday,this.passwordCheck).subscribe(res => {
           console.log(res);
-          alert('success');
+          this.snackBar.open('Success', null, {
+            duration: 5000,
+          });
         } , error1 => {
-          alert(error1.error.message);
+          this.snackBar.open(error1.error.message, null, {
+            duration: 5000,
+          });
         });
-      // } catch (e){
-      //   if (e instanceof TypeError) {
-      //     console.log(e.message);
-      //     alert('Please enter date before save!');
-      //   }
-      // }
-  //   }
+      } catch (e){
+        if (e instanceof TypeError) {
+          console.log(e.message);
+          this.snackBar.open('Please enter date before save!', null, {
+            duration: 5000,
+          });
+        }
+      }
+    }
   }
 }
