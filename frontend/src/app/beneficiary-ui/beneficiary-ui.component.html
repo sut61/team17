@@ -217,7 +217,7 @@
                       </mat-option>
                     </mat-select>
                     <mat-error
-                      *ngIf="beneficiaryFormGroup.invalid && beneficiaryFormGroup.hasError('required','personalId')">
+                      *ngIf="beneficiaryFormGroup.invalid && beneficiaryFormGroup.hasError('required','gender')">
                       Please Select your gender
                     </mat-error>
                   </mat-form-field>
@@ -236,8 +236,7 @@
                       <div *ngIf="beneficiaryFormGroup.hasError('required','personalId')">
                         Please enter your personal ID
                       </div>
-                      <div
-                        *ngIf="beneficiaryFormGroup.hasError('min','personalId') || beneficiaryFormGroup.hasError('max','personalId')">
+                      <div *ngIf="beneficiaryFormGroup.hasError('pattern','personalId')">
                         Personal ID incorrect
                       </div>
                     </mat-error>
