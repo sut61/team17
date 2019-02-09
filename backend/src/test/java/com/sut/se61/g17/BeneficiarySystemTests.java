@@ -102,7 +102,7 @@ public class BeneficiarySystemTests {
             employee.setGender(gender);
             employee.setAddress(address);
             employee.setIdNumber("1111111111115");
-            employee.setBirthday(LocalDate.now());
+            employee.setBirthday(LocalDate.now().minusYears(18));
             employee.setPhone("0991230880");
             employee.setEmail("sivaroot@gmail.com");
             entityManager.persistAndFlush(employee);
