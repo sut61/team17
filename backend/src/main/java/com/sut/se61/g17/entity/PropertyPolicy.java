@@ -20,7 +20,7 @@ public class PropertyPolicy {
     private @NotNull Long propertyID;
 
     @Column(unique = true )
-    @Pattern(regexp = "^[A-Za-z ก-๙]\\w+")
+    @Pattern(regexp = "^([ก-๙]|[A-Z | a-z]|[ ./*\\-])+")
     @Size(min = 5,max = 30)
     @NotNull
     private String propertyName;
