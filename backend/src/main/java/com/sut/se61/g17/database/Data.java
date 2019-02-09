@@ -59,6 +59,9 @@ public class Data implements CommandLineRunner {
     private HospitalTypeRepository hospitalTypeRepository;
 
     @Autowired
+    private DiseaseRepository diseaseRepository;
+
+    @Autowired
     private GearTypeRepository gearTypeRepository;
     @Autowired
     private CarServiceRepository carServiceRepository;
@@ -102,7 +105,11 @@ public class Data implements CommandLineRunner {
         getClaimData();
         relationshipData();
         PolicyTest();
+
         CaeService();
+
+        diseaseData();
+
     }
 
     private void addressData() {
@@ -244,6 +251,14 @@ public class Data implements CommandLineRunner {
     private void carServiceTypeData() {
         carServiceTypeRepository.saveAndFlush(new CarServiceType("อู่บริการ"));
         carServiceTypeRepository.saveAndFlush(new CarServiceType("ศูนย์บริการ"));
+    }
+
+    private  void diseaseData(){
+        diseaseRepository.saveAndFlush(new Disease("โรคภูมิแพ้"));
+        diseaseRepository.saveAndFlush(new Disease("โรคเบาหวาน"));
+        diseaseRepository.saveAndFlush(new Disease("โรคความดัน"));
+        diseaseRepository.saveAndFlush(new Disease("โรคหัวใจ"));
+        diseaseRepository.saveAndFlush(new Disease("โรคมะเร็ง"));
     }
 
     private void hospitalTypeData() {
