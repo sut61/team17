@@ -182,10 +182,10 @@ public class Data implements CommandLineRunner {
     }
 
     public void ClassPropertyData() {
-        classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถประเภท 1"));
-        classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถประเภท 2+"));
-        classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถประเภท 3+"));
-        classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถประเภท 3"));
+        classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถชั้น 1"));
+        classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถชั้น 2+"));
+        classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถชั้น 3+"));
+        classPropertyRepository.saveAndFlush(new ClassProperty("ประกันภัยรถชั้น 3"));
     }
     private void getClaimData(){
         claimTypeRepository.save(new ClaimType("เล็กน้อย"));
@@ -252,7 +252,7 @@ public class Data implements CommandLineRunner {
 
 
    public void propertyTypeData() {
-        propertyPolicyRepository.save(new PropertyPolicy("ThaiCareYou","คุ้มครองในวงเงิน 100,000 บาท" ,"จ่ายผ่านบัตรเครดิตได้ทุกประเภท" , 1990.00 , classPropertyRepository.findByClassName("ประกันภัยรถประเภท 1")));
+        propertyPolicyRepository.save(new PropertyPolicy("ThaiCareYou","คุ้มครองในวงเงิน 100,000 บาท" ,"จ่ายผ่านบัตรเครดิตได้ทุกประเภท" , 1990.00 , classPropertyRepository.findByClassName("ประกันภัยรถชั้น 1")));
     }
     public void carDataTest() {
         carDataRepository.save(new CarData("gram","500",branchCarRepository.findByBranchName("HONDA"),
@@ -296,7 +296,7 @@ public class Data implements CommandLineRunner {
                 genderRepository.findByGenderType("male"),
                 careerRepository.findByCareerName("Student")));
 
-       PropertyPolicy propertyPolicy = propertyPolicyRepository.save(new PropertyPolicy("MasterInsurance","คุ้มครองในวงเงิน 100,000 บาท" ,"จ่ายผ่านบัตรเครดิตได้ทุกประเภท" , 1990.00 , classPropertyRepository.findByClassName("ประกันภัยรถประเภท 1")));
+       PropertyPolicy propertyPolicy = propertyPolicyRepository.save(new PropertyPolicy("MasterInsurance","คุ้มครองในวงเงิน 100,000 บาท" ,"จ่ายผ่านบัตรเครดิตได้ทุกประเภท" , 1990.00 , classPropertyRepository.findByClassName("ประกันภัยรถชั้น 1")));
 
         Policy policy = new Policy();
         policy.setLicensePlate("กด2018");
