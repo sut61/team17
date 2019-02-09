@@ -97,7 +97,7 @@ export class BeneficiaryUIComponent implements OnInit {
     this.beneficiaryFormGroup = this._formBuilder.group({
       firstname: ['', [Validators.required,Validators.pattern('^[A-Z][a-z ]*$')]],
       lastname: ['', [Validators.required,Validators.pattern('^[A-Z][a-z ]*$')]],
-      personalId: ['', [Validators.required,Validators.min(13),Validators.max(13)]],
+      personalId: ['', [Validators.required,Validators.pattern('\\d{13}')]],
       phone: ['', [Validators.required,Validators.pattern('^[0]\\d*$'),Validators.min(9)]],
       relationship: ['', Validators.required],
       gender: ['', Validators.required],
