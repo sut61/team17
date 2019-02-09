@@ -17,6 +17,7 @@ public class CarService {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
     @Column(name = "carServiceID", unique = true, nullable = false)
     private @NotNull Long carServiceID;
+
     @ManyToOne
     @JoinColumn(name = "addressID")
     private Address address;
