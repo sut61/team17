@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -15,7 +17,15 @@ public class HospitalBranch {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hospital_seq")
     @Column(name = "hospitalBranchID", unique = true, nullable = false)
     private @NotNull Long hospitalBranchID;
+
+    @NotNull
+    @Size(min = 3 ,max = 50)
+    @Pattern(regexp = "^([ก-๙]|[0-9])+")
     private String branchName;
+
+    @NotNull
+    @Size(min = 10 ,max = 10)
+    @Pattern(regexp = "^([0-9])+")
     private String phone;
 
 
