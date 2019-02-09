@@ -37,7 +37,7 @@ public class PropertyPolicy {
 
     @Min(value = 100)
     @NotNull
-    private double costPolicy ;
+    private Double costPolicy ;
 
     @NotNull
     @ManyToOne
