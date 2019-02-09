@@ -176,7 +176,7 @@ public class Data implements CommandLineRunner {
                 provinceRepository.findByProvinceName("สมุทรปราการ"),
                 subDistrictRepository.findBySubDistrictName("บางหัวเสือ"))));
         employee.setIdNumber("1111111111111");
-        employee.setBirthday(LocalDate.now());
+        employee.setBirthday(LocalDate.now().minusYears(18));
         employee.setPhone("0991230880");
         employee.setEmail("sivaroot@gmail.com");
         employeeRepository.saveAndFlush(employee);
