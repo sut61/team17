@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ClaimService} from './claim.service';
-
+import {MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-claim-ui',
   templateUrl: './claim-ui.component.html',
@@ -35,7 +35,8 @@ export class ClaimUiComponent implements OnInit {
   claimTypes: Array<any>;
   claimTypeSelect: number;
 
-  constructor(private claimservice: ClaimService) {
+  constructor(private claimservice: ClaimService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -101,9 +102,15 @@ export class ClaimUiComponent implements OnInit {
     this.claimservice.postClaim(this.claimObject, this.customerObject.customerID, this.provinceSelected, this.claimTypeSelect, this.carServiceSelected).subscribe(res => {
       console.log(res);
       this.getAllClaim();
-      alert('Success');
+      this.snackBar.open('แจ้งเคลมรถสำเร็จ', null, {
+        duration: 5000,
+      });
+
     }, error1 => {
-      alert('Error');
+      console.log(error1);
+      this.snackBar.open('แจ้งเคลมรถไม่สำเร็จ', null, {
+        duration: 2000,
+      });
     });
   }
 
