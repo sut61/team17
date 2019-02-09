@@ -283,7 +283,7 @@
 
 
             <mat-vertical-stepper [linear]="true" #stepper>
-              <mat-step [stepControl]="beneficiaryFormGroup">
+              <mat-step [stepControl]="beneficiaryFormGroup.address">
                 <ng-template matStepLabel>Enter your address</ng-template>
                 <mat-form-field class="full-width">
                   <input matInput [(ngModel)]="beneficiaryObject.address" formControlName="address" required
@@ -294,7 +294,7 @@
                 </mat-form-field>
 
               </mat-step>
-              <mat-step [stepControl]="beneficiaryFormGroup">
+              <mat-step [stepControl]="beneficiaryFormGroup.province">
                 <ng-template matStepLabel>Select your province</ng-template>
                 <mat-form-field class="full-width">
                   <mat-select [(ngModel)]="beneficiaryObject.provinceID" placeholder="Select your province" required
@@ -308,7 +308,7 @@
                     </mat-error>
                 </mat-form-field>
               </mat-step>
-              <mat-step [stepControl]="beneficiaryFormGroup">
+              <mat-step [stepControl]="beneficiaryFormGroup.district">
                 <ng-template matStepLabel>Select your district</ng-template>
                 <mat-form-field class="full-width">
                   <mat-select [(ngModel)]="beneficiaryObject.districtID" placeholder="Select your district" required
@@ -322,7 +322,7 @@
                     </mat-error>
                 </mat-form-field>
               </mat-step>
-              <mat-step [stepControl]="beneficiaryFormGroup">
+              <mat-step [stepControl]="beneficiaryFormGroup.subdistrict">
                 <ng-template matStepLabel>Select your subdistrict</ng-template>
                 <mat-form-field class="full-width">
                   <mat-select [(ngModel)]="beneficiaryObject.subDistrictID" formControlName="subdistrict" required
