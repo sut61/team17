@@ -53,6 +53,12 @@ export class PaymentUIComponent implements OnInit {
       career: {
         careerName: ''
       }
+    },
+    propertyPolicy: {
+      propertyName: '',
+      classProperty: {
+        className: ''
+      }
     }
   };
 

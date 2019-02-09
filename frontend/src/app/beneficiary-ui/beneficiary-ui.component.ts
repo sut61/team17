@@ -62,6 +62,12 @@ export class BeneficiaryUIComponent implements OnInit {
       career: {
         careerName: ''
       }
+    },
+    propertyPolicy: {
+      propertyName: '',
+      classProperty: {
+        className: ''
+      }
     }
   };
   beneficiaries: Array<any>;
