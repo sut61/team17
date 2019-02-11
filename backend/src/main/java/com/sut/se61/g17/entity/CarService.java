@@ -18,8 +18,9 @@ public class CarService {
     @Column(name = "carServiceID", unique = true, nullable = false)
     private @NotNull Long carServiceID;
 
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "addressID")
+    @JoinColumn(name = "addressID",unique = true)
     private Address address;
 
     @NotNull
@@ -28,6 +29,7 @@ public class CarService {
     @Pattern(regexp = "^[a-z | A-Z]+")
     private String carServiceName;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "carserviceType", nullable = false)
     private CarServiceType carServiceType;
