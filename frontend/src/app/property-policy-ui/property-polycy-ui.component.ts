@@ -40,7 +40,7 @@ export class PropertyPolycyUiComponent implements OnInit {
       propertyName: ['', [Validators.required,Validators.pattern('^([ก-๙]|[A-Z | a-z]|[ ./*\\-])+'), Validators.min(5)]],
       detailProtection: ['', [Validators.required,Validators.min(10 )]],
       detailPayment: ['', [Validators.required,Validators.min(10)]],
-      costPolicy: ['', [Validators.required,Validators.min(100)]],
+      costPolicy: ['', [Validators.required,Validators.min(2)]],
 
       classProperty: ['', Validators.required]
     });
