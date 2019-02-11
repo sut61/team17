@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CarDataService } from './car-data.service';
-
+import { MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-car-data-ui',
   templateUrl: './car-data-ui.component.html',
@@ -19,8 +19,8 @@ export class CarDataUiComponent implements OnInit {
     model:null,
     cC:null
   }
- 
-  constructor(private service:CarDataService) { }
+
+  constructor(private service:CarDataService,private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getAllCarType();
@@ -50,8 +50,20 @@ export class CarDataUiComponent implements OnInit {
   }
 
   insertReview(){
-    this.service.postCarData(this.object,this.carTypeID,this.branchID,this.colorID,this.gearTypeID).subscribe(res=>{
-      console.log(res);
-    })
+    this.service.postCarData(this.object,this.carTypeID,this.branchID,this.colorID,this.gearTypeID)
+    .subscribe(
+      data => {
+          console.log('PUT Request is successful', data);
+         this.snackBar.open('เพิ่มรีวิวสำเร็จ', null, {
+        duration: 6000,
+      });
+
+
+    }, error1 => {
+      console.log(error1);
+      this.snackBar.open('เพิ่มรีวิวไม่สำเร็จ', null, {
+        duration: 3000,
+      });
+    });
   }
 }
