@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerInfoService} from './customer-info.service';
+import { MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-customer-info-ui',
@@ -34,7 +35,7 @@ export class CustomerInfoUIComponent implements OnInit {
 
 
 
-  constructor(private service: CustomerInfoService) {
+  constructor(private service: CustomerInfoService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -77,15 +78,17 @@ export class CustomerInfoUIComponent implements OnInit {
   postCustomerData() {
     console.log(this.dateToString());
     this.service.postCustomer(this.customerObject, this.careerIDselected, this.genderIDSelected, this.subDistrictSelected, this.districtSelected, this.provinceSelected, this.birthday).subscribe(res => {
-        console.log(res);
-        alert('บันทึกสำเร็จ');
-      }
-      , error1 => {
-        alert('กรุณากรองข้อมูลให้ถูกต้องและครบถ้วน');
+      this.snackBar.open('เพิ่มข้อมูลลูกค้าสำเร็จ', null, {
+        duration: 5000,
       });
+
+    }, error1 => {
+      console.log(error1);
+      this.snackBar.open('เพิ่มข้อมูลลูกค้าไม่สำเร็จ กรุณากรอกข้อมมูลให้ถูกต้องและครบถ้วน', null, {
+        duration: 2000,
+      });
+    });
   }
-
-
 
   dateToString() {
     const yyyy = this.bd.getFullYear();
