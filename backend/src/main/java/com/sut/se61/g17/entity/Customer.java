@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -14,47 +15,57 @@ import java.time.LocalDate;
 @Entity
 public class Customer {
     @Id
-    @SequenceGenerator(name = "customer_seq",sequenceName = "customer_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "customer_seq")
+    @SequenceGenerator(name = "customer_seq", sequenceName = "customer_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq")
     @Column(name = "CUSTOMER_ID")
     private @NotNull Long customerID;
 
-     @Size(min = 3, max = 30)
+    @NotNull
+    @Pattern(regexp = "^[A-Z][a-z]*")
+    @Size(min = 1, max = 30)
     private String firstName;
 
-      @Size(min = 3, max = 30)
+    @NotNull
+    @Pattern(regexp = "^[A-Z][a-z]*")
+    @Size(min = 1, max = 30)
     private String lastName;
 
-    @Size(min = 13,max = 13)
-      private String idNumber;
+    @NotNull
+    @Size(min = 13, max = 13)
+    @Pattern(regexp = "\\d*")
+    @Column(unique = true)
+    private String idNumber;
 
-     private  String email ;
+    @NotNull
+    private String email;
 
-
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
 
     @NotNull
-    @Size(min = 5, max = 20)
+    @Size(min = 10, max = 20)
     private String phone;
-
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "addressID", nullable = false)
     private Address address;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "genderID", nullable = false)
     private Gender gender;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "careerID", nullable = false)
     private Career career;
 
 
-    public Customer(@Size(min = 3, max = 30) String firstName,
-                    @Size(min = 3, max = 30) String lastName,
+    public Customer(@Size(min = 1, max = 30) String firstName,
+                    @Size(min = 1, max = 30) String lastName,
                     @Size(min = 13, max = 13) String idNumber, String email, LocalDate birthday,
-                    @NotNull @Size(min = 5, max = 20) String phone,
+                    @NotNull @Size(min = 10, max = 20) String phone,
                     Address address, Gender gender, Career career) {
         this.firstName = firstName;
         this.lastName = lastName;
