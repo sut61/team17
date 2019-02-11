@@ -56,7 +56,7 @@ public class ReviewSystemTests {
         entityManager.persistAndFlush(branchCar);
         carColor.setColor("Titanium");
         entityManager.persistAndFlush(carColor);
-        carData.setcC("500cc");
+        carData.setcC("500");
         carData.setModel("CITY 2020");
         carData.setBranchCar(entityManager.persistFlushFind(branchCar));
         carData.setCarColor(entityManager.persistFlushFind(carColor));
@@ -260,6 +260,28 @@ public class ReviewSystemTests {
             assertEquals(violations.isEmpty(), false);
             assertEquals(violations.size(), 1);
             System.out.println("*********************testCardataCannotBeNull**********************");
+            System.out.println(e.getConstraintViolations());
+        }
+    }
+
+
+    @Test
+    public void testReviewPass() {
+        Review review = new Review();
+        review.setComment("ทดสอบ");
+        review.setCons(1);
+        review.setClassProperty(classProperty);
+        review.setStatus(status);
+        review.setCarData(carData);
+
+        try {
+            entityManager.persist(review);
+            entityManager.flush();
+        } catch(javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.println("*********************testReviewPass**********************");
             System.out.println(e.getConstraintViolations());
         }
     }
