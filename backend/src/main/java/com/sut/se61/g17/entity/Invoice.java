@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -23,13 +25,15 @@ public class Invoice {
     private LocalDate invoiceDate;
 
     @NotNull
+    @Min(value = 1)
+    @Max(value = 9999)
     private Double invoiceAmount;
 
-
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "INVOICE_STATUS_ID")
     private InvoiceStatus invoiceStatus;
-
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "POLICY_ID")
     private Policy policy;

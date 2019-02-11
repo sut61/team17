@@ -1,4 +1,4 @@
-package com.sut.se61.g17;
+package com.sut.se61.g17.sprint2;
 
 import com.sut.se61.g17.entity.*;
 import org.junit.Before;

@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -17,14 +19,17 @@ public class Payment {
     private Long paymentID;
 
     @NotNull
+    @Min(value = 100)
+    @Max(value = 9999)
     private Double amount;
+    @NotNull
     @Temporal(TemporalType.DATE)
     private Date payDate;
-
+    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "INVOICE_ID")
     private Invoice invoice;
-
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "EMPLOYEE_ID")
     private Employee employee;

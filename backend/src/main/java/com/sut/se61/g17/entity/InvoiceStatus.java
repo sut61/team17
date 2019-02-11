@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @Entity
@@ -16,7 +19,9 @@ public class InvoiceStatus {
     @Column(name = "ID")
     private Long id;
 
-    @NonNull
+    @NotNull
+    @Pattern(regexp = "^[A-Z].*")
+    @Size(min = 4,max = 8)
     private String status;
 
     public InvoiceStatus(String status) {
