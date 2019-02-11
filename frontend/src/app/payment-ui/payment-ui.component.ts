@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TokenStorage} from '../service/token-storage';
 import {PaymentService} from './payment.service';
-import {MatDialog} from '@angular/material';
+import {MatDialog,MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-payment-ui',
@@ -68,7 +68,7 @@ export class PaymentUIComponent implements OnInit {
 
   constructor(private token: TokenStorage,
               private paymentService: PaymentService,
-              private modal: MatDialog) {
+              private snackBar: MatSnackBar) {
 
   }
 
@@ -86,6 +86,9 @@ export class PaymentUIComponent implements OnInit {
         this.getInvoices(this.policyObject.policyID);
 
       }, error => {
+        this.snackBar.open('ไม่พบกรมธรรม์', null, {
+          duration: 5000,
+        });
         this.isOpen = false;
       });
       this.isOpen = true;
@@ -114,8 +117,13 @@ export class PaymentUIComponent implements OnInit {
       console.log(res, 'Success');
       this.getInvoices(this.policyObject.policyID);
       this.getInvoicesOverdueByPolicy(this.policyObject.policyID);
+      this.snackBar.open('ชำระค่าเงินเรียบร้อย', null, {
+        duration: 5000,
+      });
     }, error1 => {
-      alert(error1.error.message);
+      this.snackBar.open('ไม่สามารถชำระเงินได้', null, {
+        duration: 5000,
+      });
       console.log(error1.error.message);
     });
   }
