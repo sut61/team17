@@ -250,7 +250,6 @@ public class Data implements CommandLineRunner {
 
     private void carServiceTypeData() {
         carServiceTypeRepository.saveAndFlush(new CarServiceType("อู่บริการ"));
-        carServiceTypeRepository.saveAndFlush(new CarServiceType("ศูนย์บริการ"));
     }
 
     private  void diseaseData(){
@@ -290,7 +289,7 @@ public class Data implements CommandLineRunner {
         carServiceRepository.save(new CarService("CPE",addressRepository.saveAndFlush(new Address("55/50 ม.6",
                 districtRepository.findByDistrictName("พระประแดง"),
                 provinceRepository.findByProvinceName("สมุทรปราการ"),
-                subDistrictRepository.findBySubDistrictName("บางหัวเสือ"))),carServiceTypeRepository.save(new CarServiceType("Test"))));
+                subDistrictRepository.findBySubDistrictName("บางหัวเสือ"))),carServiceTypeRepository.save(new CarServiceType("ศูนย์บริการ"))));
     }
     public void PolicyTest(){
         Employee employee = employeeRepository.findByUsername("admin");

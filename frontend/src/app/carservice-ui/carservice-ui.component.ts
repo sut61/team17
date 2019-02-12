@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CarserviceService} from './carservice.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-carservice-ui',
@@ -30,7 +31,8 @@ export class CarserviceUiComponent implements OnInit {
 
   displayedColumns: string[] = ['carServiceName', 'address', 'carServiceType'];
 
-  constructor(private carservice: CarserviceService) {
+  constructor(private carservice: CarserviceService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -71,9 +73,15 @@ export class CarserviceUiComponent implements OnInit {
     this.carservice.postCarService(this.carServiceObject, this.subDistrictSelected, this.districtSelected, this.provinceSelected, this.carServiceTypeSelected).subscribe(res => {
       console.log(res);
       this.getAllCarService();
-      alert('Success');
+      this.snackBar.open('เพิ่มศูนย์ซ่อมรถสำเร็จ', null, {
+        duration: 5000,
+      });
+
     }, error1 => {
-      alert('Error');
+      console.log(error1);
+      this.snackBar.open('เพิ่มศูนย์ซ่อมรถไม่สำเร็จสำเร็จ', null, {
+        duration: 2000,
+      });
     });
   }
 
