@@ -100,7 +100,7 @@ public class PaymentTests {
             entityManager.persistAndFlush(branchCar);
             carColor.setColor("Titanium");
             entityManager.persistAndFlush(carColor);
-            carData.setcC("500cc");
+            carData.setcC("500");
             carData.setModel("CITY 2020");
             carData.setBranchCar(entityManager.persistFlushFind(branchCar));
             carData.setCarColor(entityManager.persistFlushFind(carColor));
