@@ -10,12 +10,16 @@ import javax.validation.constraints.Size;
 
 @Data
 @Entity
+@Table(
+        uniqueConstraints=
+        @UniqueConstraint(columnNames={"branchName", "addressID","hospitalID"})
+)
 @NoArgsConstructor
 public class HospitalBranch {
     @Id
     @SequenceGenerator(name = "hospital_seq", sequenceName = "hospital_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hospital_seq")
-    @Column(name = "hospitalBranchID", unique = true, nullable = false)
+    @Column(name = "hospitalBranchID")
     private @NotNull Long hospitalBranchID;
 
     @NotNull
@@ -29,8 +33,8 @@ public class HospitalBranch {
     private String phone;
 
 
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @OneToOne
     @JoinColumn(name = "addressID")
     private Address address;
 

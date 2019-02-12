@@ -22,6 +22,7 @@ public class Hospital {
     @Pattern(regexp = "^([ก-๙]|[0-9])+")
     private String hospitalName;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "typeID", nullable = false)
     private HospitalType hospitalType;
