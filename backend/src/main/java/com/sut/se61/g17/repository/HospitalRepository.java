@@ -6,4 +6,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface HospitalRepository extends JpaRepository<Hospital, Long> {
+    Hospital findByHospitalName(String hospitalName);
 }

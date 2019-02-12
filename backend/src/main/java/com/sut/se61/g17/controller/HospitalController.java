@@ -3,6 +3,7 @@ package com.sut.se61.g17.controller;
 import com.sut.se61.g17.entity.*;
 import com.sut.se61.g17.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -28,6 +29,7 @@ public class HospitalController {
     private AddressRepository addressRepository;
 
     @PostMapping("/hospital/{typeID}/{provinceID}/{districtID}/{subDistrictID}")
+    @Transactional
     public HospitalBranch postHospital(@PathVariable Long typeID,
                                        @PathVariable Long provinceID,
                                        @PathVariable Long districtID,
@@ -40,20 +42,32 @@ public class HospitalController {
                                        District district,
                                        SubDistrict subDistrict) {
 
+
         hospitalType = hospitalTypeRepository.findById(typeID).get();
         province = provinceRepository.findById(provinceID).get();
         district = districtRepository.findById(districtID).get();
         subDistrict = subDistrictRepository.findById(subDistrictID).get();
-        address.setAddress(hospitalBranch.getAddress().getAddress());
-        address.setDistrict(district);
-        address.setProvince(province);
-        address.setSubDistrict(subDistrict);
-        addressRepository.save(address);
 
+        if(addressRepository.findByAddressAndProvinceAndDistrictAndSubDistrict(hospitalBranch.getAddress().getAddress(),province,district,subDistrict) != null){
+            address = addressRepository.findByAddressAndProvinceAndDistrictAndSubDistrict(hospitalBranch.getAddress().getAddress(),province,district,subDistrict);
+            System.out.println("Ready " + address);
+        }else {
+            address.setAddress(hospitalBranch.getAddress().getAddress());
+            address.setDistrict(district);
+            address.setProvince(province);
+            address.setSubDistrict(subDistrict);
+            addressRepository.save(address);
+            System.out.println("New " + address);
+        }
 
-        hospital.setHospitalName(hospitalBranch.getHospital().getHospitalName());
-        hospital.setHospitalType(hospitalType);
-        hospitalRepository.save(hospital);
+        if(hospitalRepository.findByHospitalName(hospitalBranch.getHospital().getHospitalName()) != null){
+            hospital = hospitalRepository.findByHospitalName(hospitalBranch.getHospital().getHospitalName());
+        }else {
+            hospital.setHospitalName(hospitalBranch.getHospital().getHospitalName());
+            hospital.setHospitalType(hospitalType);
+            hospitalRepository.save(hospital);
+        }
+
 
         hospitalBranch.setAddress(address);
         hospitalBranch.setHospital(hospital);
