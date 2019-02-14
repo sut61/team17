@@ -1,12 +1,15 @@
 package com.sut.se61.g17.entity;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Data
+@Getter
+@Setter
 // is a Lombok annotation to create all the getters, setters, equals, hash, and toString methods, based on the fields
 @Entity
 @NoArgsConstructor

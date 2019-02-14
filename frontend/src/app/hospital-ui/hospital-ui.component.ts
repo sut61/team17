@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HospitalService} from './hospital.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-hospital-ui',
@@ -33,7 +34,7 @@ export class HospitalUIComponent implements OnInit {
   districts: Array<any>;
   districtSelected: number;
 
-  constructor(private service: HospitalService) {
+  constructor(private service: HospitalService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -46,9 +47,15 @@ export class HospitalUIComponent implements OnInit {
     this.service.postHospital(this.object, this.typeSelected, this.provinceSelected, this.districtSelected, this.subDistrictSelected).subscribe(res => {
       console.log(res);
       this.getTable();
-      alert('บันทึกข้อมูลสำเร็จ');
+      this.snackBar.open('บันทึกข้อมูลสำเร็จ', null, {
+        duration: 5000,
+      });
+
     }, error1 => {
-      alert('บันทึกข้อมูลไม่สำเร็จ');
+      console.log(error1);
+      this.snackBar.open('บันทึกข้อมูลไม่สำเร็จ', null, {
+        duration: 2000,
+      });
     });
   }
 
