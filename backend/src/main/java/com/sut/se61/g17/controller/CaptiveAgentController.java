@@ -3,12 +3,17 @@ package com.sut.se61.g17.controller;
 import com.sut.se61.g17.entity.*;
 import com.sut.se61.g17.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.stream.Collectors;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -29,6 +34,11 @@ public class CaptiveAgentController {
     @Autowired
     private AddressRepository addressRepository;
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public CaptiveAgentController(BCryptPasswordEncoder bCryptPasswordEncoder){
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @GetMapping(path = "/gender")
     public Collection<Gender> getGender(){return genderRepository.findAll().stream().collect(Collectors.toList());}
@@ -56,79 +66,78 @@ public class CaptiveAgentController {
 
     @PostMapping(path = "/{genderID}/{subdistrictID}/{districtID}/{provinceID}/{birthday}/{passwordCheck}")
     public Employee postEmployee(@RequestBody Employee employee, Address address,
-                                 @PathVariable Long genderID,
-                                 @PathVariable Long subdistrictID,
-                                 @PathVariable Long districtID,
-                                 @PathVariable Long provinceID,
-                                 @PathVariable String birthday,
+                                 @PathVariable String genderID,             //Received with string to prevent 'undefined' not convert to Long
+                                 @PathVariable String subdistrictID,        //Received with string to prevent 'undefined' not convert to Long
+                                 @PathVariable String districtID,           //Received with string to prevent 'undefined' not convert to Long
+                                 @PathVariable String provinceID,           //Received with string to prevent 'undefined' not convert to Long
+                                 @PathVariable String birthday,             //Received with string to format LocalDate
                                  @PathVariable String passwordCheck
     ) throws Exception {
-        if(employee.getUsername().length()<2 || employee.getUsername().length()>20)
-            throw new Exception("Username length incorrect!(2-20)");
-        if(!employee.getUsername().matches("\\D\\w*"))
-            throw new Exception("Username incorrect!");
-        if(employeeRepository.existsByUsername(employee.getUsername()))
-            throw new Exception("Username already exists");
-
-        if(employee.getIdNumber().length()!=13)
-            throw new Exception("IdNumber length incorrect!(13)");
-        if(!employee.getIdNumber().matches("\\d+"))
-            throw new Exception("IdNumber incorrect!");
-        if(employeeRepository.existsByIdNumber(employee.getIdNumber()))
-            throw new Exception("IdNumber already exists");
-
+        //=====This part not use annotation=====
+        //prevent Password and Confirm not same value
         if(!passwordCheck.equals(employee.getPassword()))
             throw new Exception("Password and Confirm incorrect!");
 
-        if(employee.getFirstName().length()<2 || employee.getFirstName().length()>30)
-            throw new Exception("FirstName length incorrect!(2-30)");
-        if(!employee.getFirstName().matches("\\D+"))
-            throw new Exception("FirstName incorrect!");
+        //prevent null value
+        if(genderID.equals("undefined"))
+            throw new Exception("Please select gender before save!");
 
-        if(employee.getLastName().length()<2 || employee.getLastName().length()>30)
-            throw new Exception("LastName length incorrect!(2-30)");
-        if(!employee.getLastName().matches("\\D+"))
-            throw new Exception("LastName incorrect!");
+        //prevent null value
+        System.out.println(employee.getAddress().getAddress());
+        if(subdistrictID.equals("undefined") || districtID.equals("undefined") || provinceID.equals("undefined") || employee.getAddress().getAddress()==null || employee.getAddress().getAddress().isEmpty())
+            throw new Exception("Please enter address before save!");
 
-        if(!employee.getEmail().matches("\\w+[@]\\w+[.]com"))
-            throw new Exception("Email incorrect!");
+        //convert string to long for set value
+        Long genderIDLong = Long.valueOf(genderID);
+        Long subdistrictIDLong = Long.valueOf(subdistrictID);
+        Long districtIDLong = Long.valueOf(districtID);
+        Long provinceIDLong = Long.valueOf(provinceID);
 
+        //pattern string to localdate
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        //set maxdate to prevent age less than 18 years old
         LocalDate maxDate = LocalDate.now().minusYears(18);
+        //convert string to localdate
         LocalDate dateOfBirth = LocalDate.parse(birthday, formatter);
+        //prevent date after 18 years
         if(dateOfBirth.isAfter(maxDate))
             throw new Exception("Please selected birthday before 18 years of current!");
-
-        if(employee.getPhone().length()<10 || employee.getPhone().length()>10)
-            throw new Exception("Phone length incorrect!(10)");
-        if(!employee.getPhone().matches("[0]\\d*"))
-            throw new Exception("Phone incorrect!");
+        //=====This part not use annotation=====
 
         try {
-            Gender gender = genderRepository.findById(genderID).get();
-            SubDistrict subDistrict = subDistrictRepository.findById(subdistrictID).get();
-            District district = districtRepository.findById(districtID).get();
-            Province province = provinceRepository.findById(provinceID).get();
-
+            Gender gender = genderRepository.findById(genderIDLong).get();
+            SubDistrict subDistrict = subDistrictRepository.findById(subdistrictIDLong).get();
+            District district = districtRepository.findById(districtIDLong).get();
+            Province province = provinceRepository.findById(provinceIDLong).get();
 
             address.setAddress(employee.getAddress().getAddress());
             address.setProvince(province);
             address.setDistrict(district);
             address.setSubDistrict(subDistrict);
-
             addressRepository.save(address);
+
             employee.setAddress(address);
             employee.setGender(gender);
             employee.setBirthday(dateOfBirth);
+            employee.setPassword(bCryptPasswordEncoder.encode(employee.getPassword())); //PasswordEncoder
+
+            return  employeeRepository.saveAndFlush(employee);
+        }catch (ConstraintViolationException e) {
+            String message = e.getConstraintViolations().iterator().next().getMessage();
+            throw new Exception(message);
+        }catch (DataIntegrityViolationException e){
+            String message = e.getMostSpecificCause().getMessage();
+            System.out.println("=====================================================\n\n");
+            System.out.println(message);
+            System.out.println("\n\n=====================================================");
+            if(message.matches("^Unique.*EMPLOYEE\\(USERNAME\\).*\\n.*"))
+                throw new Exception("Username already exists");
+            if(message.matches("^Unique.*EMPLOYEE\\(ID_NUMBER\\).*\\n.*"))
+                throw new Exception("IdNumber already exists");
+            throw new Exception(message);
         }catch (Exception e){
             System.out.println(e);
             throw new Exception("Error");
         }
-
-
-
-        return  employeeRepository.save(employee);
-
-
     }
 }

@@ -77,40 +77,7 @@ export class CaptiveAgentUiComponent implements OnInit {
     return this.birthday = yyyy + '-' + mm + '-' + dd;
   }
 
-  postCaptiveAgentData() {
-    if(this.captiveAgentObject.username == null){
-      this.snackBar.open('Please type username before save!', null, {
-        duration: 5000,
-      });
-    }else if(this.captiveAgentObject.idNumber == null){
-      this.snackBar.open('Please type idNumber before save!', null, {
-        duration: 5000,
-      });
-    }else if(this.genderIDSelected == null){
-      this.snackBar.open('Please select gender before save!', null, {
-        duration: 5000,
-      });
-    }else if(this.captiveAgentObject.firstName == null){
-      this.snackBar.open('Please type firstName before save!', null, {
-        duration: 5000,
-      });
-    }else if(this.captiveAgentObject.lastName == null){
-      this.snackBar.open('Please type lastName before save!', null, {
-        duration: 5000,
-      });
-    }else if(this.captiveAgentObject.phone == null){
-      this.snackBar.open('Please type phone before save!', null, {
-        duration: 5000,
-      });
-    }else if(this.captiveAgentObject.email == null){
-      this.snackBar.open('Please type email before save!', null, {
-        duration: 5000,
-      });
-    }else if(this.captiveAgentObject.address == null || this.provinceSelected == null || this.districtSelected == null || this.subDistrictSelected == null){
-      this.snackBar.open('Please enter address before save!', null, {
-        duration: 5000,
-      });
-    }else{
+  postCaptiveAgentData() {    
       try {
         console.log(this.dateToString());
         this.service.postCaptiveAgent(this.captiveAgentObject, this.genderIDSelected, this.subDistrictSelected, this.districtSelected,
@@ -132,6 +99,6 @@ export class CaptiveAgentUiComponent implements OnInit {
           });
         }
       }
-    }
+    
   }
 }
