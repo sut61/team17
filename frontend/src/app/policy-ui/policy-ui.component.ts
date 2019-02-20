@@ -165,17 +165,25 @@ export class PolicyUiComponent implements OnInit {
         this.service.postPolicy(this.policyObject, this.propertyIDSelected, this.customerObject.customerID, this.carDataSelected,
           sessionStorage.getItem('username'), this.periodStartDate, this.periodYear).subscribe(res => {
           console.log(res);
-          alert('success');
+          this.snackBar.open('success', null, {
+            duration: 5000,
+          });
         } , error1 => {
-          alert(error1.error.message);
+          this.snackBar.open(error1.error.message, null, {
+            duration: 5000,
+          });
         });
       } catch (e){
         if (e instanceof TypeError) {
           console.log(e.message);
           if (e.message.match(".*customerID.*null"))
-            alert('Id number not correct!');
+            this.snackBar.open('Id number not correct!', null, {
+              duration: 5000,
+            });
           if (e.message.match(".*getFullYear.*null"))  
-            alert('Please enter date before save!');
+            this.snackBar.open('Please enter date before save!', null, {
+              duration: 5000,
+            });
         }
       }
   }
