@@ -76,12 +76,12 @@ public class CaptiveAgentSystemTest {
 
 /*
     ===== Name of method =====
+    test Correct use keyword "Correct"
     test @NotNull use keyword "BeNull"
     test @Size min use keyword "TooShort" , max use keyword "TooLong"
     test @Pattern use keyword "PatternInvalid"
     test @Column(unique = true) use keyword "NotUnique"
     test @Email use keyword "EmailIncorrect"
-    test @Past use keyword "NotPast"
  */
 
     //  *********************************************Correct Test*********************************************
@@ -112,7 +112,7 @@ public class CaptiveAgentSystemTest {
             System.out.println("\n\n================================ testCorrect ================================\n\n");
         }
     }
-//  *********************************************Correct Test*********************************************
+    //  *********************************************Correct Test*********************************************
 
     //  *********************************************Username Test*********************************************
     public Employee setAllExceptUsername() {
@@ -236,7 +236,7 @@ public class CaptiveAgentSystemTest {
             System.out.println("\n\n================================ testUsernameNotUnique ================================\n\n");
         }
     }
-//  *********************************************Username Test*********************************************
+    //  *********************************************Username Test*********************************************
 
     //  *********************************************Password Test*********************************************
     @Test
@@ -264,7 +264,7 @@ public class CaptiveAgentSystemTest {
             System.out.println("\n\n================================ testPasswordBeNull ================================\n\n");
         }
     }
-//  *********************************************Password Test*********************************************
+    //  *********************************************Password Test*********************************************
 
     //  *********************************************FirstName Test*********************************************
     public Employee setAllExceptFirstName() {
@@ -352,7 +352,7 @@ public class CaptiveAgentSystemTest {
             System.out.println("\n\n================================ testFirstNamePatternInvalid ================================\n\n");
         }
     }
-//  *********************************************FirstName Test*********************************************
+    //  *********************************************FirstName Test*********************************************
 
     //  *********************************************LastName Test*********************************************
     public Employee setAllExceptLastname() {
@@ -440,7 +440,7 @@ public class CaptiveAgentSystemTest {
             System.out.println("\n\n================================ testLastNamePatternInvalid ================================\n\n");
         }
     }
-//  *********************************************LastName Test*********************************************
+    //  *********************************************LastName Test*********************************************
 
     //  *********************************************IdNumber Test*********************************************
     public Employee setAllExceptIdNumber() {
@@ -560,7 +560,7 @@ public class CaptiveAgentSystemTest {
             System.out.println("\n\n================================ testIdNumberNotUnique ================================\n\n");
         }
     }
-//  *********************************************IdNumber Test*********************************************
+    //  *********************************************IdNumber Test*********************************************
 
     //  *********************************************Email Test*********************************************
     public Employee setAllExceptEmail() {
@@ -610,57 +610,8 @@ public class CaptiveAgentSystemTest {
             System.out.println("\n\n================================ testEmailIncorrect ================================\n\n");
         }
     }
-//  *********************************************Email Test*********************************************
+    //  *********************************************Email Test*********************************************
 
-    //  *********************************************Birthday Test*********************************************
-    public Employee setAllExceptBirthday() {
-        Employee employee = new Employee();
-        employee.setUsername("test");
-        employee.setPassword("test");
-        employee.setFirstName("abcd");
-        employee.setLastName("efgh");
-        employee.setIdNumber("1234567890123");
-        employee.setEmail("test@gmail.com");
-        employee.setPhone("0123456789");
-        employee.setAddress(address);
-        employee.setGender(gender);
-        return employee;
-    }
-
-    @Test
-    public void testBirthdayBeNull() {
-        Employee employee = setAllExceptBirthday();
-        employee.setBirthday(null);
-        try {
-            entityManager.persistAndFlush(employee);
-            fail("Should not pass to this line");
-        } catch (javax.validation.ConstraintViolationException e) {
-            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-            assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 1);
-            System.out.println("\n\n================================ testBirthdayBeNull ================================\n\n");
-            System.out.println(e.getConstraintViolations());
-            System.out.println("\n\n================================ testBirthdayBeNull ================================\n\n");
-        }
-    }
-
-    /*@Test
-    public void testBirthdayNotPast() {
-        Employee employee = setAllExceptBirthday();
-        employee.setBirthday(LocalDate.now());
-        try {
-            entityManager.persistAndFlush(employee);
-            fail("Should not pass to this line");
-        } catch (javax.validation.ConstraintViolationException e) {
-            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-            assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 1);
-            System.out.println("\n\n================================ testBirthdayNotPast ================================\n\n");
-            System.out.println(e.getConstraintViolations());
-            System.out.println("\n\n================================ testBirthdayNotPast ================================\n\n");
-        }
-    }*/
-//  *********************************************Birthday Test*********************************************
 
     //  *********************************************Phone Test*********************************************
     public Employee setAllExceptPhone() {
@@ -744,62 +695,6 @@ public class CaptiveAgentSystemTest {
             System.out.println("\n\n================================ testPhonePatternInvalid ================================\n\n");
         }
     }
-//  *********************************************Phone Test*********************************************
-
-    //  *********************************************Address Test*********************************************
-   /* @Test
-    public void testAddressBeNull() {
-        Employee employee = new Employee();
-        employee.setUsername("test");
-        employee.setPassword("test");
-        employee.setFirstName("abcd");
-        employee.setLastName("efgh");
-        employee.setIdNumber("1234567890123");
-        employee.setEmail("test@gmail.com");
-        employee.setBirthday(LocalDate.now().minusYears(18));
-        employee.setPhone("0123456789");
-        employee.setAddress(null);
-        employee.setGender(gender);
-        try {
-            entityManager.persistAndFlush(employee);
-            fail("Should not pass to this line");
-        } catch (javax.validation.ConstraintViolationException e) {
-            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-            assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 1);
-            System.out.println("\n\n================================ testAddressBeNull ================================\n\n");
-            System.out.println(e.getConstraintViolations());
-            System.out.println("\n\n================================ testAddressBeNull ================================\n\n");
-        }
-    }*/
-//  *********************************************Address Test*********************************************
-
-    //  *********************************************Gender Test*********************************************
-   /* @Test
-    public void testGenderBeNull() {
-        Employee employee = new Employee();
-        employee.setUsername("test");
-        employee.setPassword("test");
-        employee.setFirstName("abcd");
-        employee.setLastName("efgh");
-        employee.setIdNumber("1234567890123");
-        employee.setEmail("test@gmail.com");
-        employee.setBirthday(LocalDate.now().minusYears(18));
-        employee.setPhone("0123456789");
-        employee.setAddress(address);
-        employee.setGender(null);
-        try {
-            entityManager.persistAndFlush(employee);
-            fail("Should not pass to this line");
-        } catch (javax.validation.ConstraintViolationException e) {
-            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
-            assertEquals(violations.isEmpty(), false);
-            assertEquals(violations.size(), 1);
-            System.out.println("\n\n================================ testGenderBeNull ================================\n\n");
-            System.out.println(e.getConstraintViolations());
-            System.out.println("\n\n================================ testGenderBeNull ================================\n\n");
-        }
-    }*/
-//  *********************************************Gender Test*********************************************
+    //  *********************************************Phone Test*********************************************
 
 }
