@@ -79,12 +79,14 @@ public class CaptiveAgentController {
             throw new Exception("Password and Confirm incorrect!");
 
         //prevent null value
-        if(genderID.equals("undefined"))
+        if(genderID.equals("undefined") || genderID.equals("null"))
             throw new Exception("Please select gender before save!");
 
         //prevent null value
-        System.out.println(employee.getAddress().getAddress());
-        if(subdistrictID.equals("undefined") || districtID.equals("undefined") || provinceID.equals("undefined") || employee.getAddress().getAddress()==null || employee.getAddress().getAddress().isEmpty())
+        if(subdistrictID.equals("undefined") || subdistrictID.equals("null") ||
+                districtID.equals("undefined") || districtID.equals("null") ||
+                provinceID.equals("undefined") || provinceID.equals("null") ||
+                employee.getAddress().getAddress()==null || employee.getAddress().getAddress().isEmpty())
             throw new Exception("Please enter address before save!");
 
         //convert string to long for set value
@@ -99,7 +101,7 @@ public class CaptiveAgentController {
         LocalDate maxDate = LocalDate.now().minusYears(18);
         //convert string to localdate
         LocalDate dateOfBirth = LocalDate.parse(birthday, formatter);
-        //prevent date after 18 years
+        //prevent the date after 18 years before the current
         if(dateOfBirth.isAfter(maxDate))
             throw new Exception("Please selected birthday before 18 years of current!");
         //=====This part not use annotation=====
@@ -125,7 +127,7 @@ public class CaptiveAgentController {
         }catch (ConstraintViolationException e) {
             String message = e.getConstraintViolations().iterator().next().getMessage();
             throw new Exception(message);
-        }catch (DataIntegrityViolationException e){
+        }catch (DataIntegrityViolationException e){                 //detect @Column(unique = true)
             String message = e.getMostSpecificCause().getMessage();
             System.out.println("=====================================================\n\n");
             System.out.println(message);
