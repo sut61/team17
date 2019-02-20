@@ -5,6 +5,7 @@ import com.sut.se61.g17.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -51,14 +52,8 @@ public class PolicyController {
         return customerRepository.findAll().stream().collect(Collectors.toList());
     }
     @GetMapping(path = "/customer/{idNumber}")
-    public Customer getOneCustomer(@PathVariable String idNumber)
-    throws Exception{
-        try {
+    public Customer getOneCustomer(@PathVariable String idNumber){
             return customerRepository.findByIdNumber(idNumber);
-        }catch (Exception e){
-            System.out.println(e);
-            throw new Exception("ID Number Incorrect");
-        }
     }
 
 
@@ -97,33 +92,53 @@ public class PolicyController {
 
     @PostMapping(path = "/{propertyID}/{customerID}/{carID}/{username}/{periodStartDate}/{periodYear}")
     public Policy postPolicy(@RequestBody Policy policy,
-                             @PathVariable Long propertyID,
-                             @PathVariable Long customerID,
-                             @PathVariable Long carID,
+                             @PathVariable String propertyID,       //Received with string to prevent 'undefined' not convert to Long
+                             @PathVariable String customerID,       //Received with string to prevent 'undefined' not convert to Long
+                             @PathVariable String carID,            //Received with string to prevent 'undefined' not convert to Long
                              @PathVariable String username,
                              @PathVariable String periodStartDate,
-                             @PathVariable Byte periodYear
+                             @PathVariable String periodYear        //Received with string to prevent 'undefined' not convert to Byte
     ) throws Exception {
+        //=====This part not use annotation=====
+        //prevent null value
+        if(propertyID.equals("undefined") || propertyID.equals("null"))
+            throw new Exception("Please select property before save!");
 
-        if(periodYear<1 || periodYear > 10)
+        //prevent null value
+        if(customerID.equals("undefined") || customerID.equals("null"))
+            throw new Exception("Please click search before save!");
+
+        //prevent null value
+        if(carID.equals("undefined") || carID.equals("null"))
+            throw new Exception("Please enter car data before save!");
+
+        //prevent null value
+        if(periodYear.equals("undefined") || periodYear.equals("null"))
+            throw new Exception("Please select period before save!");
+        //convert string to long,byte for set value
+        Long propertyIDLong = Long.valueOf(propertyID);
+        Long customerIDLong = Long.valueOf(customerID);
+        Long carIDLong = Long.valueOf(carID);
+        Byte periodYearLong = Byte.valueOf(periodYear);             //value between 1-10
+        //prevent periodExpiryDate more than 10 years
+        if(periodYearLong<1 || periodYearLong > 10)
             throw new Exception("Period incorrect!");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate maxDate = LocalDate.now().plusMonths(1);
         LocalDate dateStart = LocalDate.parse(periodStartDate, formatter);
+        //prevent the date after 1 month of current
         if(dateStart.isAfter(maxDate))
             throw new Exception("Please selected date not more than 1 month of current!");
+        //prevent the date before of current
         if(dateStart.isBefore(LocalDate.now()))
             throw new Exception("Please selected date equal or more than of current!");
-        if(!policy.getLicensePlate().matches("(\\d?[ก-ฮ])?[ก-ฮ]\\d{3}[1-9]"))
-            throw new Exception("LicensePlate Incorrect!");
-        if(policy.getVin().length()!=17)
-            throw new Exception("VIN Incorrect!");
+        //=====This part not use annotation=====
         try{
-            PropertyPolicy property = propertyPolicyRepository.findById(propertyID).get();
-            Customer customer = customerRepository.findById(customerID).get();
-            CarData carData = carDataRepository.findById(carID).get();
+            PropertyPolicy property = propertyPolicyRepository.findById(propertyIDLong).get();
+            Customer customer = customerRepository.findById(customerIDLong).get();
+            CarData carData = carDataRepository.findById(carIDLong).get();
             Employee employee = employeeRepository.findByUsername(username);
-            LocalDate dateExpiry = dateStart.plusYears(periodYear);
+            LocalDate dateExpiry = dateStart.plusYears(periodYearLong);
             LocalDateTime dateTimeNow = LocalDateTime.now(ZoneId.of("Asia/Bangkok"));
 
             policy.setIssuedDate(dateTimeNow);
@@ -133,10 +148,15 @@ public class PolicyController {
             policy.setEmployee(employee);
             policy.setPeriodStartDate(dateStart);
             policy.setPeriodExpiryDate(dateExpiry);
+
+            return policyRepository.saveAndFlush(policy);
+        }catch (ConstraintViolationException e) {
+            String message = e.getConstraintViolations().iterator().next().getMessage();
+            String value = e.getConstraintViolations().iterator().next().getPropertyPath().toString();
+            throw new Exception(value+" "+message);
         }catch (Exception e){
             System.out.println(e);
             throw new Exception("Error ");
         }
-        return policyRepository.save(policy);
     }
 }
