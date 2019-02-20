@@ -22,7 +22,11 @@
         </mat-form-field>
       <table cellspacing="0" style="width: 100%" *ngIf="isOpenProperty">
         <tr><td style="width: 20%">รายละเอียดกรมธรรม์</td><td style="width: 5%">:</td><td style="width: 75%">{{propertyObject.propertyName}}</td></tr>
-      </table>
+        <tr><td style="width: 20%">รายละเอียดการคุ้มครอง</td><td style="width: 5%">:</td><td style="width: 75%">{{propertyObject.detailProtection}}</td></tr>
+        <tr><td style="width: 20%">รายละเอียดการคุ้มครองชำระเงิน</td><td style="width: 5%">:</td><td style="width: 75%">{{propertyObject.detailPayment}}</td></tr>
+        <tr><td style="width: 20%">ราคา</td><td style="width: 5%">:</td><td style="width: 75%">{{propertyObject.costPolicy}} บาท</td></tr>
+        <tr><td style="width: 20%">ระดับชั้นกรมธรรม์</td><td style="width: 5%">:</td><td style="width: 75%">{{propertyObject.classProperty.className}}</td></tr>        
+      </table>      
     </mat-expansion-panel>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -46,7 +50,7 @@
           <tr><td style="width: 20%">Email</td><td style="width: 5%">:</td><td style="width: 75%">{{customerObject.email}}</td></tr>
           <tr><td style="width: 20%">ที่อยู่</td><td style="width: 5%">:</td><td style="width: 75%">{{customerObject.address.address}} {{customerObject.address.subDistrict.subDistrictName}}
               {{customerObject.address.district.districtName}} {{customerObject.address.province.provinceName}}</td></tr>    
-      </table>      
+      </table> 
     </mat-expansion-panel>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -102,7 +106,7 @@
         <mat-panel-title class="date-select">
           <mat-form-field style="width: 100%">
             <input matInput [min]="now" [max]="maxDate" placeholder="วันเริ่มต้นระยะประกัน" [matDatepicker]="picker"
-                   (focus)="picker.open()" [(ngModel)]="date" [ngModelOptions]="{standalone: true}">
+                    [(ngModel)]="date" [ngModelOptions]="{standalone: true}">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>

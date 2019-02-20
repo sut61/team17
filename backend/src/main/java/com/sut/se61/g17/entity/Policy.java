@@ -31,13 +31,15 @@ public class Policy {
     private LocalDateTime issuedDate;
 
     @NotNull
-    @Size(min = 17,max = 17)
+    @Pattern(regexp = "[A-Za-z0-9]{17}")
     private String vin;
 
     @NotNull
-    @Size(min = 5,max = 7)
-    @Pattern(regexp = "(\\d?[ก-ฮ])?[ก-ฮ]\\d{3}[1-9]")    //ตัวอย่าง กข 1234, ก 0001 และ 9กข 9999 (เลข 4 ตัวท้ายต้อง 0001 - 9999)
-    private String licensePlate;
+    @Pattern(regexp = "(\\d?[ก-ฮ])?[ก-ฮ]((0{3}[1-9])|" +              //pattern มี ศูนย์ 3 ตัว ใน3ตัวแรกของตัวเลข4หลัก จะต้องลงท้าย 1-9
+            "(0{2}[1-9]\\d)|([1-9]0{2}\\d)|(0[1-9]0\\d)|" +         //pattern มี ศูนย์ 2 ตัว ใน3ตัวแรกของตัวเลข4หลัก จะต้องลงท้าย 0-9
+            "(0[1-9]{2}\\d)|([1-9]{2}0\\d)|([1-9]0[1-9]\\d)|" +     //pattern มี ศูนย์ 1 ตัว ใน3ตัวแรกของตัวเลข4หลัก จะต้องลงท้าย 0-9
+            "([1-9]{3}\\d))",message = "must match example \"กข1234, ก0001 และ 9กข9999 (เลข 4 ตัวท้ายต้อง 0001 - 9999)\"")                //pattern มี ศูนย์ 0 ตัว ใน3ตัวแรกของตัวเลข4หลัก จะต้องลงท้าย 0-9
+    private String licensePlate;                                    // ตัวอย่าง กข1234, ก0001 และ 9กข9999 (เลข 4 ตัวท้ายต้อง 0001 - 9999)
 
     @ManyToOne
     @JoinColumn(name = "EMPLOYEE_ID")
@@ -55,7 +57,10 @@ public class Policy {
     @JoinColumn(name = "CARDATA_ID")
     private CarData carData;
 
-    public Policy(LocalDate periodStartDate, LocalDate periodExpiryDate, LocalDateTime issuedDate, @NotNull @Size(min = 17, max = 17) String vin, @NotNull @Size(min = 5, max = 7) @Pattern(regexp = "(\\d?[ก-ฮ])?[ก-ฮ]\\d{3}[1-9]") String licensePlate, Employee employee, Customer customer, PropertyPolicy propertyPolicy, CarData carData) {
+    public Policy(LocalDate periodStartDate, LocalDate periodExpiryDate, LocalDateTime issuedDate, @NotNull @Pattern(regexp = "[A-Za-z0-9]{17}") String vin, @NotNull @Size(min = 5, max = 7) @Pattern(regexp = "(\\d?[ก-ฮ])?[ก-ฮ]((0{3}[1-9])|" +              //pattern มี ศูนย์ 3 ตัว ใน3ตัวแรกของตัวเลข4หลัก จะต้องลงท้าย 1-9
+            "(0{2}[1-9]\\d)|([1-9]0{2}\\d)|(0[1-9]0\\d)|" +         //pattern มี ศูนย์ 2 ตัว ใน3ตัวแรกของตัวเลข4หลัก จะต้องลงท้าย 0-9
+            "(0[1-9]{2}\\d)|([1-9]{2}0\\d)|([1-9]0[1-9]\\d)|" +     //pattern มี ศูนย์ 1 ตัว ใน3ตัวแรกของตัวเลข4หลัก จะต้องลงท้าย 0-9
+            "([1-9]{3}\\d))") String licensePlate, Employee employee, Customer customer, PropertyPolicy propertyPolicy, CarData carData) {
         this.periodStartDate = periodStartDate;
         this.periodExpiryDate = periodExpiryDate;
         this.issuedDate = issuedDate;

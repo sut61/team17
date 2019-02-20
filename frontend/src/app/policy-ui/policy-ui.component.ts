@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PolicyService} from './policy.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-policy-ui',
@@ -71,7 +72,8 @@ export class PolicyUiComponent implements OnInit {
     vin: ''
   };
 
-  constructor(private service: PolicyService) {
+  constructor(private service: PolicyService,
+    private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -80,11 +82,11 @@ export class PolicyUiComponent implements OnInit {
     this.maxDate.setMonth(this.now.getMonth()+1);
   }
 
-  displayProperty() {
-    this.isOpenProperty = true;
+  displayProperty() {    
     this.service.getPropertyById(this.propertyIDSelected).subscribe(response => {
       this.propertyObject = response;
       /** นำข้อมูลมาใส่ใน propertyObject **/
+      this.isOpenProperty = true;
     }, error => {
       this.isOpenProperty = false;
     });
@@ -98,19 +100,20 @@ export class PolicyUiComponent implements OnInit {
           console.log(this.customerObject.customerID);
         } catch (e){
           if (e instanceof TypeError) {
-            console.log(e.message);
-            alert('Id number not correct!');
+            console.log(e.message);    
+            if (e.message.match(".*customerID.*null"))
+              alert('Id number not found!');       
             this.isOpenCustomer = false;
           }
         }
       }, error => {
-        alert('Id number not correct!');
+        alert(error.error.message);
         this.isOpenCustomer = false;
       });
       this.isOpenCustomer = true;
     } else {
       this.isOpenCustomer = false;
-      alert('Please enter id number before search!')
+      this.customerObject = null;
     }
   }
 
@@ -157,15 +160,6 @@ export class PolicyUiComponent implements OnInit {
   }
 
   postPolicyData() {
-    if(this.propertyIDSelected == null){
-      alert('Please select property before save!');
-    }else if(this.customerObject.customerID == null){
-      alert('Please click search before save!');
-    }else if(this.periodYear == null){
-      alert('Please select period before save!');    
-    }else if(this.carDataSelected == null){
-      alert('Please select car data before save!');
-    }else{
       try {
         console.log(this.dateToString());
         this.service.postPolicy(this.policyObject, this.propertyIDSelected, this.customerObject.customerID, this.carDataSelected,
@@ -178,9 +172,11 @@ export class PolicyUiComponent implements OnInit {
       } catch (e){
         if (e instanceof TypeError) {
           console.log(e.message);
-          alert('Please enter date before save!');
+          if (e.message.match(".*customerID.*null"))
+            alert('Id number not correct!');
+          if (e.message.match(".*getFullYear.*null"))  
+            alert('Please enter date before save!');
         }
       }
-    }
   }
 }
