@@ -115,30 +115,21 @@ public class PolicyController {
         //prevent null value
         if(periodYear.equals("undefined") || periodYear.equals("null"))
             throw new Exception("Please select period before save!");
-        //convert string to long,byte for set value
+        //convert string to long,int for set value
         Long propertyIDLong = Long.valueOf(propertyID);
         Long customerIDLong = Long.valueOf(customerID);
         Long carIDLong = Long.valueOf(carID);
-        Byte periodYearLong = Byte.valueOf(periodYear);             //value between 1-10
-        //prevent periodExpiryDate more than 10 years
-        if(periodYearLong<1 || periodYearLong > 10)
-            throw new Exception("Period incorrect!");
+        int periodYearInt = Integer.valueOf(periodYear);             //value between 1-10
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate maxDate = LocalDate.now().plusMonths(1);
         LocalDate dateStart = LocalDate.parse(periodStartDate, formatter);
-        //prevent the date after 1 month of current
-        if(dateStart.isAfter(maxDate))
-            throw new Exception("Please selected date not more than 1 month of current!");
-        //prevent the date before of current
-        if(dateStart.isBefore(LocalDate.now()))
-            throw new Exception("Please selected date equal or more than of current!");
         //=====This part not use annotation=====
         try{
             PropertyPolicy property = propertyPolicyRepository.findById(propertyIDLong).get();
             Customer customer = customerRepository.findById(customerIDLong).get();
             CarData carData = carDataRepository.findById(carIDLong).get();
             Employee employee = employeeRepository.findByUsername(username);
-            LocalDate dateExpiry = dateStart.plusYears(periodYearLong);
+            LocalDate dateExpiry = dateStart.plusYears(periodYearInt);
             LocalDateTime dateTimeNow = LocalDateTime.now(ZoneId.of("Asia/Bangkok"));
 
             policy.setIssuedDate(dateTimeNow);
