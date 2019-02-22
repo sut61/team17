@@ -105,7 +105,7 @@
       <mat-expansion-panel-header style="margin-top: 25px">
         <mat-panel-title class="date-select">
           <mat-form-field style="width: 100%">
-            <input matInput [min]="now" [max]="maxDate" placeholder="วันเริ่มต้นระยะประกัน" [matDatepicker]="picker"
+            <input matInput [min]="now" placeholder="วันเริ่มต้นระยะประกัน" [matDatepicker]="picker"
                     [(ngModel)]="date" [ngModelOptions]="{standalone: true}">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -114,7 +114,7 @@
         <mat-panel-description class="period-select">
           <mat-form-field style="width: 100%">
             <input matInput [(ngModel)]="periodYear" placeholder="ระยะเวลาประกันภัย (1-10) ปี" type="number"
-                   [ngModelOptions]="{standalone: true}" min="1" max="10">
+                   [ngModelOptions]="{standalone: true}">
           </mat-form-field>
         </mat-panel-description>
       </mat-expansion-panel-header>
