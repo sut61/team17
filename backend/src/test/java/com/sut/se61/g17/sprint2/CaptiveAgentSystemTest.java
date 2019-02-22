@@ -697,4 +697,31 @@ public class CaptiveAgentSystemTest {
     }
     //  *********************************************Phone Test*********************************************
 
+    //  *********************************************MaxDateOfBirthday Test*********************************************
+    @Test
+    public void testMaxDateOfBirthdayLessThan() {
+        Employee employee = new Employee();
+        employee.setUsername("test1234");
+        employee.setPassword("test");
+        employee.setFirstName("abcd");
+        employee.setLastName("efgh");
+        employee.setIdNumber("1234567890123");
+        employee.setEmail("test@gmail.com");
+        employee.setBirthday(LocalDate.now());
+        employee.setPhone("0123456789");
+        employee.setAddress(address);
+        employee.setGender(gender);
+        try {
+            entityManager.persistAndFlush(employee);
+            fail("Should not pass to this line");
+        } catch (javax.validation.ConstraintViolationException e) {
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.println("\n\n================================ testMaxDateOfBirthdayLessThan ================================\n\n");
+            System.out.println(e.getConstraintViolations());
+            System.out.println("\n\n================================ testMaxDateOfBirthdayLessThan ================================\n\n");
+        }
+    }
+    //  *********************************************MaxDateOfBirthday Test*********************************************
 }

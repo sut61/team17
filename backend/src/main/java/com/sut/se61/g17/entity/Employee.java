@@ -13,7 +13,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "employee_seq",sequenceName = "employee_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "employee_seq")
     @Column(name = "EMPLOYEE_ID")
     private Long employeeID;
 
@@ -74,5 +75,11 @@ public class Employee {
         this.phone = phone;
         this.address = address;
         this.gender = gender;
+    }
+
+    @Min(value = 18,message = "Please selected birthday before 18 years of current!")
+    public int getMaxDateOfBirthday(){
+        int maxDate = LocalDate.now().getYear()-this.getBirthday().getYear();
+        return maxDate;
     }
 }
