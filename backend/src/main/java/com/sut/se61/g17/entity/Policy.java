@@ -7,9 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Data
 @Entity
@@ -70,5 +68,19 @@ public class Policy {
         this.customer = customer;
         this.propertyPolicy = propertyPolicy;
         this.carData = carData;
+    }
+
+    @Min(value = 1)
+    @Max(value = 10)
+    public int getPeriodYear(){
+        int periodYear = this.periodExpiryDate.getYear()-this.periodStartDate.getYear();
+        return periodYear;
+    }
+
+    @Min(value = 0)
+    @Max(value = 1)
+    public int getMonthOfPeriodStartDate(){
+        int monthOfPeriodStartDate = this.periodStartDate.getMonthValue() - LocalDate.now().getMonthValue();
+        return monthOfPeriodStartDate;
     }
 }
