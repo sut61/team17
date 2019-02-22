@@ -102,4 +102,5 @@ public class PropertyPolicy {
     public void setClassProperty(ClassProperty classProperty) {
         this.classProperty = classProperty;
     }
+    
 }
