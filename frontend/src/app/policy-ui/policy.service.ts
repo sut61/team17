@@ -49,22 +49,19 @@ export class PolicyService {
   public getPropertyById(id: number): Observable<any> {
     console.log('Call PolicyService method : getPropertyById(' + id + ') Rest API : ' + propertyPath + id);
     return this.http.get(propertyPath + id, {headers: this.authKey});
-    /** ปิดการส่ง key อยู่ **/
   }
 
   public getCustomerByIdNumber(idNumber: string): Observable<any> {
     console.log('Call PolicyService method : getCustomerByIdNumber(' + idNumber + ') Rest API : ' + customerPath + idNumber);
     return this.http.get(customerPath + idNumber, {headers: this.authKey});
-    /** ปิดการส่ง key อยู่ **/
   }
 
   public getCarById(id: number): Observable<any> {
     console.log('Call PolicyService method : getCarById(' + id + ') Rest API : ' + carPath + id);
     return this.http.get(carPath + id, {headers: this.authKey});
-    /** ปิดการส่ง key อยู่ **/
   }
 
-  public postPolicy(object: any, propertyID: number, customerID: number, carID: number, username: string, periodStartDate: string, periodYear: number): Observable<any> {
+  public postPolicy(object: any, propertyID: number, customerID: number, carID: number, username: string, periodStartDate: Date, periodYear: number): Observable<any> {
     return this.http.post(policyApi + propertyID + '/' + customerID + '/' + carID + '/' + username + '/' + periodStartDate + '/' + periodYear, {
       'licensePlate': object.licensePlate,
       'vin': object.vin

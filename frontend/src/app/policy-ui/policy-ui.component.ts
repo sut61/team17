@@ -9,7 +9,6 @@ import {MatSnackBar} from '@angular/material';
 })
 export class PolicyUiComponent implements OnInit {
   now = new Date();
-  maxDate = new Date();
   date = new Date();
   carDataSelected:number;
   carDatas:Array<any>;
@@ -79,7 +78,6 @@ export class PolicyUiComponent implements OnInit {
   ngOnInit() {
     this.getProperties();
     this.getAllbranches();
-    this.maxDate.setMonth(this.now.getMonth()+1);
   }
 
   displayProperty() {    
@@ -147,23 +145,20 @@ export class PolicyUiComponent implements OnInit {
     this.service.getAllcarColor().subscribe(res => {
       this.carColors = res;
     });
-  }
-  dateToString(){
-    const yyyy = this.date.getFullYear();
-    //prevent month from being 1 digit (yyyy-m-dd)
-    const mm = (this.date.getMonth() < 10 ? '0' : '') + (this.date.getMonth() + 1);
-    //prevent date from being 1 digit (yyyy-mm-d)
-    const dd = (this.date.getDate() < 10 ? '0' : '') + this.date.getDate();
-    //format date (yyyy-mm-dd) to string for path backend
-    //And backend format string to LocalDate
-    return this.periodStartDate = yyyy + '-' + mm + '-' + dd;
-  }
+  }  
 
   postPolicyData() {
-      try {
-        console.log(this.dateToString());
+    if(this.date == null){
+      this.snackBar.open('Please enter date before save!', null, {
+        duration: 5000,
+      });
+    }else if(this.customerObject == null){
+      this.snackBar.open('Id number not correct!', null, {
+        duration: 5000,
+      });
+    }else{  
         this.service.postPolicy(this.policyObject, this.propertyIDSelected, this.customerObject.customerID, this.carDataSelected,
-          sessionStorage.getItem('username'), this.periodStartDate, this.periodYear).subscribe(res => {
+          sessionStorage.getItem('username'), this.date, this.periodYear).subscribe(res => {
           console.log(res);
           this.snackBar.open('success', null, {
             duration: 5000,
@@ -173,18 +168,6 @@ export class PolicyUiComponent implements OnInit {
             duration: 5000,
           });
         });
-      } catch (e){
-        if (e instanceof TypeError) {
-          console.log(e.message);
-          if (e.message.match(".*customerID.*null"))
-            this.snackBar.open('Id number not correct!', null, {
-              duration: 5000,
-            });
-          if (e.message.match(".*getFullYear.*null"))  
-            this.snackBar.open('Please enter date before save!', null, {
-              duration: 5000,
-            });
-        }
       }
   }
 }
