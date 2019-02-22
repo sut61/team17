@@ -398,4 +398,107 @@ public class PolicyTests {
         }
     }
     //  *********************************************LicensePlate Test*********************************************
+
+    //  *********************************************PeriodYear Test*********************************************
+    @Test
+    public void testPeriodYearLessThan(){
+        Policy policy = new Policy();
+        policy.setPeriodStartDate(LocalDate.now());
+        policy.setPeriodExpiryDate(LocalDate.now());
+        policy.setIssuedDate(LocalDateTime.now());
+        policy.setVin("12345678901234567");
+        policy.setLicensePlate("ก1234");
+        policy.setEmployee(employee);
+        policy.setCustomer(customer);
+        policy.setPropertyPolicy(propertyPolicy);
+        policy.setCarData(carData);
+        try {
+            entityManager.persistAndFlush(policy);
+            fail("Should not pass to this line");
+        }catch (javax.validation.ConstraintViolationException e){
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.println("\n\n================================ testPeriodYearLessThan ================================\n\n");
+            System.out.println(e.getConstraintViolations().iterator().next().getPropertyPath());
+            System.out.println(e.getConstraintViolations().iterator().next().getMessage());
+            System.out.println("\n\n================================ testPeriodYearLessThan ================================\n\n");
+        }
+    }
+    @Test
+    public void testPeriodYearMoreThan(){
+        Policy policy = new Policy();
+        policy.setPeriodStartDate(LocalDate.now());
+        policy.setPeriodExpiryDate(LocalDate.now().plusYears(11));
+        policy.setIssuedDate(LocalDateTime.now());
+        policy.setVin("12345678901234567");
+        policy.setLicensePlate("ก1234");
+        policy.setEmployee(employee);
+        policy.setCustomer(customer);
+        policy.setPropertyPolicy(propertyPolicy);
+        policy.setCarData(carData);
+        try {
+            entityManager.persistAndFlush(policy);
+            fail("Should not pass to this line");
+        }catch (javax.validation.ConstraintViolationException e){
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.println("\n\n================================ testPeriodYearMoreThan ================================\n\n");
+            System.out.println(e.getConstraintViolations().iterator().next().getPropertyPath());
+            System.out.println(e.getConstraintViolations().iterator().next().getMessage());
+            System.out.println("\n\n================================ testPeriodYearMoreThan ================================\n\n");
+        }
+    }
+    //  *********************************************PeriodYear Test*********************************************
+    @Test
+    public void testMonthOfPeriodStartDateLessThan(){
+        Policy policy = new Policy();
+        policy.setPeriodStartDate(LocalDate.now().minusMonths(1));
+        policy.setPeriodExpiryDate(LocalDate.now().plusYears(5));
+        policy.setIssuedDate(LocalDateTime.now());
+        policy.setVin("12345678901234567");
+        policy.setLicensePlate("ก1234");
+        policy.setEmployee(employee);
+        policy.setCustomer(customer);
+        policy.setPropertyPolicy(propertyPolicy);
+        policy.setCarData(carData);
+        try {
+            entityManager.persistAndFlush(policy);
+            fail("Should not pass to this line");
+        }catch (javax.validation.ConstraintViolationException e){
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.println("\n\n================================ testMonthOfPeriodStartDate ================================\n\n");
+            System.out.println(e.getConstraintViolations().iterator().next().getPropertyPath());
+            System.out.println(e.getConstraintViolations().iterator().next().getMessage());
+            System.out.println("\n\n================================ testMonthOfPeriodStartDate ================================\n\n");
+        }
+    }
+    @Test
+    public void testMonthOfPeriodStartDateMoreThan(){
+        Policy policy = new Policy();
+        policy.setPeriodStartDate(LocalDate.now().plusMonths(2));
+        policy.setPeriodExpiryDate(LocalDate.now().plusYears(5));
+        policy.setIssuedDate(LocalDateTime.now());
+        policy.setVin("12345678901234567");
+        policy.setLicensePlate("ก1234");
+        policy.setEmployee(employee);
+        policy.setCustomer(customer);
+        policy.setPropertyPolicy(propertyPolicy);
+        policy.setCarData(carData);
+        try {
+            entityManager.persistAndFlush(policy);
+            fail("Should not pass to this line");
+        }catch (javax.validation.ConstraintViolationException e){
+            Set<ConstraintViolation<?>> violations = e.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
+            System.out.println("\n\n================================ testMonthOfPeriodStartDateMoreThan ================================\n\n");
+            System.out.println(e.getConstraintViolations().iterator().next().getPropertyPath());
+            System.out.println(e.getConstraintViolations().iterator().next().getMessage());
+            System.out.println("\n\n================================ testMonthOfPeriodStartDateMoreThan ================================\n\n");
+        }
+    }
 }

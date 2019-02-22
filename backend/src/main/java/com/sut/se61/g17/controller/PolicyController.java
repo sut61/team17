@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 @RestController
@@ -96,7 +97,7 @@ public class PolicyController {
                              @PathVariable String customerID,       //Received with string to prevent 'undefined' not convert to Long
                              @PathVariable String carID,            //Received with string to prevent 'undefined' not convert to Long
                              @PathVariable String username,
-                             @PathVariable String periodStartDate,
+                             @PathVariable Date periodStartDate,
                              @PathVariable String periodYear        //Received with string to prevent 'undefined' not convert to Byte
     ) throws Exception {
         //=====This part not use annotation=====
@@ -121,8 +122,7 @@ public class PolicyController {
         Long carIDLong = Long.valueOf(carID);
         int periodYearInt = Integer.valueOf(periodYear);             //value between 1-10
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dateStart = LocalDate.parse(periodStartDate, formatter);
+        LocalDate dateStart = periodStartDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         //=====This part not use annotation=====
         try{
             PropertyPolicy property = propertyPolicyRepository.findById(propertyIDLong).get();
@@ -130,7 +130,7 @@ public class PolicyController {
             CarData carData = carDataRepository.findById(carIDLong).get();
             Employee employee = employeeRepository.findByUsername(username);
             LocalDate dateExpiry = dateStart.plusYears(periodYearInt);
-            LocalDateTime dateTimeNow = LocalDateTime.now(ZoneId.of("Asia/Bangkok"));
+            LocalDateTime dateTimeNow = LocalDateTime.now(ZoneId.systemDefault());
 
             policy.setIssuedDate(dateTimeNow);
             policy.setPropertyPolicy(property);
