@@ -48,7 +48,7 @@
         <input matInput [(ngModel)] ="captiveAgentObject.lastName" placeholder="Last Name" [ngModelOptions]="{standalone: true}">
       </mat-form-field></tr>
     <tr><mat-form-field style="width: 50%">
-      <input matInput [max]="maxDate" placeholder="Birthday" [matDatepicker]="picker"
+      <input matInput placeholder="Birthday" [matDatepicker]="picker"
        [(ngModel)]="date" [ngModelOptions]="{standalone: true}">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>

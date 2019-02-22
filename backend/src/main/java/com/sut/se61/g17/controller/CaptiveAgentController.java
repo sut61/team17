@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.validation.ConstraintViolationException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 
@@ -70,7 +73,7 @@ public class CaptiveAgentController {
                                  @PathVariable String subdistrictID,        //Received with string to prevent 'undefined' not convert to Long
                                  @PathVariable String districtID,           //Received with string to prevent 'undefined' not convert to Long
                                  @PathVariable String provinceID,           //Received with string to prevent 'undefined' not convert to Long
-                                 @PathVariable String birthday,             //Received with string to format LocalDate
+                                 @PathVariable Date birthday,
                                  @PathVariable String passwordCheck
     ) throws Exception {
         //=====This part not use annotation=====
@@ -95,15 +98,8 @@ public class CaptiveAgentController {
         Long districtIDLong = Long.valueOf(districtID);
         Long provinceIDLong = Long.valueOf(provinceID);
 
-        //pattern string to localdate
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        //set maxdate to prevent age less than 18 years old
-        LocalDate maxDate = LocalDate.now().minusYears(18);
-        //convert string to localdate
-        LocalDate dateOfBirth = LocalDate.parse(birthday, formatter);
-        //prevent the date after 18 years before the current
-        if(dateOfBirth.isAfter(maxDate))
-            throw new Exception("Please selected birthday before 18 years of current!");
+        //convert date to localdate
+        LocalDate dateOfBirth = birthday.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         //=====This part not use annotation=====
 
         try {

@@ -28,7 +28,7 @@ export class CaptiveAgentService {
   public getSubdtrictByDistrict(id: number): Observable<any> {
     return this.http.get(captiveAgentApi + 'subdistrict/' + id, {headers: this.authKey});
   }
-  public postCaptiveAgent(object: any, genderID: number, subDistrictID: number, districtID: number, provinceID: number,birthday:string, passwordCheck:string): Observable<any> {
+  public postCaptiveAgent(object: any, genderID: number, subDistrictID: number, districtID: number, provinceID: number,birthday:Date, passwordCheck:string): Observable<any> {
     return this.http.post(captiveAgentApi + genderID + '/' + subDistrictID + '/' + districtID + '/' + provinceID + '/' + birthday + '/' + passwordCheck,{
       'username': object.username,
       'password': object.password,
