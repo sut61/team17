@@ -9,13 +9,16 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 @RunWith(SpringRunner.class)
@@ -198,6 +201,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(payment);
             fail("@Test data fail ->testPayment_AmountCannotBeNull()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail ->testPayment_AmountCannotBeNull()");
@@ -219,6 +225,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(payment);
             fail("@Test data fail -> testPayment_AmountSizeMustBeOverMin()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testPayment_AmountSizeMustBeOverMin()");
@@ -239,6 +248,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(payment);
             fail("@Test data fail -> testPayment_AmountSizeMustBeLessThanMax()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testPayment_AmountSizeMustBeLessThanMax()");
@@ -259,6 +271,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(payment);
             fail("@Test data fail -> testPayment_payDateCannotBeNull()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testPayment_payDateCannotBeNull()");
@@ -279,6 +294,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(payment);
             fail("@Test data fail -> testPayment_InvoiceCannotBeNull()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testPayment_InvoiceCannotBeNull()");
@@ -299,6 +317,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(payment);
             fail("@Test data fail -> testPayment_EmployeeCannotBeNull()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testPayment_EmployeeCannotBeNull()");
@@ -327,6 +348,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(invoiceStatus);
             fail("@Test data fail -> testInvoiceStatus_StatusCannotBeNull()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testInvoiceStatus_StatusCannotBeNull()");
@@ -345,6 +369,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(invoiceStatus);
             fail("@Test data fail -> testInvoiceStatus_StatusSizeMustBeOverMin()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testInvoiceStatus_StatusSizeMustBeOverMin()");
@@ -362,6 +389,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(invoiceStatus);
             fail("@Test data fail -> testInvoiceStatus_StatusSizeMustBeLessThanMax()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testInvoiceStatus_StatusSizeMustBeLessThanMax()");
@@ -379,6 +409,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(invoiceStatus);
             fail("@Test data fail -> testInvoiceStatus_StatusMustBePatternCorrectly()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testInvoiceStatus_StatusMustBePatternCorrectly()");
@@ -409,6 +442,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(invoice1);
             fail("@Test data fail -> testInvoice_invoiceDateCannotBeNull()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testInvoice_invoiceDateCannotBeNull()");
@@ -430,6 +466,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(invoice1);
             fail("@Test data fail -> testInvoice_invoiceAmountCannotBeNull()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testInvoice_invoiceAmountCannotBeNull()");
@@ -451,6 +490,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(invoice1);
             fail("@Test data fail -> testInvoice_PolicyCannotBeNull()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testInvoice_PolicyCannotBeNull()");
@@ -472,6 +514,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(invoice1);
             fail("@Test data fail -> testInvoice_InvoiceStatusCannotBeNull()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testInvoice_InvoiceStatusCannotBeNull()");
@@ -492,6 +537,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(payment);
             fail("@Test data fail -> testInvoice_invoiceAmountValueMustBeOverMin()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testInvoice_invoiceAmountValueMustBeOverMin()");
@@ -512,6 +560,9 @@ public class PaymentTests {
             entityManager.persistAndFlush(payment);
             fail("@Test data fail -> testInvoice_invoiceAmountValueMustBeLessThanMax()");
         }catch (javax.validation.ConstraintViolationException ve){
+            Set<ConstraintViolation<?>> violations = ve.getConstraintViolations();
+            assertEquals(violations.isEmpty(), false);
+            assertEquals(violations.size(), 1);
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("/***--------------------------------------------------------------------------------------------------***/");
             System.out.println("@Test data fail -> testInvoice_invoiceAmountValueMustBeLessThanMax()");
